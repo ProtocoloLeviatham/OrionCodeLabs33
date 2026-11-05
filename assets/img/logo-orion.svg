@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 910 241" width="910" height="241" role="img" aria-label="OrionCodeLabs33 Logo">
+  <defs>
+    <linearGradient id="orionGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="50%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#9333EA"/>
+    </linearGradient>
+    <linearGradient id="ringGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="45%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+  <!-- Vector fallback & scalable emblem lockup -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Code Brackets < > -->
+    <path d="M92 68 L30 120 L92 172" stroke="#F8FAFC" stroke-width="18"/>
+    <path d="M214 68 L276 120 L214 172" stroke="#F8FAFC" stroke-width="18"/>
+    <!-- Central O -->
+    <rect x="112" y="54" width="82" height="132" rx="41" stroke="#F8FAFC" stroke-width="20"/>
+    <!-- Diagonal Orbital Circuit Ring -->
+    <ellipse cx="153" cy="120" rx="132" ry="38" transform="rotate(-38 153 120)" stroke="url(#ringGrad)" stroke-width="9"/>
+    <ellipse cx="153" cy="120" rx="116" ry="26" transform="rotate(-38 153 120)" stroke="url(#ringGrad)" stroke-width="3.5" stroke-dasharray="28 10 14 8"/>
+    <!-- Orion's Belt 3 Stars -->
+    <line x1="126" y1="146" x2="180" y2="94" stroke="url(#orionGrad)" stroke-width="3"/>
+    <polygon points="126,133 129,143 139,146 129,149 126,159 123,149 113,146 123,143" fill="#3B82F6"/>
+    <polygon points="153,102 157,116 171,120 157,124 153,138 149,124 135,120 149,116" fill="#6366F1"/>
+    <polygon points="180,81 183,91 193,94 183,97 180,107 177,97 167,94 177,91" fill="#8B5CF6"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="304" y="146" font-family="'Plus Jakarta Sans', Montserrat, sans-serif" font-weight="800" font-size="72" letter-spacing="-1.5">
+    <tspan fill="#F8FAFC">OrionCode</tspan><tspan fill="url(#orionGrad)">Labs33</tspan>
+  </text>
+</svg>

@@ -1,0 +1,1638 @@
+/* ==========================================================================
+   OrionCodeLabs33 — Clean Architectural White Layout & Floating Bottom Dock
+   Archivo 2: assets/css/layout.css
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+/* --------------------------------------------------------------------------
+   1. HEADER SUPERIOR MINIMALISTA (Solo Identidad & Estado, sin menú repetido)
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  height: var(--header-height);
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.site-header.is-scrolled {
+  box-shadow: var(--shadow-sm);
+}
+
+.header-inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+/* Logo perfectamente integrado sobre el fondo blanco sin sobresalir jamás */
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 38px;
+  max-width: 56vw;
+  transition: transform 0.25s var(--ease-out-expo);
+}
+
+.brand-logo:hover {
+  transform: scale(1.015);
+}
+
+.brand-logo img {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: left center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@media (min-width: 768px) {
+  .brand-logo {
+    height: 44px;
+    max-width: 265px;
+  }
+}
+
+.header-right-status {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.orion-ai-pill {
+  display: none;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 0.85rem;
+  border-radius: var(--radius-pill);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+@media (min-width: 640px) {
+  .orion-ai-pill {
+    display: inline-flex;
+  }
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand-emerald);
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.18);
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   2. BOTONES DE INGENIERÍA
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.75rem 1.35rem;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.22s var(--ease-out-expo), box-shadow 0.22s ease, background-color 0.22s ease, border-color 0.22s ease;
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: var(--gradient-orion);
+  color: #FFFFFF;
+  box-shadow: var(--shadow-glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px -6px rgba(37, 99, 235, 0.5);
+}
+
+.btn-secondary {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-xs);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-secondary);
+  border-color: var(--brand-blue);
+  color: var(--brand-blue);
+  transform: translateY(-1px);
+}
+
+.btn-dark {
+  background: var(--brand-navy);
+  color: #FFFFFF;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-dark:hover {
+  background: #16244D;
+  transform: translateY(-2px);
+}
+
+.btn-lg {
+  padding: 0.95rem 1.7rem;
+  font-size: var(--text-base);
+  border-radius: var(--radius-md);
+}
+
+.btn-sm {
+  padding: 0.5rem 0.95rem;
+  font-size: var(--text-xs);
+  border-radius: var(--radius-xs);
+}
+
+/* --------------------------------------------------------------------------
+   3. NAVBAR INFERIOR PROTAGONISTA (FLOATING DOCK EN CELULAR Y PC)
+      Items: Inicio | Servicios | ORION (Centro) | Proyectos | Contacto
+   -------------------------------------------------------------------------- */
+.orion-bottom-dock {
+  position: fixed;
+  left: 10px;
+  right: 10px;
+  bottom: calc(10px + var(--safe-bottom));
+  z-index: 150;
+  height: var(--dock-height);
+  max-width: 560px;
+  margin-inline: auto;
+  background: var(--bg-dock);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-radius: 24px;
+  padding: 0 0.45rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  box-shadow: var(--shadow-dock);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+@media (min-width: 768px) {
+  .orion-bottom-dock {
+    bottom: 18px;
+    border-radius: 9999px;
+    padding: 0 0.75rem;
+    max-width: 590px;
+  }
+}
+
+.dock-item {
+  position: relative;
+  height: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #94A3B8;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border-radius: 16px;
+  transition: color 0.25s ease, transform 0.25s var(--ease-spring), background-color 0.25s ease;
+  user-select: none;
+}
+
+.dock-item svg {
+  width: 21px;
+  height: 21px;
+  transition: transform 0.28s var(--ease-spring), stroke 0.25s ease;
+}
+
+.dock-item:hover {
+  color: #F8FAFC;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.dock-item:hover svg {
+  transform: translateY(-2px) scale(1.08);
+}
+
+.dock-item.is-active {
+  color: #FFFFFF;
+  background: rgba(37, 99, 235, 0.22);
+}
+
+.dock-item.is-active svg {
+  color: #60A5FA;
+  transform: translateY(-2px);
+}
+
+/* Indicador luminoso inferior en el item activo */
+.dock-item.is-active::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  width: 18px;
+  height: 3px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #38BDF8, #8B5CF6);
+  box-shadow: 0 0 10px #38BDF8;
+}
+
+/* Botón Central Especial: ORION (Motor de IA & ADN) */
+.dock-item-orion {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: #FFFFFF;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  user-select: none;
+}
+
+.dock-orion-orb {
+  width: 48px;
+  height: 48px;
+  margin-top: -22px;
+  border-radius: 50%;
+  background: var(--gradient-orion);
+  display: grid;
+  place-items: center;
+  color: #FFFFFF;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.55), 0 0 0 4px #0B132B;
+  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s ease;
+  position: relative;
+}
+
+.dock-item-orion:hover .dock-orion-orb,
+.dock-item-orion.is-active .dock-orion-orb {
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 12px 30px rgba(124, 58, 237, 0.75), 0 0 0 4px #2563EB;
+}
+
+.dock-orion-orb svg {
+  width: 26px;
+  height: 26px;
+}
+
+/* --------------------------------------------------------------------------
+   4. HERO ARQUITECTÓNICO (BLANCO LIMPIO + PANEL DE INGENIERÍA)
+   -------------------------------------------------------------------------- */
+.hero-section {
+  position: relative;
+  padding-block: clamp(2.25rem, 5vw, 4.5rem);
+  overflow: hidden;
+  background:
+    radial-gradient(700px circle at 12% 15%, rgba(37, 99, 235, 0.06), transparent 65%),
+    radial-gradient(600px circle at 88% 25%, rgba(124, 58, 237, 0.06), transparent 65%),
+    var(--bg-primary);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 3.5rem;
+  }
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.42rem 0.95rem;
+  border-radius: var(--radius-pill);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--brand-navy);
+  margin-bottom: 1.15rem;
+  box-shadow: var(--shadow-xs);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  color: var(--text-primary);
+  margin-bottom: 1.15rem;
+}
+
+.hero-subtitle {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  line-height: 1.68;
+  margin-bottom: 0.75rem;
+}
+
+.hero-subtitle strong {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 1.35rem;
+}
+
+@media (max-width: 639px) {
+  .hero-cta-group .btn {
+    width: 100%;
+  }
+}
+
+.hero-metrics-bar {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.metric-item strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  color: var(--brand-navy);
+  line-height: 1.2;
+}
+
+.metric-item span {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+/* Panel de Ingeniería Derecho en el Hero */
+.hero-showcase-panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 1.4rem;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+
+.showcase-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.95rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.window-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.window-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.window-dots span:nth-child(1) { background: #F43F5E; }
+.window-dots span:nth-child(2) { background: #F59E0B; }
+.window-dots span:nth-child(3) { background: #10B981; }
+
+.showcase-stack-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.showcase-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  transition: transform 0.22s var(--ease-out-expo), border-color 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease;
+  cursor: pointer;
+}
+
+.showcase-row:hover {
+  transform: translateX(4px);
+  background: var(--bg-surface);
+  border-color: var(--brand-blue);
+  box-shadow: var(--shadow-sm);
+}
+
+.showcase-row-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.svg-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--gradient-orion-subtle);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  display: grid;
+  place-items: center;
+  color: var(--brand-blue);
+  flex-shrink: 0;
+  transition: transform 0.25s var(--ease-spring), background-color 0.25s ease, color 0.25s ease;
+}
+
+.showcase-row:hover .svg-icon-box,
+.service-category-card:hover .svg-icon-box {
+  background: var(--gradient-orion);
+  color: #FFFFFF;
+  transform: scale(1.06) rotate(-3deg);
+}
+
+.svg-icon-box svg {
+  width: 22px;
+  height: 22px;
+}
+
+.showcase-row-info h3 {
+  font-size: var(--text-sm);
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.showcase-row-info p {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.badge-verified {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-pill);
+  background: rgba(37, 99, 235, 0.09);
+  color: var(--brand-blue);
+  border: 1px solid rgba(37, 99, 235, 0.22);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   5. SECCIONES GENERALES, SERVICIOS Y TARJETAS EDITORIALES
+   -------------------------------------------------------------------------- */
+.section {
+  padding-block: clamp(3.25rem, 6vw, 5.5rem);
+  position: relative;
+}
+
+.section-alt {
+  background: var(--bg-secondary);
+  border-block: 1px solid var(--border-subtle);
+}
+
+.section-header {
+  max-width: 800px;
+  margin-bottom: 2.25rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin-bottom: 0.85rem;
+}
+
+.section-desc {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+}
+
+/* Barra de Búsqueda y Chips de Servicios */
+.services-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-bottom: 2rem;
+  position: sticky;
+  top: var(--header-height);
+  z-index: 40;
+  background: rgba(246, 248, 252, 0.92);
+  backdrop-filter: blur(14px);
+  padding-block: 0.85rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.search-bar-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-bar-wrap svg {
+  position: absolute;
+  left: 1rem;
+  width: 18px;
+  height: 18px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.service-search-input {
+  width: 100%;
+  height: 48px;
+  padding: 0 9.5rem 0 2.85rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-xs);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-search-input:focus {
+  outline: none;
+  border-color: var(--brand-blue);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.search-count-badge {
+  position: absolute;
+  right: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.22rem 0.6rem;
+  border-radius: var(--radius-pill);
+  background: var(--bg-secondary);
+  color: var(--brand-blue);
+  border: 1px solid var(--border-subtle);
+}
+
+.category-chips {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+
+.category-chips::-webkit-scrollbar {
+  display: none;
+}
+
+.chip-btn {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-pill);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chip-btn:hover {
+  border-color: var(--brand-blue);
+  color: var(--brand-blue);
+}
+
+.chip-btn.is-active {
+  background: var(--brand-navy);
+  color: #FFFFFF;
+  border-color: var(--brand-navy);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Grilla de Servicios Realistas y Super Detallados */
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.35rem;
+}
+
+@media (min-width: 768px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1140px) {
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.service-category-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.2rem;
+  box-shadow: var(--shadow-xs);
+  transition: transform 0.25s var(--ease-out-expo), box-shadow 0.25s ease, border-color 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(37, 99, 235, 0.38);
+}
+
+.service-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.85rem;
+}
+
+.service-card-title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+
+.service-card-summary {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  line-height: 1.58;
+}
+
+.subservices-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.42rem;
+}
+
+.subservice-pill {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.34rem 0.68rem;
+  border-radius: var(--radius-xs);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.subservice-pill:hover {
+  background: var(--brand-blue);
+  color: #FFFFFF;
+  border-color: var(--brand-blue);
+  transform: translateY(-1px);
+}
+
+.service-card-footer {
+  padding-top: 0.95rem;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.tech-stack-row {
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.service-detail-trigger {
+  font-size: var(--text-xs);
+  font-weight: 800;
+  color: var(--brand-blue);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.service-detail-trigger:hover {
+  color: var(--brand-violet);
+}
+
+/* --------------------------------------------------------------------------
+   6. GRILLA DE LOGOS OFICIALES DE TECNOLOGÍA (Proyectos & Stack)
+   -------------------------------------------------------------------------- */
+.tech-logos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.9rem;
+}
+
+@media (min-width: 640px) {
+  .tech-logos-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .tech-logos-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.tech-logo-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.15rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.65rem;
+  box-shadow: var(--shadow-xs);
+  transition: transform 0.22s var(--ease-spring), border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.tech-logo-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--brand-blue);
+  box-shadow: var(--shadow-md);
+}
+
+.tech-logo-card img,
+.tech-logo-card svg {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.tech-logo-card strong {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.tech-logo-card span {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* --------------------------------------------------------------------------
+   7. BENTO GRID & FAQ
+   -------------------------------------------------------------------------- */
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.35rem;
+}
+
+@media (min-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .bento-span-2 {
+    grid-column: span 2;
+  }
+}
+
+.bento-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.65rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.1rem;
+  box-shadow: var(--shadow-xs);
+  transition: transform 0.24s var(--ease-out-expo), box-shadow 0.24s ease, border-color 0.24s ease;
+}
+
+.bento-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(37, 99, 235, 0.3);
+}
+
+.bento-card h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  line-height: 1.22;
+}
+
+/* --------------------------------------------------------------------------
+   8. MODAL / BOTTOM-SHEET DE DETALLE TÉCNICO COMPLETO
+   -------------------------------------------------------------------------- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 220;
+  background: rgba(11, 19, 43, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+@media (min-width: 768px) {
+  .modal-backdrop {
+    align-items: center;
+    padding: 1.5rem;
+  }
+}
+
+.modal-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.bottom-sheet {
+  width: 100%;
+  max-width: 820px;
+  max-height: 88dvh;
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  padding: 1.5rem var(--container-pad) calc(1.75rem + var(--safe-bottom));
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform 0.32s var(--ease-out-expo);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (min-width: 768px) {
+  .bottom-sheet {
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    transform: translateY(20px) scale(0.97);
+    padding: 2.25rem;
+  }
+}
+
+.modal-backdrop.is-open .bottom-sheet {
+  transform: translateY(0) scale(1);
+}
+
+/* Ficha Técnica Estructurada (Engineering Spec Sheet) */
+.spec-sheet-meta-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.15rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.spec-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+}
+
+.spec-meta-pill.is-accent {
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--brand-blue);
+  border-color: rgba(37, 99, 235, 0.24);
+}
+
+.spec-sheet-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 1.25rem 0;
+}
+
+@media (min-width: 680px) {
+  .spec-sheet-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.spec-card-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.1rem 1.15rem;
+}
+
+.spec-card-box.is-full {
+  grid-column: 1 / -1;
+}
+
+.spec-card-label {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--brand-blue);
+  margin-bottom: 0.55rem;
+}
+
+.spec-workflow-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.65rem;
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 680px) {
+  .spec-workflow-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.spec-workflow-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.85rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.spec-workflow-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--gradient-brand);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0.05rem;
+}
+
+/* --------------------------------------------------------------------------
+   8B. CONSOLA INTERACTIVA COMPACTA DE SERVICIOS (INDEX ANTI-INFINITE-SCROLL)
+   -------------------------------------------------------------------------- */
+.services-console-frame {
+  background: var(--bg-surface);
+  border: 1px solid rgba(37, 99, 235, 0.22);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  position: relative;
+}
+
+.services-console-topbar {
+  background: linear-gradient(90deg, #0B132B 0%, #162447 100%);
+  color: #F8FAFC;
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.services-console-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #38BDF8;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+}
+
+.services-console-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 960px) {
+  .services-console-layout {
+    grid-template-columns: 330px 1fr;
+    min-height: 490px;
+  }
+}
+
+/* Navegador de Módulos (Horizontal Snap en Móvil, Sidebar en Desktop) */
+.services-console-sidebar {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.85rem;
+  display: flex;
+  gap: 0.55rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.services-console-sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 960px) {
+  .services-console-sidebar {
+    flex-direction: column;
+    overflow-x: visible;
+    overflow-y: auto;
+    border-bottom: none;
+    border-right: 1px solid var(--border-subtle);
+    padding: 1.15rem;
+    gap: 0.45rem;
+  }
+}
+
+.console-service-tab {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  width: 235px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: var(--radius-md);
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.22s var(--ease-out-expo);
+  position: relative;
+}
+
+@media (min-width: 960px) {
+  .console-service-tab {
+    width: 100%;
+  }
+}
+
+.console-service-tab:hover {
+  border-color: rgba(37, 99, 235, 0.35);
+  transform: translateY(-1px);
+}
+
+.console-service-tab.is-active {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.09) 0%, rgba(124, 58, 237, 0.09) 100%);
+  border-color: var(--brand-blue);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.12);
+}
+
+.console-service-tab.is-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 18%;
+  bottom: 18%;
+  width: 3.5px;
+  border-radius: 0 4px 4px 0;
+  background: var(--gradient-brand);
+}
+
+.console-tab-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand-blue);
+  flex-shrink: 0;
+  transition: all 0.22s ease;
+}
+
+.console-service-tab.is-active .console-tab-icon {
+  background: var(--gradient-brand);
+  color: #FFFFFF;
+  border-color: transparent;
+}
+
+.console-tab-meta {
+  min-width: 0;
+  flex: 1;
+}
+
+.console-tab-code {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.console-service-tab.is-active .console-tab-code {
+  color: var(--brand-blue);
+}
+
+.console-tab-title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.83rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Viewport Activo de la Consola de Servicios */
+.services-console-viewport {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+  background:
+    radial-gradient(circle at 92% 8%, rgba(37, 99, 235, 0.06), transparent 42%),
+    radial-gradient(circle at 12% 90%, rgba(124, 58, 237, 0.05), transparent 45%),
+    #FFFFFF;
+}
+
+@media (min-width: 768px) {
+  .services-console-viewport {
+    padding: 2rem 2.25rem;
+  }
+}
+
+.console-viewport-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.console-specs-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+
+@media (min-width: 640px) {
+  .console-specs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.console-spec-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.95rem 1.05rem;
+}
+
+.console-spec-box h4 {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--brand-blue);
+  margin-bottom: 0.45rem;
+}
+
+.console-deliverable-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.45rem;
+}
+
+@media (min-width: 640px) {
+  .console-deliverable-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.console-deliverable-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.81rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+}
+
+.console-viewport-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* --------------------------------------------------------------------------
+   8C. CASO DE ÉXITO CVSTUDIO33 + IA NYX + AXON SHOWCASE
+   -------------------------------------------------------------------------- */
+.cvstudio-flagship-card {
+  background: linear-gradient(155deg, #FFFFFF 0%, #F5F8FF 55%, #F3F0FF 100%);
+  border: 1.5px solid rgba(37, 99, 235, 0.26);
+  border-radius: var(--radius-xl);
+  padding: clamp(1.5rem, 3.5vw, 2.5rem);
+  box-shadow: 0 20px 50px rgba(11, 19, 43, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.cvstudio-brand-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.15rem;
+  padding-bottom: 1.35rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(37, 99, 235, 0.15);
+}
+
+.cvstudio-identity-cluster {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cvstudio-logo-frame {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: #0B132B;
+  border: 1.5px solid rgba(56, 189, 248, 0.4);
+  padding: 0.45rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 24px rgba(11, 19, 43, 0.18);
+  flex-shrink: 0;
+}
+
+.cvstudio-logo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cvstudio-sublogos-pills {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.sublogo-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.32rem 0.7rem 0.32rem 0.4rem;
+  border-radius: var(--radius-full);
+  background: #0B132B;
+  color: #F8FAFC;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  border: 1px solid rgba(124, 58, 237, 0.45);
+  box-shadow: var(--shadow-xs);
+}
+
+.sublogo-chip img {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.cvstudio-action-links {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.btn-tiktok-official {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.68rem 1.1rem;
+  border-radius: var(--radius-md);
+  background: #0B132B;
+  color: #FFFFFF;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 800;
+  border: 1px solid rgba(37, 244, 238, 0.45);
+  box-shadow: 0 6px 18px rgba(11, 19, 43, 0.16);
+  transition: transform 0.2s var(--ease-spring), box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-tiktok-official:hover {
+  transform: translateY(-2px);
+  border-color: #FE2C55;
+  box-shadow: 0 10px 24px rgba(254, 44, 85, 0.22);
+}
+
+.btn-tiktok-official img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.nyx-architecture-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 1.35rem 0;
+}
+
+@media (min-width: 768px) {
+  .nyx-architecture-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.nyx-arch-card {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  border-radius: var(--radius-md);
+  padding: 1.15rem;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.nyx-arch-card h4 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nyx-arch-card p {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+/* --------------------------------------------------------------------------
+   9. FOOTER CORPORATIVO EXCLUSIVO DE ORIONCODELABS33
+   -------------------------------------------------------------------------- */
+.site-footer {
+  background: linear-gradient(180deg, #F4F7FB 0%, #E9EFF8 100%);
+  border-top: 1px solid var(--border-subtle);
+  padding-top: clamp(3rem, 6vw, 4.75rem);
+  padding-bottom: clamp(2.25rem, 4vw, 3.25rem);
+  font-size: var(--text-sm);
+  position: relative;
+}
+
+/* Cinta Superior de Telemetría e Infraestructura Propia OrionCodeLabs33 */
+.footer-telemetry-banner {
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.1rem 1.35rem;
+  margin-bottom: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  box-shadow: var(--shadow-xs);
+}
+
+@media (min-width: 768px) {
+  .footer-telemetry-banner {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.footer-telemetry-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.footer-telemetry-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--brand-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.footer-telemetry-item strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.footer-telemetry-item span {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* Bloque del Video del Logo en el Footer: Autoajustable al ancho de cualquier dispositivo */
+.footer-video-showcase {
+  width: 100%;
+  max-width: min(380px, 86vw);
+  margin-bottom: 1rem;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-logo-video {
+  width: 100%;
+  height: auto;
+  max-height: 130px;
+  object-fit: contain;
+  display: block;
+}
+
+.footer-navmap-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.25rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+@media (min-width: 640px) {
+  .footer-navmap-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1080px) {
+  .footer-navmap-grid {
+    grid-template-columns: 1.55fr 0.95fr 1.15fr 1.15fr 1.15fr;
+    gap: 1.75rem;
+  }
+}
+
+.footer-col-title {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.footer-col-title::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gradient-brand);
+}
+
+.footer-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.footer-nav-list a {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  transition: color 0.18s ease, transform 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.footer-nav-list a:hover {
+  color: var(--brand-blue);
+  transform: translateX(3px);
+}
+
+.footer-bottom {
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+@media (min-width: 768px) {
+  .footer-bottom {
+    flex-direction: row;
+    align-items: center;
+  }
+}

@@ -1,0 +1,619 @@
+/* ==========================================================================
+   OrionCodeLabs33 — Pure Code Animations Engine
+   Archivo 3: assets/css/animations.css
+   1. Animación "Si puedes imaginarlo, Podemos crearlo" (Caja 100% bloqueada,
+      cero estiramiento de pantalla, sin etiquetas "render/code")
+   2. Animaciones SVG vectoriales (Órbitas, Circuitos, Cinturón de Orión)
+   3. Coreografía de Scroll Reveal (Blur-to-Sharp), Marquee Oficial y Dock
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. ANIMACIÓN INTEGRADA EN EL SUBTÍTULO:
+      "Si puedes imaginarlo, Podemos crearlo"
+      - Contenedor con `contain: strict` y dimensiones fijas para que NUNCA
+        estire la pantalla ni mueva ningún elemento alrededor.
+      - Sin textos extras como "RENDER" o "CODE".
+   -------------------------------------------------------------------------- */
+.orion-motto-box {
+  position: relative;
+  width: 100%;
+  max-width: 510px;
+  height: 46px;
+  margin-block: 0.75rem 1.15rem;
+  border-radius: var(--radius-sm);
+  background: #0B132B;
+  border: 1px solid rgba(37, 99, 235, 0.38);
+  box-shadow: 0 6px 20px -4px rgba(11, 19, 43, 0.18);
+  overflow: hidden;
+  /* Bloqueo estricto de layout y pintura: impide cualquier salto o estiramiento */
+  contain: strict;
+  user-select: none;
+  transition: background-color 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+}
+
+/* Estado cuando está renderizado en limpio sobre fondo claro/gradiente */
+.orion-motto-box.is-rendered {
+  background: linear-gradient(135deg, #F8FAFF 0%, #EEF2FF 100%);
+  border-color: rgba(124, 58, 237, 0.45);
+  box-shadow: 0 8px 24px -4px rgba(37, 99, 235, 0.18);
+}
+
+/* Escenario absoluto interno (jamás altera el flujo del documento) */
+.orion-motto-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding-inline: 0.95rem;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Vista A: Escritura en Código Puro */
+.motto-code-layer {
+  font-family: var(--font-mono);
+  font-size: clamp(0.71rem, 2.7vw, 0.86rem);
+  font-weight: 500;
+  color: #E2E8F0;
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.orion-motto-box.is-rendered .motto-code-layer {
+  display: none;
+}
+
+.c-tag { color: #38BDF8; }
+.c-str { color: #A7F3D0; }
+.c-sym { color: #C084FC; }
+
+.motto-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 1.05em;
+  background: #38BDF8;
+  margin-left: 2px;
+  flex-shrink: 0;
+  animation: mottoCursorBlink 0.75s steps(2, start) infinite;
+}
+
+@keyframes mottoCursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Vista B: Frase Renderizada Final */
+.motto-render-layer {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+.orion-motto-box.is-rendered .motto-render-layer {
+  display: flex;
+}
+
+.motto-render-text {
+  font-family: var(--font-display);
+  font-size: clamp(0.84rem, 3.1vw, 1.02rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, #0B132B 0%, #2563EB 55%, #7C3AED 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Efecto Glitch Interno Contenidísimo (Solo dentro de la caja de 46px) */
+.orion-motto-box.is-glitching .orion-motto-stage {
+  animation: internalGlitchShift 0.36s steps(2, end) infinite;
+}
+
+.orion-motto-box.is-glitching::after {
+  content: attr(data-glitch);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding-inline: 0.95rem;
+  font-family: var(--font-mono);
+  font-size: clamp(0.72rem, 2.7vw, 0.86rem);
+  font-weight: 700;
+  color: #FFFFFF;
+  background: #0B132B;
+  text-shadow: -2px 0 #38BDF8, 2px 0 #A855F7;
+  overflow: hidden;
+  white-space: nowrap;
+  z-index: 4;
+  animation: internalGlitchSlice 0.36s steps(3, end) infinite;
+  pointer-events: none;
+}
+
+@keyframes internalGlitchShift {
+  0% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(-2px, 1px, 0); filter: hue-rotate(40deg); }
+  50% { transform: translate3d(2px, -1px, 0); }
+  75% { transform: translate3d(-1px, 0, 0); filter: hue-rotate(-40deg); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes internalGlitchSlice {
+  0% { clip-path: inset(10% 0 55% 0); }
+  33% { clip-path: inset(52% 0 12% 0); }
+  66% { clip-path: inset(24% 0 34% 0); }
+  100% { clip-path: inset(8% 0 65% 0); }
+}
+
+/* --------------------------------------------------------------------------
+   2. ANIMACIONES SVG PROFESIONALES (TRAZOS DE CIRCUITO, ÓRBITAS Y ESTRELLAS)
+   -------------------------------------------------------------------------- */
+@keyframes circuitFlow {
+  0% { stroke-dashoffset: 120; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes orbitPulse {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.06) rotate(4deg); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes pulseRing {
+  0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.45); }
+  70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+}
+
+.svg-circuit-line {
+  stroke-dasharray: 24 8;
+  animation: circuitFlow 3.5s linear infinite;
+}
+
+.svg-orbit-group {
+  transform-origin: center;
+  animation: orbitPulse 4.5s ease-in-out infinite;
+}
+
+.float-anim {
+  animation: floatSlow 5s ease-in-out infinite;
+}
+
+.dock-orion-orb {
+  animation: pulseRing 2.8s infinite;
+}
+
+/* --------------------------------------------------------------------------
+   3. CINTA INFINITA DE TECNOLOGÍAS OFICIALES (MARQUEE)
+   -------------------------------------------------------------------------- */
+.tech-marquee-wrap {
+  width: 100%;
+  overflow: hidden;
+  padding-block: 1.1rem;
+  background: var(--bg-surface);
+  border-block: 1px solid var(--border-subtle);
+  position: relative;
+}
+
+.tech-marquee-wrap::before,
+.tech-marquee-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 70px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.tech-marquee-wrap::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg-surface), transparent);
+}
+
+.tech-marquee-wrap::after {
+  right: 0;
+  background: linear-gradient(-90deg, var(--bg-surface), transparent);
+}
+
+.tech-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  width: max-content;
+  animation: marqueeScroll 34s linear infinite;
+}
+
+.tech-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.marquee-item img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+/* --------------------------------------------------------------------------
+   4. COREOGRAFÍA DE APARICIÓN EN SCROLL (REVEAL BLUR-TO-SHARP)
+   -------------------------------------------------------------------------- */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(22px);
+  filter: blur(4px);
+  transition:
+    opacity 0.65s var(--ease-out-expo),
+    transform 0.65s var(--ease-out-expo),
+    filter 0.65s var(--ease-out-expo);
+  will-change: opacity, transform, filter;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Spotlight sutil en tarjetas blancas */
+.spotlight-card {
+  position: relative;
+}
+
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    380px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(37, 99, 235, 0.065),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   5. MICRO-ANIMACIONES DE ICONOS SVG MULTICAPA (STACK DE PRODUCCIÓN)
+   -------------------------------------------------------------------------- */
+@keyframes svgNodePulse {
+  0%, 100% { opacity: 0.45; transform: scale(0.92); }
+  50% { opacity: 1; transform: scale(1.12); }
+}
+
+@keyframes svgOrbitSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes svgDataBeam {
+  0% { stroke-dashoffset: 60; opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0.4; }
+}
+
+.svg-node-glow {
+  transform-origin: center;
+  animation: svgNodePulse 2.6s ease-in-out infinite;
+}
+
+.svg-ring-spin {
+  transform-origin: center;
+  animation: svgOrbitSpin 16s linear infinite;
+}
+
+.svg-beam-flow {
+  stroke-dasharray: 14 6;
+  animation: svgDataBeam 2.4s linear infinite;
+}
+
+/* --------------------------------------------------------------------------
+   6. PIPELINE 3D EN SCROLL CON COMPILADOR GLITCH CÓDIGO -> RENDER
+      ("Cómo construimos tu proyecto paso a paso" en portafolio.html)
+      - 100% acelerado por GPU (transform + opacity), 60 FPS garantizados
+        sin WebGL pesado que colapse el navegador.
+   -------------------------------------------------------------------------- */
+.process-3d-arena {
+  position: relative;
+  perspective: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  padding-left: 0;
+}
+
+@media (min-width: 900px) {
+  .process-3d-arena {
+    padding-left: 3.25rem;
+  }
+}
+
+/* Riel Láser Vertical de Progreso */
+.process-3d-rail {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .process-3d-rail {
+    display: block;
+    position: absolute;
+    left: 1.1rem;
+    top: 1.5rem;
+    bottom: 1.5rem;
+    width: 4px;
+    border-radius: 999px;
+    background: rgba(37, 99, 235, 0.14);
+    overflow: hidden;
+  }
+
+  .process-3d-rail-fill {
+    width: 100%;
+    height: var(--rail-progress, 20%);
+    background: linear-gradient(180deg, #2563EB 0%, #7C3AED 50%, #06B6D4 100%);
+    box-shadow: 0 0 16px rgba(37, 99, 235, 0.6);
+    transition: height 0.25s ease-out;
+  }
+}
+
+/* Tarjeta 3D por Etapa con Perspectiva Reactiva al Scroll */
+.process-3d-step {
+  position: relative;
+  background: var(--bg-surface);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  border-radius: var(--radius-xl);
+  padding: clamp(1.35rem, 3vw, 2rem);
+  box-shadow: 0 18px 42px -12px rgba(11, 19, 43, 0.09);
+  transform-style: preserve-3d;
+  transform:
+    perspective(1100px)
+    rotateX(var(--step-rx, 11deg))
+    rotateY(var(--step-ry, -2deg))
+    translate3d(0, var(--step-ty, 24px), var(--step-tz, -30px))
+    scale(var(--step-scale, 0.96));
+  opacity: var(--step-opacity, 0.45);
+  transition:
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.55s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+  will-change: transform, opacity;
+}
+
+.process-3d-step.is-in-3d-focus {
+  --step-rx: 0deg;
+  --step-ry: 0deg;
+  --step-ty: 0px;
+  --step-tz: 0px;
+  --step-scale: 1;
+  --step-opacity: 1;
+  border-color: rgba(37, 99, 235, 0.42);
+  box-shadow:
+    0 24px 54px -12px rgba(37, 99, 235, 0.14),
+    0 0 0 1px rgba(37, 99, 235, 0.08);
+}
+
+/* Nodo Conector en el Riel 3D */
+@media (min-width: 900px) {
+  .process-3d-step::before {
+    content: attr(data-step-num);
+    position: absolute;
+    left: -3.15rem;
+    top: 2rem;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: #FFFFFF;
+    border: 2px solid var(--brand-blue);
+    color: var(--brand-blue);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.2);
+    transition: all 0.35s ease;
+    z-index: 3;
+  }
+
+  .process-3d-step.is-in-3d-focus::before {
+    background: var(--gradient-brand);
+    color: #FFFFFF;
+    border-color: transparent;
+    transform: scale(1.1);
+  }
+}
+
+.process-3d-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+@media (min-width: 860px) {
+  .process-3d-grid {
+    grid-template-columns: 1.1fr 0.95fr;
+  }
+}
+
+/* Escenario Compilador Código Puro -> Glitch -> UI Renderizada */
+.code-render-compiler {
+  position: relative;
+  border-radius: var(--radius-lg);
+  background: #0B132B;
+  border: 1px solid rgba(56, 189, 248, 0.32);
+  overflow: hidden;
+  min-height: 235px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 14px 34px rgba(11, 19, 43, 0.24);
+  contain: layout paint;
+}
+
+.compiler-topbar {
+  background: #131F42;
+  padding: 0.55rem 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.compiler-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.compiler-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.compiler-dots span:nth-child(1) { background: #EF4444; }
+.compiler-dots span:nth-child(2) { background: #F59E0B; }
+.compiler-dots span:nth-child(3) { background: #10B981; }
+
+.compiler-mode-toggle {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #38BDF8;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 6px;
+  padding: 0.22rem 0.55rem;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.compiler-mode-toggle:hover {
+  background: rgba(56, 189, 248, 0.24);
+  color: #FFFFFF;
+}
+
+.compiler-stage-body {
+  position: relative;
+  flex: 1;
+  padding: 1rem 1.1rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Vista 1: Código Puro */
+.compiler-code-view {
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  line-height: 1.65;
+  color: #E2E8F0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.code-render-compiler.is-compiled .compiler-code-view {
+  display: none;
+}
+
+/* Vista 2: Módulo Renderizado tras el Glitch */
+.compiler-rendered-view {
+  display: none;
+  width: 100%;
+  background: linear-gradient(145deg, #FFFFFF 0%, #F1F5FD 100%);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.1rem;
+  color: var(--text-primary);
+  border: 1px solid rgba(37, 99, 235, 0.24);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.code-render-compiler.is-compiled .compiler-rendered-view {
+  display: flex;
+  animation: compiledPopIn 0.38s var(--ease-out-expo);
+}
+
+@keyframes compiledPopIn {
+  0% { opacity: 0; transform: scale(0.96) translateY(6px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Glitch Cromático durante la Compilación Código <-> Render */
+.code-render-compiler.is-compiling .compiler-stage-body {
+  animation: compilerGlitchPulse 0.42s steps(3, end) infinite;
+}
+
+.code-render-compiler.is-compiling::after {
+  content: 'ORION_COMPILER // GLITCH_SYNTHESIS_ACTIVE [0x33]';
+  position: absolute;
+  inset: 34px 0 0 0;
+  background: rgba(11, 19, 43, 0.92);
+  color: #38BDF8;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: -2px 0 #FE2C55, 2px 0 #25F4EE;
+  letter-spacing: 0.06em;
+  animation: internalGlitchSlice 0.35s steps(3, end) infinite;
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes compilerGlitchPulse {
+  0% { transform: translate3d(0, 0, 0); filter: hue-rotate(0deg); }
+  33% { transform: translate3d(-3px, 1px, 0) skewX(2deg); filter: hue-rotate(60deg); }
+  66% { transform: translate3d(3px, -1px, 0) skewX(-2deg); filter: hue-rotate(-60deg); }
+  100% { transform: translate3d(0, 0, 0); filter: hue-rotate(0deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal-on-scroll,
+  .process-3d-step {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}

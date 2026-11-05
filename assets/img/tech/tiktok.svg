@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-label="TikTok Oficial">
+  <rect width="48" height="48" rx="12" fill="#0B132B"/>
+  <!-- Cyan glitch offset layer -->
+  <path d="M33.2 18.2a8.2 8.2 0 0 1-4.8-1.6v11.1a9.4 9.4 0 1 1-8.1-9.3v4.7a4.8 4.8 0 1 0 3.4 4.6V10h4.7a8.2 8.2 0 0 0 4.8 6.4v1.8Z" fill="#25F4EE" transform="translate(-1.4, -1.2)"/>
+  <!-- Magenta/Red glitch offset layer -->
+  <path d="M33.2 18.2a8.2 8.2 0 0 1-4.8-1.6v11.1a9.4 9.4 0 1 1-8.1-9.3v4.7a4.8 4.8 0 1 0 3.4 4.6V10h4.7a8.2 8.2 0 0 0 4.8 6.4v1.8Z" fill="#FE2C55" transform="translate(1.4, 1.2)"/>
+  <!-- Crisp White Center Layer -->
+  <path d="M33.2 18.2a8.2 8.2 0 0 1-4.8-1.6v11.1a9.4 9.4 0 1 1-8.1-9.3v4.7a4.8 4.8 0 1 0 3.4 4.6V10h4.7a8.2 8.2 0 0 0 4.8 6.4v1.8Z" fill="#FFFFFF"/>
+</svg>

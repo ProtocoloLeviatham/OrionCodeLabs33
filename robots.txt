@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://orioncodelabs33.com.ar/sitemap.xml

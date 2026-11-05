@@ -1,0 +1,144 @@
+/* ==========================================================================
+   OrionCodeLabs33 — Architectural White & Cobalt-Violet Design System
+   Archivo 1: assets/css/tokens.css
+   Diseñado para Web App Moderna de Alta Ingeniería (Blanco Puro + Azul Noche
+   #0B132B + Cobalto Eléctrico #2563EB + Violeta Orión #7C3AED)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Familias Tipográficas */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+
+  /* Escala Tipográfica Fluida y Equilibrada */
+  --text-xs: clamp(0.75rem, 0.72rem + 0.14vw, 0.8125rem);
+  --text-sm: clamp(0.875rem, 0.84rem + 0.18vw, 0.9375rem);
+  --text-base: clamp(0.98rem, 0.95rem + 0.2vw, 1.0625rem);
+  --text-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.275rem);
+  --text-xl: clamp(1.3rem, 1.18rem + 0.55vw, 1.55rem);
+  --text-2xl: clamp(1.6rem, 1.38rem + 1vw, 2.15rem);
+  --text-3xl: clamp(1.95rem, 1.62rem + 1.65vw, 2.85rem);
+  --text-hero: clamp(2.2rem, 1.7rem + 2.5vw, 3.75rem);
+
+  /* Paleta Principal: Blanco Arquitectónico & Tinta Orión (#0B132B) */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F6F8FC;
+  --bg-tertiary: #EEF2F9;
+  --bg-surface: #FFFFFF;
+  --bg-surface-hover: #F8FAFF;
+  --bg-glass: rgba(255, 255, 255, 0.86);
+  --bg-dock: rgba(11, 19, 43, 0.92);
+  --bg-code: #0B132B;
+
+  /* Textos de Alto Contraste y Lectura Limpia */
+  --text-primary: #0B132B;
+  --text-secondary: #334155;
+  --text-muted: #64748B;
+  --text-on-brand: #FFFFFF;
+
+  /* Colores de Marca Extraídos del Logo OrionCodeLabs33 */
+  --brand-navy: #0B132B;
+  --brand-blue: #2563EB;
+  --brand-blue-bright: #1D4ED8;
+  --brand-indigo: #4F46E5;
+  --brand-violet: #7C3AED;
+  --brand-purple: #9333EA;
+  --brand-cyan: #0284C7;
+  --brand-emerald: #059669;
+  --brand-amber: #D97706;
+
+  /* Gradientes de Ingeniería */
+  --gradient-orion: linear-gradient(135deg, #2563EB 0%, #4F46E5 50%, #8B5CF6 100%);
+  --gradient-orion-dark: linear-gradient(135deg, #0B132B 0%, #1E293B 45%, #1E1B4B 100%);
+  --gradient-orion-subtle: linear-gradient(135deg, rgba(37, 99, 235, 0.07) 0%, rgba(124, 58, 237, 0.08) 100%);
+  --gradient-surface-sheen: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+
+  /* Bordes y Sombras Multicapa (Estética Limpia de Web App) */
+  --border-subtle: #E2E8F0;
+  --border-medium: #CBD5E1;
+  --border-strong: rgba(37, 99, 235, 0.32);
+  --border-focus: #2563EB;
+
+  --shadow-xs: 0 1px 2px rgba(11, 19, 43, 0.04);
+  --shadow-sm: 0 4px 12px -2px rgba(11, 19, 43, 0.06), 0 1px 3px rgba(11, 19, 43, 0.04);
+  --shadow-md: 0 14px 34px -8px rgba(11, 19, 43, 0.09), 0 4px 10px -3px rgba(11, 19, 43, 0.04);
+  --shadow-lg: 0 24px 56px -12px rgba(11, 19, 43, 0.14), 0 8px 20px -6px rgba(37, 99, 235, 0.08);
+  --shadow-glow: 0 10px 30px -6px rgba(37, 99, 235, 0.35);
+  --shadow-dock: 0 20px 50px -10px rgba(11, 19, 43, 0.32), 0 0 0 1px rgba(255, 255, 255, 0.12);
+
+  /* Radios y Dimensiones */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 30px;
+  --radius-pill: 9999px;
+
+  --header-height: 68px;
+  --dock-height: 72px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  --container-max: 1260px;
+  --container-pad: clamp(1rem, 4vw, 2.5rem);
+
+  /* Curvas Físicas de Animación */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset y Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-height: 100dvh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.62;
+  overflow-x: hidden;
+  /* Espacio reservado abajo para el Dock de Navegación en celular y PC */
+  padding-bottom: calc(var(--dock-height) + var(--safe-bottom) + 28px);
+}
+
+img, svg, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 3px;
+}
+
+p {
+  max-width: 72ch;
+}

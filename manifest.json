@@ -1,0 +1,25 @@
+{
+  "name": "OrionCodeLabs33 — Ingeniería de Software & ORION IA",
+  "short_name": "OrionCodeLabs33",
+  "description": "Si puedes imaginarlo, Podemos crearlo. Desarrollo de software, aplicaciones web y móviles, Cloudflare Workers, Supabase, Firebase y nuestro motor propio ORION IA.",
+  "lang": "es-AR",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFFFFF",
+  "icons": [
+    {
+      "src": "assets/img/favicon.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/img/logo-icon.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
