@@ -104,18 +104,32 @@ html {
   scroll-padding-top: 88px;
   background-color: var(--bg-primary);
   color: var(--text-primary);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+  overscroll-behavior-x: none;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
 }
 
 body {
   min-height: 100dvh;
+  width: 100%;
+  max-width: 100%;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.62;
-  overflow-x: hidden;
+  overflow-x: clip;
+  overscroll-behavior-x: none;
+  position: relative;
   /* Espacio reservado abajo para el Dock de Navegación en celular y PC */
   padding-bottom: calc(var(--dock-height) + var(--safe-bottom) + 28px);
+}
+
+main, section, header, footer {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 img, svg, video {

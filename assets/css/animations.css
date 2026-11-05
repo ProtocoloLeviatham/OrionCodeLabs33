@@ -339,18 +339,20 @@
 }
 
 /* --------------------------------------------------------------------------
-   6. PIPELINE 3D EN SCROLL CON COMPILADOR GLITCH CÓDIGO -> RENDER
+   6. PIPELINE 3D EN LOOP AUTOMÁTICO CON ESCÁNER VISUAL & COMPILADOR EN VIVO
       ("Cómo construimos tu proyecto paso a paso" en portafolio.html)
-      - 100% acelerado por GPU (transform + opacity), 60 FPS garantizados
-        sin WebGL pesado que colapse el navegador.
+      - 100% automático en loop infinito, visualmente atractivo, moderno
+        y contenido dentro del viewport móvil sin causar scroll horizontal.
    -------------------------------------------------------------------------- */
 .process-3d-arena {
   position: relative;
-  perspective: 1200px;
   display: flex;
   flex-direction: column;
-  gap: 2.25rem;
+  gap: 2rem;
   padding-left: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 @media (min-width: 900px) {
@@ -359,7 +361,7 @@
   }
 }
 
-/* Riel Láser Vertical de Progreso */
+/* Riel Láser Vertical de Progreso en Loop */
 .process-3d-rail {
   display: none;
 }
@@ -379,48 +381,66 @@
 
   .process-3d-rail-fill {
     width: 100%;
-    height: var(--rail-progress, 20%);
+    height: var(--rail-progress, 35%);
     background: linear-gradient(180deg, #2563EB 0%, #7C3AED 50%, #06B6D4 100%);
     box-shadow: 0 0 16px rgba(37, 99, 235, 0.6);
-    transition: height 0.25s ease-out;
+    animation: railAutoFlow 8s ease-in-out infinite alternate;
   }
 }
 
-/* Tarjeta 3D por Etapa con Perspectiva Reactiva al Scroll */
+@keyframes railAutoFlow {
+  0% { height: 22%; filter: hue-rotate(0deg); }
+  50% { height: 68%; filter: hue-rotate(25deg); }
+  100% { height: 100%; filter: hue-rotate(0deg); }
+}
+
+/* Tarjeta 3D por Etapa con Animación Continua en Loop */
 .process-3d-step {
   position: relative;
   background: var(--bg-surface);
-  border: 1px solid rgba(37, 99, 235, 0.2);
+  border: 1.5px solid rgba(37, 99, 235, 0.22);
   border-radius: var(--radius-xl);
-  padding: clamp(1.35rem, 3vw, 2rem);
-  box-shadow: 0 18px 42px -12px rgba(11, 19, 43, 0.09);
-  transform-style: preserve-3d;
-  transform:
-    perspective(1100px)
-    rotateX(var(--step-rx, 11deg))
-    rotateY(var(--step-ry, -2deg))
-    translate3d(0, var(--step-ty, 24px), var(--step-tz, -30px))
-    scale(var(--step-scale, 0.96));
-  opacity: var(--step-opacity, 0.45);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  box-shadow: 0 18px 42px -12px rgba(11, 19, 43, 0.08);
   transition:
-    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.55s ease,
-    border-color 0.35s ease,
-    box-shadow 0.35s ease;
-  will-change: transform, opacity;
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
-.process-3d-step.is-in-3d-focus {
-  --step-rx: 0deg;
-  --step-ry: 0deg;
-  --step-ty: 0px;
-  --step-tz: 0px;
-  --step-scale: 1;
-  --step-opacity: 1;
-  border-color: rgba(37, 99, 235, 0.42);
+.process-3d-step.is-in-3d-focus,
+.process-3d-step.is-loop-active {
+  border-color: rgba(37, 99, 235, 0.5);
   box-shadow:
-    0 24px 54px -12px rgba(37, 99, 235, 0.14),
-    0 0 0 1px rgba(37, 99, 235, 0.08);
+    0 24px 54px -12px rgba(37, 99, 235, 0.16),
+    0 0 0 1px rgba(124, 58, 237, 0.14);
+}
+
+/* Halo Luminoso Superior Animado en Loop en cada Etapa */
+.process-3d-step::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 65%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #2563EB, #7C3AED, #06B6D4, transparent);
+  animation: stepTopBeamLoop 5.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+.process-3d-step:nth-child(2)::after { animation-delay: 0s; }
+.process-3d-step:nth-child(3)::after { animation-delay: 1.3s; }
+.process-3d-step:nth-child(4)::after { animation-delay: 2.6s; }
+.process-3d-step:nth-child(5)::after { animation-delay: 3.9s; }
+
+@keyframes stepTopBeamLoop {
+  0% { left: -70%; opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { left: 115%; opacity: 0.4; }
 }
 
 /* Nodo Conector en el Riel 3D */
@@ -433,53 +453,68 @@
     width: 34px;
     height: 34px;
     border-radius: 10px;
-    background: #FFFFFF;
-    border: 2px solid var(--brand-blue);
-    color: var(--brand-blue);
+    background: var(--gradient-brand);
+    color: #FFFFFF;
     font-family: var(--font-mono);
     font-size: 0.74rem;
     font-weight: 800;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.2);
-    transition: all 0.35s ease;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.28);
     z-index: 3;
-  }
-
-  .process-3d-step.is-in-3d-focus::before {
-    background: var(--gradient-brand);
-    color: #FFFFFF;
-    border-color: transparent;
-    transform: scale(1.1);
   }
 }
 
 .process-3d-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.35rem;
   align-items: center;
+  width: 100%;
 }
 
 @media (min-width: 860px) {
   .process-3d-grid {
-    grid-template-columns: 1.1fr 0.95fr;
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
   }
 }
 
-/* Escenario Compilador Código Puro -> Glitch -> UI Renderizada */
+/* Escenario Compilador Automático en Loop (Código -> Escáner Láser -> App UI Viva) */
 .code-render-compiler {
   position: relative;
   border-radius: var(--radius-lg);
-  background: #0B132B;
-  border: 1px solid rgba(56, 189, 248, 0.32);
+  background: linear-gradient(160deg, #0B132B 0%, #111C38 100%);
+  border: 1px solid rgba(56, 189, 248, 0.36);
   overflow: hidden;
-  min-height: 235px;
+  min-height: 255px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 14px 34px rgba(11, 19, 43, 0.24);
+  box-shadow: 0 16px 38px rgba(11, 19, 43, 0.24);
   contain: layout paint;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Escáner Láser Horizontal que recorre la ventana en Loop Automático */
+.code-render-compiler::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 34px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #38BDF8 50%, transparent 100%);
+  box-shadow: 0 0 14px 2px rgba(56, 189, 248, 0.55);
+  z-index: 4;
+  pointer-events: none;
+  animation: compilerLaserSweep 4.2s ease-in-out infinite;
+}
+
+@keyframes compilerLaserSweep {
+  0% { top: 36px; opacity: 0.25; }
+  50% { top: calc(100% - 10px); opacity: 0.95; }
+  100% { top: 36px; opacity: 0.25; }
 }
 
 .compiler-topbar {
@@ -489,7 +524,34 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
+  flex-wrap: wrap;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  z-index: 3;
+}
+
+/* Barra de Progreso de Ciclo Automático en Loop */
+.compiler-loop-progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2.5px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.compiler-loop-progress-bar {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #38BDF8, #818CF8, #2DD4BF);
+  transform-origin: left center;
+  animation: autoCycleProgress 4.6s linear infinite;
+}
+
+@keyframes autoCycleProgress {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
 }
 
 .compiler-dots {
@@ -510,98 +572,204 @@
 
 .compiler-mode-toggle {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.66rem;
   font-weight: 700;
   color: #38BDF8;
-  background: rgba(56, 189, 248, 0.12);
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  border-radius: 6px;
-  padding: 0.22rem 0.55rem;
+  background: rgba(56, 189, 248, 0.14);
+  border: 1px solid rgba(56, 189, 248, 0.34);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
   cursor: pointer;
   transition: all 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.compiler-mode-toggle::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+  animation: mottoCursorBlink 1.1s infinite;
 }
 
 .compiler-mode-toggle:hover {
-  background: rgba(56, 189, 248, 0.24);
+  background: rgba(56, 189, 248, 0.26);
   color: #FFFFFF;
 }
 
 .compiler-stage-body {
   position: relative;
   flex: 1;
-  padding: 1rem 1.1rem;
+  padding: 1rem 1.05rem;
   display: flex;
   align-items: center;
+  min-width: 0;
 }
 
-/* Vista 1: Código Puro */
+/* Vista 1: Código Puro con Pulso de Ejecución */
 .compiler-code-view {
   width: 100%;
   font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: 0.73rem;
   line-height: 1.65;
   color: #E2E8F0;
   white-space: pre-wrap;
   word-break: break-word;
+  animation: codeViewFadeIn 0.45s var(--ease-out-expo);
+}
+
+@keyframes codeViewFadeIn {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 .code-render-compiler.is-compiled .compiler-code-view {
   display: none;
 }
 
-/* Vista 2: Módulo Renderizado tras el Glitch */
+/* Vista 2: Módulo UI Renderizado con Animaciones Internas en Loop */
 .compiler-rendered-view {
   display: none;
   width: 100%;
   background: linear-gradient(145deg, #FFFFFF 0%, #F1F5FD 100%);
   border-radius: var(--radius-md);
-  padding: 1rem 1.1rem;
+  padding: 1rem 1.05rem;
   color: var(--text-primary);
-  border: 1px solid rgba(37, 99, 235, 0.24);
-  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
+  border: 1px solid rgba(37, 99, 235, 0.26);
+  box-shadow: 0 10px 28px rgba(37, 99, 235, 0.18);
   flex-direction: column;
   gap: 0.65rem;
+  position: relative;
+  overflow: hidden;
 }
 
 .code-render-compiler.is-compiled .compiler-rendered-view {
   display: flex;
-  animation: compiledPopIn 0.38s var(--ease-out-expo);
+  animation: compiledPopIn 0.45s var(--ease-out-expo);
+}
+
+/* Barras de Actividad Animadas en Loop dentro de la Vista Renderizada */
+.rendered-live-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 28px;
+  padding-top: 4px;
+}
+
+.rendered-live-bars span {
+  flex: 1;
+  background: linear-gradient(180deg, #2563EB 0%, #7C3AED 100%);
+  border-radius: 3px 3px 0 0;
+  animation: liveBarBounce 1.8s ease-in-out infinite alternate;
+}
+
+.rendered-live-bars span:nth-child(1) { height: 45%; animation-delay: 0.1s; }
+.rendered-live-bars span:nth-child(2) { height: 75%; animation-delay: 0.3s; }
+.rendered-live-bars span:nth-child(3) { height: 60%; animation-delay: 0.2s; }
+.rendered-live-bars span:nth-child(4) { height: 95%; animation-delay: 0.45s; }
+.rendered-live-bars span:nth-child(5) { height: 70%; animation-delay: 0.15s; }
+.rendered-live-bars span:nth-child(6) { height: 100%; animation-delay: 0.35s; }
+
+@keyframes liveBarBounce {
+  0% { transform: scaleY(0.45); opacity: 0.7; }
+  100% { transform: scaleY(1); opacity: 1; }
 }
 
 @keyframes compiledPopIn {
-  0% { opacity: 0; transform: scale(0.96) translateY(6px); }
+  0% { opacity: 0; transform: scale(0.95) translateY(6px); }
   100% { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-/* Glitch Cromático durante la Compilación Código <-> Render */
+/* Transición Holográfica Limpia durante el Cambio Automático */
 .code-render-compiler.is-compiling .compiler-stage-body {
-  animation: compilerGlitchPulse 0.42s steps(3, end) infinite;
+  animation: compilerGlitchPulse 0.36s steps(2, end) infinite;
 }
 
 .code-render-compiler.is-compiling::after {
-  content: 'ORION_COMPILER // GLITCH_SYNTHESIS_ACTIVE [0x33]';
+  content: 'SINCRONIZANDO VISTA EN VIVO...';
   position: absolute;
   inset: 34px 0 0 0;
-  background: rgba(11, 19, 43, 0.92);
+  background: rgba(11, 19, 43, 0.88);
+  backdrop-filter: blur(4px);
   color: #38BDF8;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.74rem;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-shadow: -2px 0 #FE2C55, 2px 0 #25F4EE;
   letter-spacing: 0.06em;
-  animation: internalGlitchSlice 0.35s steps(3, end) infinite;
   pointer-events: none;
   z-index: 5;
 }
 
 @keyframes compilerGlitchPulse {
-  0% { transform: translate3d(0, 0, 0); filter: hue-rotate(0deg); }
-  33% { transform: translate3d(-3px, 1px, 0) skewX(2deg); filter: hue-rotate(60deg); }
-  66% { transform: translate3d(3px, -1px, 0) skewX(-2deg); filter: hue-rotate(-60deg); }
-  100% { transform: translate3d(0, 0, 0); filter: hue-rotate(0deg); }
+  0% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(0.985); filter: brightness(1.25) hue-rotate(25deg); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+
+/* Showcase Orbital Automático en Loop para Portafolio */
+.portfolio-auto-showcase {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.15rem;
+  margin-bottom: 2.25rem;
+}
+
+@media (min-width: 768px) {
+  .portfolio-auto-showcase {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.auto-showcase-card {
+  background: linear-gradient(155deg, #FFFFFF 0%, #F4F7FF 100%);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  animation: showcaseCardFloat 6s ease-in-out infinite;
+}
+
+.auto-showcase-card:nth-child(2) { animation-delay: -2s; }
+.auto-showcase-card:nth-child(3) { animation-delay: -4s; }
+
+@keyframes showcaseCardFloat {
+  0%, 100% { transform: translateY(0); border-color: rgba(37, 99, 235, 0.2); }
+  50% { transform: translateY(-5px); border-color: rgba(124, 58, 237, 0.45); box-shadow: 0 14px 30px rgba(37, 99, 235, 0.12); }
+}
+
+.auto-wave-visualizer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 32px;
+  margin-top: 0.75rem;
+}
+
+.auto-wave-visualizer span {
+  flex: 1;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #2563EB, #06B6D4);
+  transform-origin: center;
+  animation: wavePulseLoop 1.5s ease-in-out infinite alternate;
+}
+
+.auto-wave-visualizer span:nth-child(odd) { animation-duration: 1.1s; }
+.auto-wave-visualizer span:nth-child(3n) { animation-duration: 1.7s; background: linear-gradient(180deg, #7C3AED, #2563EB); }
+
+@keyframes wavePulseLoop {
+  0% { transform: scaleY(0.25); opacity: 0.45; }
+  100% { transform: scaleY(0.95); opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {

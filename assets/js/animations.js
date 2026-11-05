@@ -207,11 +207,99 @@
   }
 
   /**
-   * Motor 3D de Scroll y Compilación Glitch Código -> Render ("Cómo construimos tu proyecto paso a paso")
-   * Liviano, 60 FPS constantes en GPU y con alternancia interactiva entre Código Puro y Módulo Renderizado.
+   * Motor de Métricas Animadas en Vivo (Caso de Éxito CvStudio33):
+   * Sube progresivamente (+200k TikTok, +15.000 visitas web, +1.000 CVs,
+   * +1.000 USD ventas web, +200 contratados 1er mes) y llena barras de progreso.
+   */
+  function initLiveMetricsCounter() {
+    const metricCards = document.querySelectorAll('.cvstudio-metric-card');
+    if (!metricCards.length) return;
+
+    function formatMetricNumber(val, formatType) {
+      const rounded = Math.round(val);
+      if (formatType === 'dot-thousands') {
+        return rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+      }
+      return String(rounded);
+    }
+
+    function animateCard(card, delayMs) {
+      if (card.dataset.animated === '1') return;
+      card.dataset.animated = '1';
+
+      const valEl = card.querySelector('[data-metric-target]');
+      const barEl = card.querySelector('.metric-progress-fill');
+      if (!valEl) return;
+
+      const target = parseFloat(valEl.dataset.metricTarget || '100');
+      const prefix = valEl.dataset.metricPrefix || '+';
+      const suffix = valEl.dataset.metricSuffix || '';
+      const fmt = valEl.dataset.metricFormat || 'plain';
+      const barWidth = barEl ? (barEl.dataset.progressTarget || '92%') : '92%';
+
+      window.setTimeout(() => {
+        if (barEl) {
+          barEl.style.width = barWidth;
+        }
+
+        const duration = 2100;
+        const startTime = performance.now();
+
+        function stepFrame(now) {
+          const elapsed = now - startTime;
+          const progress = Math.min(1, elapsed / duration);
+          // Easing suave pero progresivo (easeOutQuart)
+          const eased = 1 - Math.pow(1 - progress, 4);
+          const currentVal = target * eased;
+
+          valEl.textContent = `${prefix}${formatMetricNumber(currentVal, fmt)}${suffix}`;
+
+          if (progress < 1) {
+            window.requestAnimationFrame(stepFrame);
+          } else {
+            valEl.textContent = `${prefix}${formatMetricNumber(target, fmt)}${suffix}`;
+          }
+        }
+
+        window.requestAnimationFrame(stepFrame);
+      }, delayMs);
+    }
+
+    if ('IntersectionObserver' in window) {
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const allCards = entry.target.querySelectorAll('.cvstudio-metric-card');
+              if (allCards.length) {
+                allCards.forEach((c, idx) => animateCard(c, idx * 140));
+              } else if (entry.target.classList.contains('cvstudio-metric-card')) {
+                animateCard(entry.target, 0);
+              }
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+
+      const wrappers = document.querySelectorAll('.cvstudio-live-metrics-wrap');
+      if (wrappers.length) {
+        wrappers.forEach((w) => obs.observe(w));
+      } else {
+        metricCards.forEach((c) => obs.observe(c));
+      }
+    } else {
+      metricCards.forEach((c, idx) => animateCard(c, idx * 120));
+    }
+  }
+
+  /**
+   * Motor Automático en Loop Infinito ("Cómo construimos tu proyecto paso a paso" en portafolio.html)
+   * Corre solo automáticamente en loop continuo alternando entre Código en Vivo y App UI Renderizada
+   * sin requerir clics manuales del usuario.
    */
   function initProcess3DScrollEngine() {
-    const arena = document.querySelector('.process-3d-arena');
     const steps = document.querySelectorAll('.process-3d-step');
     if (!steps.length) return;
 
@@ -230,17 +318,19 @@
         const btn = compilerEl.querySelector('.compiler-mode-toggle');
         if (btn) {
           btn.textContent = compilerEl.classList.contains('is-compiled')
-            ? '</> Ver Código Puro'
-            : '⚡ Compilar Render';
+            ? '⚡ Loop Activo: Vista App en Vivo'
+            : '⚡ Loop Activo: Sintetizando Código';
         }
         compilerEl.dataset.busy = '0';
-      }, 380);
+      }, 320);
     }
 
-    // Botones manuales de cada etapa para alternar Código <-> Render con efecto Glitch
-    steps.forEach((step) => {
+    steps.forEach((step, index) => {
+      step.classList.add('is-in-3d-focus');
       const compiler = step.querySelector('.code-render-compiler');
       const toggleBtn = step.querySelector('.compiler-mode-toggle');
+
+      // Permite clic opcional, pero funciona 100% solo en loop automático
       if (compiler && toggleBtn) {
         toggleBtn.addEventListener('click', () => {
           const nextState = !compiler.classList.contains('is-compiled');
@@ -248,66 +338,34 @@
         });
       }
 
-      // Inclinación 3D sutil por puntero (throttled por rAF)
-      let rafId = null;
-      step.addEventListener('mousemove', (e) => {
-        if (!step.classList.contains('is-in-3d-focus') || window.innerWidth < 900) return;
-        if (rafId) return;
-        rafId = window.requestAnimationFrame(() => {
-          const rect = step.getBoundingClientRect();
-          const nx = (e.clientX - rect.left) / rect.width - 0.5;
-          const ny = (e.clientY - rect.top) / rect.height - 0.5;
-          step.style.setProperty('--step-rx', `${(-ny * 3.5).toFixed(2)}deg`);
-          step.style.setProperty('--step-ry', `${(nx * 4.5).toFixed(2)}deg`);
-          rafId = null;
-        });
-      });
-
-      step.addEventListener('mouseleave', () => {
-        if (step.classList.contains('is-in-3d-focus')) {
-          step.style.setProperty('--step-rx', '0deg');
-          step.style.setProperty('--step-ry', '0deg');
-        }
-      });
+      if (compiler) {
+        // Inicia alternancia automática desfasada por etapa para que toda la página tenga vida en loop
+        const initialDelay = 900 + index * 1100;
+        window.setTimeout(() => {
+          triggerCompilerTransition(compiler, true);
+          window.setInterval(() => {
+            const nextState = !compiler.classList.contains('is-compiled');
+            triggerCompilerTransition(compiler, nextState);
+          }, 4600);
+        }, initialDelay);
+      }
     });
 
-    if ('IntersectionObserver' in window) {
-      const stepObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            const stepEl = entry.target;
-            if (entry.isIntersecting) {
-              stepEl.classList.add('is-in-3d-focus');
-              const idx = Number(stepEl.dataset.stepIndex || 1);
-              if (arena) {
-                const pct = Math.min(100, Math.round((idx / steps.length) * 100));
-                arena.style.setProperty('--rail-progress', `${pct}%`);
-              }
-
-              // Auto-compila de Código Puro a Render con Glitch la primera vez que entra en foco
-              const compiler = stepEl.querySelector('.code-render-compiler');
-              if (compiler && !compiler.dataset.autoCompiled) {
-                compiler.dataset.autoCompiled = '1';
-                window.setTimeout(() => {
-                  triggerCompilerTransition(compiler, true);
-                }, 720);
-              }
-            }
-          });
-        },
-        { threshold: 0.22, rootMargin: '0px 0px -45px 0px' }
-      );
-
-      steps.forEach((s) => stepObserver.observe(s));
-    } else {
-      steps.forEach((s) => s.classList.add('is-in-3d-focus'));
-    }
+    // Rotación automática de foco luminoso entre las etapas
+    let activeStepIdx = 0;
+    window.setInterval(() => {
+      steps.forEach((s, idx) => {
+        s.classList.toggle('is-loop-active', idx === activeStepIdx);
+      });
+      activeStepIdx = (activeStepIdx + 1) % steps.length;
+    }, 3200);
   }
 
   document.addEventListener('DOMContentLoaded', () => {
     initOrionMottoAnimation();
     initScrollReveal();
     initInteractiveAndVideo();
+    initLiveMetricsCounter();
     initProcess3DScrollEngine();
   });
 })();
