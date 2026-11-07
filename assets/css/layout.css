@@ -2682,21 +2682,21 @@
   }
 }
 
-/* Reproductor Dedicado Remotion (60 FPS Frame/Spring Engine) */
+/* Reproductor Dedicado Remotion (60 FPS Minimalista Integrado en Superficie Blanca) */
 .remotion-player-shell {
-  background: #090D16;
-  border: 1px solid #1E293B;
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 20px 45px rgba(9, 13, 22, 0.16);
+  box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
 .remotion-player-topbar {
-  background: #0F172A;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: #F8FAFC;
+  border-bottom: 1px solid var(--border-subtle);
   padding: 0.65rem 1rem;
   display: flex;
   align-items: center;
@@ -2712,16 +2712,12 @@
   font-family: var(--font-display);
   font-size: 0.78rem;
   font-weight: 700;
-  color: #F8FAFC;
+  color: var(--text-primary);
 }
 
-.remotion-player-meta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: #38BDF8;
+.remotion-player-meta,
+[data-remotion-frame] {
+  display: none !important;
 }
 
 .remotion-canvas-stage {
@@ -2730,7 +2726,7 @@
   aspect-ratio: 16 / 10;
   min-height: 250px;
   max-height: 380px;
-  background: radial-gradient(circle at 50% 45%, #111C38 0%, #060913 85%);
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
   overflow: hidden;
 }
 
@@ -2741,8 +2737,8 @@
 }
 
 .remotion-scene-selector {
-  background: #0F172A;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: #F8FAFC;
+  border-top: 1px solid var(--border-subtle);
   padding: 0.6rem 0.75rem;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2756,13 +2752,13 @@
 }
 
 .remotion-scene-btn {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
   border-radius: 8px;
-  padding: 0.45rem 0.6rem;
+  padding: 0.48rem 0.65rem;
   text-align: left;
   cursor: pointer;
-  color: #94A3B8;
+  color: var(--text-secondary);
   transition: all 0.18s ease;
 }
 
@@ -2771,13 +2767,13 @@
   font-family: var(--font-display);
   font-size: 0.72rem;
   font-weight: 700;
-  color: #E2E8F0;
+  color: var(--text-primary);
 }
 
 .remotion-scene-btn span {
   display: block;
   font-size: 0.65rem;
-  color: #64748B;
+  color: var(--text-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -2785,26 +2781,26 @@
 
 .remotion-scene-btn:hover,
 .remotion-scene-btn.is-active {
-  background: rgba(29, 78, 216, 0.28);
-  border-color: #38BDF8;
-  color: #FFFFFF;
+  background: #EFF6FF;
+  border-color: var(--brand-blue);
+  color: var(--brand-blue);
 }
 
 .remotion-scene-btn.is-active strong {
-  color: #38BDF8;
+  color: var(--brand-blue);
 }
 
 .remotion-progress-rail {
-  height: 4px;
+  height: 3px;
   width: 100%;
-  background: rgba(255, 255, 255, 0.08);
+  background: #E2E8F0;
   overflow: hidden;
 }
 
 .remotion-progress-fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #2563EB 0%, #38BDF8 50%, #818CF8 100%);
+  background: linear-gradient(90deg, #1D4ED8 0%, #3B82F6 50%, #4F46E5 100%);
 }
 
 /* Matriz de Especificaciones de ORION IA en Superficie Blanca */
@@ -2912,8 +2908,8 @@
 }
 
 .roadmap-year-btn.is-active {
-  background: #090D16;
-  border-color: #090D16;
+  background: var(--brand-blue);
+  border-color: var(--brand-blue);
   color: #FFFFFF;
   box-shadow: var(--shadow-sm);
 }
@@ -2927,7 +2923,7 @@
 }
 
 .roadmap-year-btn.is-active strong {
-  color: #38BDF8;
+  color: #FFFFFF;
 }
 
 .roadmap-year-btn span {
@@ -2939,7 +2935,7 @@
 }
 
 .roadmap-year-btn.is-active span {
-  color: #E2E8F0;
+  color: #DBEAFE;
 }
 
 .roadmap-stage-grid {
@@ -3025,11 +3021,12 @@
 }
 
 .roadmap-chart-panel {
-  background: #090D16;
-  border: 1px solid #1E293B;
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   padding: 1.15rem;
-  color: #F8FAFC;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-xs);
   display: flex;
   flex-direction: column;
   justify-content: space-between;

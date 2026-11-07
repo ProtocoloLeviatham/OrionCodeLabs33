@@ -22,7 +22,7 @@
       solution:
         'Conectamos nuestra propia Inteligencia Artificial ORION IA (creada sobre Qwen 3.8 con método QLoRA en servidores NVIDIA de 40GB) entrenada con tus precios, catálogo y forma de vender para atender, cotizar y cerrar ventas las 24 horas.',
       summary:
-        'Transformamos tu atención al cliente y tus operaciones con nuestro motor propietario ORION IA: el mismo cerebro neural que impulsa a IA NYX en CvStudio33.com.ar (+200k seguidores en TikTok, +15.000 visitas web y valuación SaaS de +5.000 USD). Aprende cada noche y se adapta 100% a tu negocio.',
+        'Transformamos tu atención al cliente y tus operaciones con nuestro motor propietario ORION IA: el mismo cerebro neural que impulsa a IA NYX en CvStudio33.com.ar (que alcanzó +200k seguidores en TikTok, +15.000 visitas web y una valuación SaaS de +5.000 USD en su primer mes de lanzamiento). Aprende cada noche y se adapta 100% a tu negocio.',
       architecture:
         'Motor ORION IA basado en Qwen 3.8 (Hugging Face) optimizado con adaptadores QLoRA en GPU NVIDIA de 40GB, conectado a Cloudflare Workers y memoria vectorial en Supabase PostgreSQL para responder al instante sin inventar datos.',
       workflowSteps: [
@@ -32,9 +32,9 @@
         'Tu negocio atiende en menos de 1 segundo, califica clientes y vende en automático 24/7.'
       ],
       caseStudy:
-        'Caso de Éxito Real — CvStudio33.com.ar: Nuestro cerebro ORION IA potencia a IA NYX, AXON y su portal de empleo en alianza con Jooble y Adzuna, logrando +200k en TikTok, +15.000 visitas web, +1.000 CVs creados, +1.000 USD en compras web, +200 contratados en su 1er mes y una valorización SaaS que ronda los +5.000 USD.',
+        'Caso de Éxito Real — CvStudio33.com.ar (Métricas del 1er Mes de Lanzamiento): Nuestro cerebro ORION IA potencia a IA NYX, AXON y su portal de empleo en alianza con Jooble y Adzuna, alcanzando en su primer mes de ser lanzado +200k en TikTok, +15.000 visitas web, +1.000 CVs creados, +1.000 USD en compras web, +200 contratados y una valorización SaaS que ronda los +5.000 USD.',
       stack: ['ORION IA (Qwen 3.8 + QLoRA)', 'NVIDIA 40GB GPU', 'IA NYX / AXON Arch', 'Python FastAPI', 'Cloudflare Workers', 'Supabase Vector RAG', 'WhatsApp Cloud API'],
-      timeline: '1 a 3 semanas listo para vender',
+      timeline: 'Según agenda y volumen de código (3 a 15 días máximo)',
       deliverables: [
         'Agente o motor ORION IA entrenado con tus precios, productos y reglas comerciales reales',
         'Conexión directa a tu WhatsApp Oficial o sitio web para atender, cotizar y vender 24/7',
@@ -76,7 +76,7 @@
       caseStudy:
         'Retención en 5 Segundos: Aplicamos la misma arquitectura visual y velocidad de carga que permitió a CvStudio33.com.ar convertir más de 15.000 visitas web de TikTok en más de 1.000 compras reales sin caídas.',
       stack: ['HTML5 Semántico', 'CSS3 GPU Animations', 'JavaScript / TypeScript', 'React / Next.js', 'Cloudflare Edge CDN', 'PWA Mobile Lock', 'SEO Google AR'],
-      timeline: '1 a 3 semanas',
+      timeline: 'Según agenda y volumen de código (3 a 15 días máximo)',
       deliverables: [
         'Página web o Web App completa 100% adaptable a celulares, tablets y computadoras',
         'Redacción completa de textos gancho comerciales (Copywriting) enfocados en vender',
@@ -118,7 +118,7 @@
       caseStudy:
         'Tráfico Viral sin Caídas: Cuando los videos de @CvStudio33 (+200k seguidores en TikTok) enviaron miles de usuarios simultáneos a la web, nuestra arquitectura en Cloudflare y Supabase respondió en milisegundos con 0% de caídas.',
       stack: ['Cloudflare Edge & WAF', 'Cloudflare Workers', 'Supabase PostgreSQL', 'Google Firebase', 'OAuth 2.0 / Login Google', 'Ciberseguridad OWASP', 'Backups Automáticos'],
-      timeline: '1 a 3 semanas',
+      timeline: 'Según agenda y volumen de código (3 a 15 días máximo)',
       deliverables: [
         'Base de datos en producción en Supabase (PostgreSQL) o Google Firebase con seguridad RLS',
         'Sistema completo de registro, inicio de sesión con Google y perfiles de usuario',
@@ -160,7 +160,7 @@
       caseStudy:
         'Panel de Partners y Sistema de la 5ta Venta: En CvStudio33 desarrollamos un panel propio de afiliados que calcula comisiones de hasta el 80% de forma automática, gestiona retiros y emite documentos en segundos.',
       stack: ['Dashboard Web & Móvil', 'Supabase PostgreSQL', 'Python / TypeScript', 'Motor PDF Vault', 'Exportación Excel/CSV', 'Roles y Permisos', 'Alertas WhatsApp'],
-      timeline: '2 a 5 semanas',
+      timeline: 'Según agenda y volumen de código (3 a 15 días máximo)',
       deliverables: [
         'Sistema de gestión 100% propio accesible desde cualquier celular, tablet o PC',
         'Usuarios ilimitados con niveles de permiso (dueño, encargados, vendedores, sucursales)',
@@ -202,7 +202,7 @@
       caseStudy:
         'Más de +1.000 USD Facturados en Compras Web: En CvStudio33.com.ar implementamos pasarelas serverless en Cloudflare Workers para la venta de plantillas, planes mensuales y recarga de Tokens NYX/AXON en vivo.',
       stack: ['Mercado Pago API Oficial', 'Cloudflare Workers Pay', 'Checkout Móvil 3 Pasos', 'Economía de Tokens/Créditos', 'Carrito Directo a WhatsApp', 'Stripe / PayPal USD'],
-      timeline: '2 a 4 semanas',
+      timeline: 'Según agenda y volumen de código (3 a 15 días máximo)',
       deliverables: [
         'Tienda online o plataforma de cobros propia sin pagar comisiones por venta a intermediarios',
         'Integración oficial con Mercado Pago (tarjetas, dinero en cuenta), transferencia y USD',
@@ -244,7 +244,7 @@
       caseStudy:
         'Experiencia Táctil Perfecta: Cero pantallas que se mueven hacia los costados y cero botones cortados. Diseñamos con bloqueo estricto de viewport y navegación inferior ergonómica.',
       stack: ['Flutter Android & iOS', 'React Native', 'PWA Instalable en 1 Clic', 'Notificaciones Push', 'Escáner QR & Cámara', 'Firebase & Supabase Realtime'],
-      timeline: '2 a 6 semanas',
+      timeline: 'Según agenda y volumen de código (3 a 15 días máximo)',
       deliverables: [
         'Aplicación móvil funcionando con fluidez total en celulares Android e iPhone (iOS)',
         'Panel de control web para administrar usuarios, pedidos, contenidos y notificaciones',
@@ -286,7 +286,7 @@
       caseStudy:
         'Portal de Empleo Propio en Alianza con Jooble y Adzuna (CvStudio33): Automatizamos la conexión y filtrado algorítmico de vacantes reales por radio en KM y salario, logrando +200 contrataciones estimadas en su primer mes.',
       stack: ['Python 3.12 Async', 'APIs Jooble & Adzuna', 'Cloudflare Cron Workers', 'Bots WhatsApp & Telegram', 'Google Sheets / Excel API', 'Scraping & Data Pipelines'],
-      timeline: '1 a 3 semanas',
+      timeline: 'Según agenda y volumen de código (3 a 15 días máximo)',
       deliverables: [
         'Robot de software o integración API funcionando 24/7 en la nube de forma autónoma',
         'Conexión automática entre tu sitio web, hojas de cálculo, base de datos y medios de pago',
@@ -328,7 +328,7 @@
       caseStudy:
         'De Visita a Comprador en Segundos: La combinación de métricas en vivo, prueba social verificada y formularios de 1 toque multiplicó la tasa de contacto y ventas en nuestros proyectos propios y de clientes.',
       stack: ['SEO Técnico Google AR', 'Copywriting de Respuesta Directa', 'Optimización CRO (Regla 5s)', 'Diseño UI/UX a Medida', 'Iconos & Logos SVG Propios', 'Schema.org JSON-LD'],
-      timeline: '1 a 2 semanas',
+      timeline: 'Según agenda y volumen de código (3 a 15 días máximo)',
       deliverables: [
         'Optimización SEO completa (títulos, metadatos, Schema.org, sitemap y velocidad) para Google',
         'Reescritura profesional de textos con ganchos comerciales que atrapan al cliente',

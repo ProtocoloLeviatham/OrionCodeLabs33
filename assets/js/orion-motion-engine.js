@@ -94,14 +94,14 @@
 
   /* ------------------------------------------------------------------------
      2. COMPOSICIÓN REMOTION #1: HERO PRESENTATION PLAYER (index.html)
-        300 frames @ 60 FPS (5.0s loop) — 3 Escenas de Ingeniería en Vivo
+        300 frames @ 60 FPS (5.0s loop) — Minimalismo Editorial en Superficie Blanca
+        Cero contadores de frames (0/1000) y cero estética oscura/hacker.
      ------------------------------------------------------------------------ */
   function initHeroRemotionComposition() {
     const root = document.querySelector('[data-remotion-composition="hero-architecture"]');
     if (!root) return;
 
     const canvas = root.querySelector('canvas');
-    const frameBadge = root.querySelector('[data-remotion-frame]');
     const progressFill = root.querySelector('.remotion-progress-fill');
     const sceneBtns = root.querySelectorAll('[data-remotion-scene]');
     if (!canvas) return;
@@ -123,102 +123,146 @@
       });
     });
 
+    function drawDotGrid(ctx, w, h) {
+      ctx.fillStyle = 'rgba(148, 163, 184, 0.28)';
+      const step = 24;
+      for (let x = 18; x < w; x += step) {
+        for (let y = 18; y < h; y += step) {
+          ctx.beginPath();
+          ctx.arc(x, y, 1, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+    }
+
     function renderFrame(frame) {
       const { ctx, w, h } = setupHiDPICanvas(canvas);
       ctx.clearRect(0, 0, w, h);
 
-      // Fondo arquitectónico técnico
-      ctx.fillStyle = '#090D16';
+      // Fondo blanco editorial minimalista
+      const bgGrad = ctx.createLinearGradient(0, 0, 0, h);
+      bgGrad.addColorStop(0, '#FFFFFF');
+      bgGrad.addColorStop(1, '#F8FAFC');
+      ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, w, h);
 
-      // Grilla de precisión
-      ctx.strokeStyle = 'rgba(148, 163, 184, 0.08)';
-      ctx.lineWidth = 1;
-      const step = 28;
-      for (let x = 0; x < w; x += step) {
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, h);
-        ctx.stroke();
-      }
-      for (let y = 0; y < h; y += step) {
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(w, y);
-        ctx.stroke();
-      }
+      drawDotGrid(ctx, w, h);
 
       const sceneIndex = Math.min(2, Math.floor(frame / 100));
       const localFrame = frame % 100;
-      const enterSpring = spring({ frame: localFrame, fps: FPS, config: { damping: 18, stiffness: 130 } });
+      const enterSpring = spring({ frame: localFrame, fps: FPS, config: { damping: 19, stiffness: 130 } });
 
       sceneBtns.forEach((b, idx) => {
         b.classList.toggle('is-active', idx === sceneIndex);
       });
 
-      if (frameBadge) {
-        frameBadge.textContent = `ESCENA 0${sceneIndex + 1} · FRAME ${String(frame).padStart(3, '0')}/${DURATION_IN_FRAMES} · 60 FPS`;
-      }
       if (progressFill) {
         progressFill.style.width = `${((frame / DURATION_IN_FRAMES) * 100).toFixed(1)}%`;
       }
 
       const cx = w / 2;
-      const cy = h / 2;
+      const cy = h / 2 - 6;
 
       if (sceneIndex === 0) {
-        // ESCENA 1: Arquitectura Web & Apps a Medida
-        const boxW = Math.min(w * 0.78, 360) * enterSpring;
-        const boxH = Math.min(h * 0.62, 165) * enterSpring;
-        const bx = cx - boxW / 2;
-        const by = cy - boxH / 2;
+        // ESCENA 1: Arquitectura Web & Plataformas SaaS Minimalista
+        const cardW = Math.min(w - 36, 400) * enterSpring;
+        const cardH = Math.min(h - 54, 182) * enterSpring;
+        const bx = cx - cardW / 2;
+        const by = cy - cardH / 2;
 
-        ctx.fillStyle = 'rgba(15, 23, 42, 0.92)';
-        ctx.strokeStyle = '#38BDF8';
+        ctx.save();
+        ctx.shadowColor = 'rgba(15, 23, 42, 0.07)';
+        ctx.shadowBlur = 24;
+        ctx.shadowOffsetY = 8;
+        ctx.fillStyle = '#FFFFFF';
+        ctx.strokeStyle = '#E2E8F0';
         ctx.lineWidth = 1.5;
         ctx.beginPath();
-        ctx.roundRect(bx, by, boxW, boxH, 12);
+        ctx.roundRect(bx, by, cardW, cardH, 16);
         ctx.fill();
         ctx.stroke();
+        ctx.restore();
 
-        // Barra superior del wireframe
-        ctx.fillStyle = 'rgba(56, 189, 248, 0.14)';
-        ctx.fillRect(bx + 12, by + 12, boxW - 24, 22);
+        // Barra superior minimalista de la app
+        ctx.fillStyle = '#F8FAFC';
+        ctx.beginPath();
+        ctx.roundRect(bx + 12, by + 12, cardW - 24, 26, 8);
+        ctx.fill();
 
-        // Bloques modulares internos animados con interpolate()
-        const colProgress = interpolate(localFrame, [8, 55], [0, 1], { easing: Easing.outCubic });
-        const innerW = (boxW - 36) / 3;
-        const colors = ['#2563EB', '#38BDF8', '#10B981'];
-        const labels = ['UI / UX', 'API REST', 'SQL / RLS'];
+        const dotColors = ['#CBD5E1', '#94A3B8', '#1D4ED8'];
+        dotColors.forEach((c, i) => {
+          ctx.fillStyle = c;
+          ctx.beginPath();
+          ctx.arc(bx + 24 + i * 11, by + 25, 3.2, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        ctx.fillStyle = '#1D4ED8';
+        ctx.font = '700 10px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText('Arquitectura Cloud Nativa', bx + 64, by + 28.5);
+
+        // 3 Tarjetas Modulares con animación spring e interpolación suave
+        const colProgress = interpolate(localFrame, [6, 52], [0, 1], { easing: Easing.outCubic });
+        const innerW = (cardW - 36) / 3;
+        const accents = ['#1D4ED8', '#4F46E5', '#059669'];
+        const softBgs = ['#EFF6FF', '#EEF2FF', '#ECFDF5'];
+        const titles = ['Diseño UI/UX', 'APIs & Pagos', 'Cloud & Datos'];
+        const metrics = ['100% Medida', 'Tiempo Real', 'Blindaje Total'];
 
         for (let i = 0; i < 3; i++) {
           const ix = bx + 12 + i * (innerW + 6);
-          const iy = by + 44;
-          const ih = (boxH - 58) * colProgress;
-          ctx.fillStyle = 'rgba(30, 41, 59, 0.9)';
-          ctx.strokeStyle = colors[i];
+          const iy = by + 48;
+          const ih = Math.max(36, (cardH - 62) * colProgress);
+
+          ctx.fillStyle = softBgs[i];
+          ctx.strokeStyle = accents[i];
+          ctx.lineWidth = 1.2;
           ctx.beginPath();
-          ctx.roundRect(ix, iy, innerW, Math.max(24, ih), 8);
+          ctx.roundRect(ix, iy, innerW, ih, 10);
           ctx.fill();
           ctx.stroke();
 
-          ctx.fillStyle = '#F8FAFC';
-          ctx.font = '700 11px "Plus Jakarta Sans", sans-serif';
-          ctx.fillText(labels[i], ix + 10, iy + 22);
+          ctx.fillStyle = '#090D16';
+          ctx.font = '700 10.5px "Plus Jakarta Sans", sans-serif';
+          ctx.fillText(titles[i], ix + 9, iy + 22);
+
+          ctx.fillStyle = accents[i];
+          ctx.font = '600 9.5px "Inter", sans-serif';
+          ctx.fillText(metrics[i], ix + 9, iy + 39);
+
+          // Barra de progreso minimalista interna
+          const barW = Math.max(8, (innerW - 18) * colProgress);
+          ctx.fillStyle = 'rgba(255,255,255,0.85)';
+          ctx.beginPath();
+          ctx.roundRect(ix + 9, iy + ih - 16, innerW - 18, 5, 3);
+          ctx.fill();
+
+          ctx.fillStyle = accents[i];
+          ctx.beginPath();
+          ctx.roundRect(ix + 9, iy + ih - 16, barW, 5, 3);
+          ctx.fill();
         }
 
-        ctx.fillStyle = '#E2E8F0';
-        ctx.font = '700 12px "Plus Jakarta Sans", sans-serif';
-        ctx.fillText('01 · Ingeniería de Plataformas Web & Apps Nativas', 18, h - 16);
+        ctx.fillStyle = '#475569';
+        ctx.font = '600 11.5px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText('Plataformas Web, Sistemas Comerciales y SaaS a Medida', 18, h - 14);
       } else if (sceneIndex === 1) {
-        // ESCENA 2: Integración del Motor Propietario ORION IA
+        // ESCENA 2: Ecosistema Minimalista ORION IA (Nodos Limpios y Curvas Suaves)
         const nodes = [
-          { x: cx - 115, y: cy - 38, label: 'Qwen 3.8 Base' },
-          { x: cx - 115, y: cy + 38, label: 'Datos Negocio' },
-          { x: cx, y: cy, label: 'ORION IA v3.3', main: true },
-          { x: cx + 115, y: cy - 38, label: 'Web / SaaS' },
-          { x: cx + 115, y: cy + 38, label: 'WhatsApp 24/7' }
+          { x: cx - 122, y: cy - 38, label: 'Base Qwen 3.8', sub: 'Fundación' },
+          { x: cx - 122, y: cy + 38, label: 'Tu Negocio', sub: 'Catálogo & Reglas' },
+          { x: cx, y: cy, label: 'ORION IA', sub: 'Motor Propio', main: true },
+          { x: cx + 122, y: cy - 38, label: 'Web & SaaS', sub: 'Integrado' },
+          { x: cx + 122, y: cy + 38, label: 'WhatsApp 24/7', sub: 'Atención Viva' }
         ];
+
+        // Anillos concéntricos suaves alrededor del núcleo
+        const ringPulse = interpolate(localFrame, [0, 99], [0.85, 1.18]);
+        ctx.strokeStyle = 'rgba(29, 78, 216, 0.10)';
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.arc(cx, cy, 52 * ringPulse, 0, Math.PI * 2);
+        ctx.stroke();
 
         const pulse = interpolate(localFrame, [0, 99], [0, 1]);
         const links = [
@@ -231,73 +275,130 @@
         links.forEach(([a, b], idx) => {
           const na = nodes[a];
           const nb = nodes[b];
-          ctx.strokeStyle = 'rgba(56, 189, 248, 0.35)';
+          const midX = (na.x + nb.x) / 2;
+
+          ctx.strokeStyle = '#CBD5E1';
           ctx.lineWidth = 1.8;
           ctx.beginPath();
           ctx.moveTo(na.x, na.y);
-          ctx.lineTo(nb.x, nb.y);
+          ctx.bezierCurveTo(midX, na.y, midX, nb.y, nb.x, nb.y);
           ctx.stroke();
 
-          const p = (pulse * 2 + idx * 0.25) % 1;
-          const px = na.x + (nb.x - na.x) * p;
-          const py = na.y + (nb.y - na.y) * p;
-          ctx.fillStyle = '#38BDF8';
+          // Partícula fluida sobre la curva
+          const t = (pulse * 1.8 + idx * 0.24) % 1;
+          const inv = 1 - t;
+          const px =
+            inv * inv * inv * na.x +
+            3 * inv * inv * t * midX +
+            3 * inv * t * t * midX +
+            t * t * t * nb.x;
+          const py =
+            inv * inv * inv * na.y +
+            3 * inv * inv * t * na.y +
+            3 * inv * t * t * nb.y +
+            t * t * t * nb.y;
+
+          ctx.fillStyle = '#1D4ED8';
           ctx.beginPath();
-          ctx.arc(px, py, 4, 0, Math.PI * 2);
+          ctx.arc(px, py, 3.8, 0, Math.PI * 2);
           ctx.fill();
         });
 
         nodes.forEach((n) => {
-          const r = n.main ? 34 * enterSpring : 22 * enterSpring;
-          ctx.fillStyle = n.main ? '#1D4ED8' : '#0F172A';
-          ctx.strokeStyle = n.main ? '#38BDF8' : '#475569';
-          ctx.lineWidth = n.main ? 2.2 : 1.4;
+          if (n.main) {
+            const r = 36 * enterSpring;
+            ctx.save();
+            ctx.shadowColor = 'rgba(29, 78, 216, 0.22)';
+            ctx.shadowBlur = 18;
+            ctx.fillStyle = '#1D4ED8';
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = '800 10.5px "Plus Jakarta Sans", sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(n.label, n.x, n.y - 2);
+            ctx.fillStyle = '#DBEAFE';
+            ctx.font = '600 8.5px "Inter", sans-serif';
+            ctx.fillText(n.sub, n.x, n.y + 10);
+          } else {
+            const pillW = 94 * enterSpring;
+            const pillH = 38 * enterSpring;
+            ctx.save();
+            ctx.shadowColor = 'rgba(15, 23, 42, 0.06)';
+            ctx.shadowBlur = 10;
+            ctx.fillStyle = '#FFFFFF';
+            ctx.strokeStyle = '#CBD5E1';
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.roundRect(n.x - pillW / 2, n.y - pillH / 2, pillW, pillH, 10);
+            ctx.fill();
+            ctx.stroke();
+            ctx.restore();
+
+            ctx.fillStyle = '#090D16';
+            ctx.font = '700 10px "Plus Jakarta Sans", sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(n.label, n.x, n.y - 2);
+            ctx.fillStyle = '#64748B';
+            ctx.font = '500 8.5px "Inter", sans-serif';
+            ctx.fillText(n.sub, n.x, n.y + 10);
+          }
+        });
+
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#475569';
+        ctx.font = '600 11.5px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText('Agentes y Sistemas Conectados al Motor Propio ORION IA', 18, h - 14);
+      } else {
+        // ESCENA 3: Rendimiento, Conversión y Entrega Llave en Mano
+        const items = [
+          { label: 'Velocidad y Disponibilidad Global (SLA 99.99%)', val: 0.96, color: '#1D4ED8', badge: 'Óptimo' },
+          { label: 'Seguridad de Datos y Protección Activa', val: 0.99, color: '#059669', badge: 'Blindado' },
+          { label: 'Código 100% Propiedad del Cliente (Sin Licencias)', val: 1.0, color: '#4F46E5', badge: '100% Tuyo' }
+        ];
+
+        const cardW = Math.min(w - 40, 380);
+        const startX = (w - cardW) / 2;
+
+        items.forEach((b, i) => {
+          const y = 26 + i * 54;
+          const fillRatio = b.val * interpolate(localFrame, [4 + i * 7, 50 + i * 7], [0, 1], { easing: Easing.outQuart });
+
+          ctx.fillStyle = '#FFFFFF';
+          ctx.strokeStyle = '#E2E8F0';
+          ctx.lineWidth = 1.2;
           ctx.beginPath();
-          ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+          ctx.roundRect(startX, y, cardW, 44, 10);
           ctx.fill();
           ctx.stroke();
 
-          ctx.fillStyle = '#FFFFFF';
-          ctx.font = n.main ? '700 10px "Plus Jakarta Sans", sans-serif' : '600 9.5px "Inter", sans-serif';
-          ctx.textAlign = 'center';
-          ctx.fillText(n.label, n.x, n.y + (n.main ? 3 : r + 14));
-        });
-        ctx.textAlign = 'left';
-        ctx.fillStyle = '#E2E8F0';
-        ctx.font = '700 12px "Plus Jakarta Sans", sans-serif';
-        ctx.fillText('02 · Núcleo Propietario ORION IA (QLoRA + RAG Vectorial)', 18, h - 16);
-      } else {
-        // ESCENA 3: Despliegue Global Edge + Ciberseguridad + Resultados
-        const bars = [
-          { label: 'Latencia Global Edge (<15ms)', val: 0.94, color: '#38BDF8' },
-          { label: 'Blindaje WAF L7 & Zero-Trust', val: 0.99, color: '#10B981' },
-          { label: 'Disponibilidad SLA 99.99%', val: 0.98, color: '#818CF8' }
-        ];
+          ctx.fillStyle = '#090D16';
+          ctx.font = '700 10.5px "Plus Jakarta Sans", sans-serif';
+          ctx.fillText(b.label, startX + 12, y + 17);
 
-        const barW = Math.min(w - 48, 350);
-        const startX = (w - barW) / 2;
-        bars.forEach((b, i) => {
-          const y = 42 + i * 52;
-          const fillRatio = b.val * interpolate(localFrame, [5 + i * 8, 55 + i * 8], [0, 1], { easing: Easing.outQuart });
+          ctx.fillStyle = b.color;
+          ctx.font = '700 9.5px "Plus Jakarta Sans", sans-serif';
+          ctx.textAlign = 'right';
+          ctx.fillText(b.badge, startX + cardW - 12, y + 17);
+          ctx.textAlign = 'left';
 
-          ctx.fillStyle = '#E2E8F0';
-          ctx.font = '600 11px "Inter", sans-serif';
-          ctx.fillText(b.label, startX, y);
-
-          ctx.fillStyle = 'rgba(255,255,255,0.08)';
+          ctx.fillStyle = '#F1F5F9';
           ctx.beginPath();
-          ctx.roundRect(startX, y + 8, barW, 12, 6);
+          ctx.roundRect(startX + 12, y + 25, cardW - 24, 8, 4);
           ctx.fill();
 
           ctx.fillStyle = b.color;
           ctx.beginPath();
-          ctx.roundRect(startX, y + 8, Math.max(12, barW * fillRatio), 12, 6);
+          ctx.roundRect(startX + 12, y + 25, Math.max(12, (cardW - 24) * fillRatio), 8, 4);
           ctx.fill();
         });
 
-        ctx.fillStyle = '#E2E8F0';
-        ctx.font = '700 12px "Plus Jakarta Sans", sans-serif';
-        ctx.fillText('03 · Producción en Vivo · Propiedad Intelectual 100% del Cliente', 18, h - 16);
+        ctx.fillStyle = '#475569';
+        ctx.font = '600 11.5px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText('Producción Lista para Vender · Entrega Ágil de 3 a 15 Días Máx.', 18, h - 14);
       }
     }
 
@@ -318,14 +419,14 @@
 
   /* ------------------------------------------------------------------------
      3. COMPOSICIÓN REMOTION #2: ECOSISTEMA & CONSTELACIÓN ORION IA (portafolio.html)
-        360 frames @ 60 FPS (6.0s loop) — 4 Escenas Cinematográficas en Código Puro
+        360 frames @ 60 FPS (6.0s loop) — 4 Escenas Minimalistas en Superficie Blanca
+        Cero contadores de frames (0/1000) y cero estética oscura/hacker.
      ------------------------------------------------------------------------ */
   function initOrionEcosystemRemotionPlayer() {
     const root = document.querySelector('[data-remotion-composition="orion-neural-ecosystem"]');
     if (!root) return;
 
     const canvas = root.querySelector('canvas');
-    const frameBadge = root.querySelector('[data-remotion-frame]');
     const progressFill = root.querySelector('.remotion-progress-fill');
     const sceneBtns = root.querySelectorAll('[data-remotion-scene]');
     if (!canvas) return;
@@ -335,15 +436,15 @@
     let currentFrame = 0;
     let lockedScene = -1;
 
-    // Estrellas reales de la Constelación de Orión (Coordenadas normalizadas 0..1)
+    // Estrellas reales de la Constelación de Orión sobre carta astronómica blanca
     const ORION_STARS = [
-      { id: 'Betelgeuse', x: 0.28, y: 0.22, r: 6.5, color: '#F59E0B' },
-      { id: 'Bellatrix', x: 0.68, y: 0.25, r: 5.5, color: '#38BDF8' },
-      { id: 'Alnitak', x: 0.42, y: 0.50, r: 5.0, color: '#60A5FA', belt: true },
-      { id: 'Alnilam', x: 0.50, y: 0.48, r: 5.8, color: '#FFFFFF', belt: true },
-      { id: 'Mintaka', x: 0.58, y: 0.46, r: 5.0, color: '#60A5FA', belt: true },
-      { id: 'Saiph', x: 0.33, y: 0.80, r: 5.2, color: '#38BDF8' },
-      { id: 'Rigel', x: 0.72, y: 0.78, r: 7.0, color: '#818CF8' }
+      { id: 'Betelgeuse', x: 0.28, y: 0.22, r: 6.0, color: '#D97706' },
+      { id: 'Bellatrix', x: 0.68, y: 0.25, r: 5.2, color: '#1D4ED8' },
+      { id: 'Alnitak', x: 0.42, y: 0.50, r: 4.8, color: '#2563EB', belt: true },
+      { id: 'Alnilam', x: 0.50, y: 0.48, r: 5.5, color: '#1D4ED8', belt: true },
+      { id: 'Mintaka', x: 0.58, y: 0.46, r: 4.8, color: '#2563EB', belt: true },
+      { id: 'Saiph', x: 0.33, y: 0.78, r: 5.0, color: '#4F46E5' },
+      { id: 'Rigel', x: 0.72, y: 0.76, r: 6.5, color: '#1D4ED8' }
     ];
 
     const ORION_EDGES = [
@@ -373,23 +474,23 @@
       const { ctx, w, h } = setupHiDPICanvas(canvas);
       ctx.clearRect(0, 0, w, h);
 
-      // Fondo espacial técnico
-      const grad = ctx.createRadialGradient(w * 0.5, h * 0.48, 10, w * 0.5, h * 0.5, Math.max(w, h) * 0.75);
-      grad.addColorStop(0, '#111C38');
-      grad.addColorStop(1, '#060913');
+      // Superficie blanca y alabastro limpia
+      const grad = ctx.createLinearGradient(0, 0, 0, h);
+      grad.addColorStop(0, '#FFFFFF');
+      grad.addColorStop(1, '#F8FAFC');
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, w, h);
 
-      // Retícula matemática
-      ctx.strokeStyle = 'rgba(56, 189, 248, 0.06)';
+      // Retícula geométrica sutil
+      ctx.strokeStyle = 'rgba(148, 163, 184, 0.14)';
       ctx.lineWidth = 1;
-      for (let x = 0; x < w; x += 32) {
+      for (let x = 24; x < w; x += 32) {
         ctx.beginPath();
         ctx.moveTo(x, 0);
         ctx.lineTo(x, h);
         ctx.stroke();
       }
-      for (let y = 0; y < h; y += 32) {
+      for (let y = 24; y < h; y += 32) {
         ctx.beginPath();
         ctx.moveTo(0, y);
         ctx.lineTo(w, y);
@@ -404,142 +505,171 @@
         b.classList.toggle('is-active', i === sceneIdx);
       });
 
-      if (frameBadge) {
-        frameBadge.textContent = `SEC 0${sceneIdx + 1}/04 · FRAME ${String(frame).padStart(3, '0')}/${DURATION} · 60 FPS`;
-      }
       if (progressFill) {
         progressFill.style.width = `${((frame / DURATION) * 100).toFixed(1)}%`;
       }
 
       if (sceneIdx === 0) {
-        // ESCENA 1: Ingesta Base Qwen 3.8 desde Hugging Face
-        const cols = 8;
-        const rows = 4;
-        const cellW = Math.min(36, (w - 90) / cols);
-        const cellH = 26;
-        const startX = (w - cols * (cellW + 6)) / 2;
-        const startY = 48;
+        // ESCENA 1: Base Fundacional Qwen 3.8 (Bloques Limpios en Superficie Blanca)
+        const cols = 7;
+        const rows = 3;
+        const cellW = Math.min(42, (w - 90) / cols);
+        const cellH = 30;
+        const startX = (w - cols * (cellW + 8)) / 2;
+        const startY = 44;
 
         for (let r = 0; r < rows; r++) {
           for (let c = 0; c < cols; c++) {
             const idx = r * cols + c;
-            const active = ((localF + idx * 3) % 40) < 20;
-            const x = startX + c * (cellW + 6);
-            const y = startY + r * (cellH + 6);
-            ctx.fillStyle = active ? 'rgba(37, 99, 235, 0.42)' : 'rgba(15, 23, 42, 0.85)';
-            ctx.strokeStyle = active ? '#38BDF8' : 'rgba(148, 163, 184, 0.25)';
+            const wave = Math.sin((localF * 0.12) + idx * 0.45);
+            const active = wave > 0.15;
+            const x = startX + c * (cellW + 8);
+            const y = startY + r * (cellH + 8);
+            ctx.fillStyle = active ? '#EFF6FF' : '#FFFFFF';
+            ctx.strokeStyle = active ? '#1D4ED8' : '#CBD5E1';
+            ctx.lineWidth = active ? 1.5 : 1;
             ctx.beginPath();
-            ctx.roundRect(x, y, cellW, cellH, 5);
+            ctx.roundRect(x, y, cellW, cellH, 7);
             ctx.fill();
             ctx.stroke();
+
+            ctx.fillStyle = active ? '#1D4ED8' : '#94A3B8';
+            ctx.beginPath();
+            ctx.arc(x + cellW / 2, y + cellH / 2, active ? 3.5 : 2, 0, Math.PI * 2);
+            ctx.fill();
           }
         }
 
-        ctx.fillStyle = '#38BDF8';
-        ctx.font = '600 11px "JetBrains Mono", monospace';
-        ctx.fillText('BASE: HuggingFace / Qwen-3.8-Foundation · Tensor Stream FP16', 18, h - 36);
-        ctx.fillStyle = '#F8FAFC';
-        ctx.font = '700 12.5px "Plus Jakarta Sans", sans-serif';
-        ctx.fillText('Escena 01 · Tokenización Semántica y Pesos Base Qwen 3.8', 18, h - 16);
+        ctx.fillStyle = '#1D4ED8';
+        ctx.font = '700 11px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText('Arquitectura Base Qwen 3.8 (Hugging Face) · Comprensión Semántica', 18, h - 34);
+        ctx.fillStyle = '#090D16';
+        ctx.font = '700 12px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText('01 · Capas Fundacionales de Razonamiento y Lenguaje', 18, h - 15);
       } else if (sceneIdx === 1) {
-        // ESCENA 2: Matrices QLoRA (W0 + B x A) en NVIDIA 40GB VRAM
-        const cy = h * 0.44;
+        // ESCENA 2: Adaptación QLoRA en GPUs NVIDIA de 40GB (Tarjetas Minimalistas)
+        const cy = h * 0.43;
         const cx = w * 0.5;
         const scale = sFactor;
 
-        // Matriz W0 Congelada (4-bit NF4)
-        ctx.fillStyle = 'rgba(30, 41, 59, 0.92)';
-        ctx.strokeStyle = '#60A5FA';
-        ctx.lineWidth = 1.6;
+        // Tarjeta 1: Base 4-bit NF4
+        ctx.fillStyle = '#FFFFFF';
+        ctx.strokeStyle = '#CBD5E1';
+        ctx.lineWidth = 1.4;
         ctx.beginPath();
-        ctx.roundRect(cx - 145, cy - 52, 92 * scale, 96 * scale, 10);
+        ctx.roundRect(cx - 148, cy - 48, 92 * scale, 90 * scale, 12);
         ctx.fill();
         ctx.stroke();
-        ctx.fillStyle = '#FFFFFF';
+        ctx.fillStyle = '#090D16';
         ctx.font = '700 11px "Plus Jakarta Sans", sans-serif';
-        ctx.fillText('W0 (NF4)', cx - 126, cy - 4);
-        ctx.fillStyle = '#94A3B8';
-        ctx.font = '500 9.5px "JetBrains Mono", monospace';
-        ctx.fillText('4-bit Frozen', cx - 132, cy + 14);
+        ctx.fillText('Base NF4', cx - 128, cy - 6);
+        ctx.fillStyle = '#64748B';
+        ctx.font = '600 9.5px "Inter", sans-serif';
+        ctx.fillText('Pesos Base', cx - 129, cy + 12);
 
-        // Signo +
-        ctx.fillStyle = '#38BDF8';
-        ctx.font = '700 18px "JetBrains Mono", monospace';
-        ctx.fillText('+', cx - 38, cy + 4);
+        ctx.fillStyle = '#1D4ED8';
+        ctx.font = '800 16px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText('+', cx - 42, cy + 4);
 
-        // Matrices Adaptadoras LoRA B x A
-        ctx.fillStyle = 'rgba(109, 40, 217, 0.35)';
-        ctx.strokeStyle = '#A855F7';
+        // Tarjeta 2: Adaptadores QLoRA
+        ctx.fillStyle = '#EEF2FF';
+        ctx.strokeStyle = '#4F46E5';
         ctx.beginPath();
-        ctx.roundRect(cx - 14, cy - 52, 46 * scale, 96 * scale, 8);
+        ctx.roundRect(cx - 18, cy - 48, 54 * scale, 90 * scale, 12);
         ctx.fill();
         ctx.stroke();
-        ctx.fillStyle = '#F8FAFC';
-        ctx.font = '700 10px "JetBrains Mono", monospace';
-        ctx.fillText('B·A', cx - 2, cy + 2);
+        ctx.fillStyle = '#4F46E5';
+        ctx.font = '800 10.5px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText('QLoRA', cx - 8, cy + 2);
 
-        // Flecha hacia GPU NVIDIA 40GB
-        const vramUsage = interpolate(localF, [0, 85], [24.2, 38.6], { easing: Easing.outCubic });
-        ctx.fillStyle = 'rgba(4, 120, 87, 0.28)';
-        ctx.strokeStyle = '#10B981';
+        // Tarjeta 3: Clúster NVIDIA 40GB
+        const vramUsage = interpolate(localF, [0, 85], [28.0, 39.2], { easing: Easing.outCubic });
+        ctx.fillStyle = '#ECFDF5';
+        ctx.strokeStyle = '#059669';
         ctx.beginPath();
-        ctx.roundRect(cx + 48, cy - 52, 108 * scale, 96 * scale, 10);
+        ctx.roundRect(cx + 50, cy - 48, 106 * scale, 90 * scale, 12);
         ctx.fill();
         ctx.stroke();
-        ctx.fillStyle = '#34D399';
-        ctx.font = '700 10.5px "Plus Jakarta Sans", sans-serif';
-        ctx.fillText('NVIDIA 40GB', cx + 62, cy - 16);
-        ctx.fillStyle = '#FFFFFF';
-        ctx.font = '700 11px "JetBrains Mono", monospace';
-        ctx.fillText(`${vramUsage.toFixed(1)} GB VRAM`, cx + 60, cy + 6);
-        ctx.fillStyle = '#A7F3D0';
-        ctx.font = '500 9.5px "JetBrains Mono", monospace';
-        ctx.fillText('Rank r=64 · α=128', cx + 58, cy + 26);
+        ctx.fillStyle = '#059669';
+        ctx.font = '800 10.5px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText('NVIDIA 40GB', cx + 64, cy - 12);
+        ctx.fillStyle = '#090D16';
+        ctx.font = '700 11px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText(`${vramUsage.toFixed(1)} GB VRAM`, cx + 64, cy + 7);
+        ctx.fillStyle = '#047857';
+        ctx.font = '600 9px "Inter", sans-serif';
+        ctx.fillText('Entrenamiento Dedicado', cx + 56, cy + 24);
 
-        ctx.fillStyle = '#F8FAFC';
-        ctx.font = '700 12.5px "Plus Jakarta Sans", sans-serif';
-        ctx.fillText('Escena 02 · Adaptación Matemática QLoRA en GPUs NVIDIA de 40GB', 18, h - 16);
+        ctx.fillStyle = '#090D16';
+        ctx.font = '700 12px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText('02 · Refinamiento Matemático QLoRA en Servidores NVIDIA de 40GB', 18, h - 15);
       } else if (sceneIdx === 2) {
-        // ESCENA 3: Auto-Aprendizaje Nocturno (Descenso de Gradiente & Loss Curve)
+        // ESCENA 3: Curva de Auto-Aprendizaje Nocturno sobre Fondo Blanco
         const padX = 42;
-        const padY = 38;
+        const padY = 34;
         const chartW = w - padX * 2;
         const chartH = h - padY * 2 - 26;
 
-        ctx.strokeStyle = 'rgba(148, 163, 184, 0.3)';
+        ctx.strokeStyle = '#CBD5E1';
+        ctx.lineWidth = 1.2;
         ctx.beginPath();
         ctx.moveTo(padX, padY);
         ctx.lineTo(padX, padY + chartH);
         ctx.lineTo(padX + chartW, padY + chartH);
         ctx.stroke();
 
-        const drawProgress = interpolate(localF, [0, 75], [0.05, 1], { easing: Easing.outCubic });
-        const maxX = padX + chartW * drawProgress;
+        const drawProgress = interpolate(localF, [0, 75], [0.08, 1], { easing: Easing.outCubic });
 
-        ctx.strokeStyle = '#38BDF8';
+        // Área bajo la curva de precisión ascendente
+        const areaGrad = ctx.createLinearGradient(0, padY, 0, padY + chartH);
+        areaGrad.addColorStop(0, 'rgba(29, 78, 216, 0.18)');
+        areaGrad.addColorStop(1, 'rgba(29, 78, 216, 0.01)');
+
+        ctx.beginPath();
+        ctx.moveTo(padX, padY + chartH);
+        for (let i = 0; i <= 60; i++) {
+          const t = (i / 60) * drawProgress;
+          const x = padX + t * chartW;
+          const accuracyNorm = 1 - Math.exp(-3.2 * t) * 0.78;
+          const y = padY + (1 - accuracyNorm) * chartH;
+          ctx.lineTo(x, y);
+        }
+        ctx.lineTo(padX + drawProgress * chartW, padY + chartH);
+        ctx.closePath();
+        ctx.fillStyle = areaGrad;
+        ctx.fill();
+
+        ctx.strokeStyle = '#1D4ED8';
         ctx.lineWidth = 2.5;
         ctx.beginPath();
         for (let i = 0; i <= 60; i++) {
           const t = (i / 60) * drawProgress;
           const x = padX + t * chartW;
-          const lossNormalized = Math.exp(-3.2 * t) * 0.82 + 0.12;
-          const y = padY + (1 - lossNormalized) * chartH;
+          const accuracyNorm = 1 - Math.exp(-3.2 * t) * 0.78;
+          const y = padY + (1 - accuracyNorm) * chartH;
           if (i === 0) ctx.moveTo(x, y);
           else ctx.lineTo(x, y);
         }
         ctx.stroke();
 
-        const currentLoss = (1.84 * Math.exp(-1.9 * drawProgress)).toFixed(3);
-        ctx.fillStyle = '#34D399';
-        ctx.font = '700 11px "JetBrains Mono", monospace';
-        ctx.fillText(`CICLO NOCTURNO 03:00 AM · LOSS: ${currentLoss} · PESOS AUDITADOS`, padX + 12, padY + 20);
+        const precisionVal = (92.0 + 7.4 * drawProgress).toFixed(1);
+        ctx.fillStyle = '#059669';
+        ctx.font = '700 11px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText(`Ciclo Nocturno Automático · Precisión Auditada: ${precisionVal}%`, padX + 12, padY + 18);
 
-        ctx.fillStyle = '#F8FAFC';
-        ctx.font = '700 12.5px "Plus Jakarta Sans", sans-serif';
-        ctx.fillText('Escena 03 · Re-Entrenamiento Nocturno Autónomo y Consolidación', 18, h - 16);
+        ctx.fillStyle = '#090D16';
+        ctx.font = '700 12px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText('03 · Evolución y Re-Entrenamiento Nocturno Continuo', 18, h - 15);
       } else {
-        // ESCENA 4: Constelación de Orión & Inferencia en Producción
+        // ESCENA 4: Constelación de Orión Minimalista (Carta Astronómica Limpia)
         const lineProgress = interpolate(localF, [0, 45], [0, 1], { easing: Easing.outCubic });
+
+        // Círculo astronómico de referencia sutil
+        ctx.strokeStyle = 'rgba(29, 78, 216, 0.10)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.arc(w * 0.5, (h - 24) * 0.5, Math.min(w, h) * 0.34, 0, Math.PI * 2);
+        ctx.stroke();
 
         ORION_EDGES.forEach(([i, j]) => {
           const s1 = ORION_STARS[i];
@@ -549,8 +679,8 @@
           const x2 = x1 + (s2.x * w - x1) * lineProgress;
           const y2 = y1 + (s2.y * (h - 28) - y1) * lineProgress;
 
-          ctx.strokeStyle = s1.belt && s2.belt ? '#38BDF8' : 'rgba(129, 140, 248, 0.55)';
-          ctx.lineWidth = s1.belt && s2.belt ? 2.2 : 1.3;
+          ctx.strokeStyle = s1.belt && s2.belt ? '#1D4ED8' : 'rgba(79, 70, 229, 0.38)';
+          ctx.lineWidth = s1.belt && s2.belt ? 2.2 : 1.4;
           ctx.beginPath();
           ctx.moveTo(x1, y1);
           ctx.lineTo(x2, y2);
@@ -560,21 +690,26 @@
         ORION_STARS.forEach((star, idx) => {
           const sx = star.x * w;
           const sy = star.y * (h - 28);
-          const pulse = 1 + 0.18 * Math.sin((frame + idx * 15) * 0.1);
+          const pulse = 1 + 0.14 * Math.sin((frame + idx * 15) * 0.09);
+
+          ctx.fillStyle = 'rgba(29, 78, 216, 0.10)';
+          ctx.beginPath();
+          ctx.arc(sx, sy, (star.r + 4) * pulse * sFactor, 0, Math.PI * 2);
+          ctx.fill();
 
           ctx.fillStyle = star.color;
           ctx.beginPath();
           ctx.arc(sx, sy, star.r * pulse * sFactor, 0, Math.PI * 2);
           ctx.fill();
 
-          ctx.fillStyle = '#E2E8F0';
-          ctx.font = '600 10px "Plus Jakarta Sans", sans-serif';
+          ctx.fillStyle = '#090D16';
+          ctx.font = '700 10px "Plus Jakarta Sans", sans-serif';
           ctx.fillText(star.id, sx + 9, sy + 3);
         });
 
-        ctx.fillStyle = '#F8FAFC';
-        ctx.font = '700 12.5px "Plus Jakarta Sans", sans-serif';
-        ctx.fillText('Escena 04 · Constelación Neural ORION IA Conectada al Ecosistema', 18, h - 16);
+        ctx.fillStyle = '#090D16';
+        ctx.font = '700 12px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText('04 · Constelación de Orión · Identidad y Red Neural Conectada', 18, h - 15);
       }
     }
 
@@ -785,10 +920,10 @@
         y: padT + ch * (1 - values[i])
       }));
 
-      // Área bajo la curva
+      // Área bajo la curva en superficie blanca
       const areaGrad = ctx.createLinearGradient(0, padT, 0, padT + ch);
-      areaGrad.addColorStop(0, 'rgba(56, 189, 248, 0.32)');
-      areaGrad.addColorStop(1, 'rgba(56, 189, 248, 0.0)');
+      areaGrad.addColorStop(0, 'rgba(29, 78, 216, 0.16)');
+      areaGrad.addColorStop(1, 'rgba(29, 78, 216, 0.01)');
 
       ctx.beginPath();
       ctx.moveTo(points[0].x, padT + ch);
@@ -799,7 +934,7 @@
       ctx.fill();
 
       // Línea principal de crecimiento
-      ctx.strokeStyle = '#38BDF8';
+      ctx.strokeStyle = '#1D4ED8';
       ctx.lineWidth = 2.5;
       ctx.beginPath();
       points.forEach((p, i) => {
@@ -811,17 +946,17 @@
       // Nodos por año
       points.forEach((p, i) => {
         const isSelected = i === targetIndex;
-        const r = isSelected ? 6.5 * s : 4;
-        ctx.fillStyle = isSelected ? '#38BDF8' : '#1E293B';
-        ctx.strokeStyle = isSelected ? '#FFFFFF' : '#64748B';
-        ctx.lineWidth = isSelected ? 2 : 1.5;
+        const r = isSelected ? 6.5 * s : 4.2;
+        ctx.fillStyle = isSelected ? '#1D4ED8' : '#FFFFFF';
+        ctx.strokeStyle = isSelected ? '#EFF6FF' : '#94A3B8';
+        ctx.lineWidth = isSelected ? 2.5 : 1.5;
         ctx.beginPath();
         ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
         ctx.fill();
         ctx.stroke();
 
-        ctx.fillStyle = isSelected ? '#38BDF8' : '#94A3B8';
-        ctx.font = isSelected ? '700 11px "Plus Jakarta Sans", sans-serif' : '500 10px "Inter", sans-serif';
+        ctx.fillStyle = isSelected ? '#1D4ED8' : '#64748B';
+        ctx.font = isSelected ? '800 11px "Plus Jakarta Sans", sans-serif' : '600 10px "Inter", sans-serif';
         ctx.textAlign = 'center';
         ctx.fillText(p.year, p.x, h - 10);
       });

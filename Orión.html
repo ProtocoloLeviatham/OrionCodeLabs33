@@ -1,0 +1,1823 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>ORION IA — Asistente &amp; Arquitecto de Software | OrionCodeLabs33</title>
+  <meta name="description" content="Conversá en vivo con ORION IA, el motor neural propio de OrionCodeLabs33 (Qwen 3.8 + QLoRA en NVIDIA 40GB). Cotizá páginas web, apps, tiendas online, sistemas a medida o analizá tu proyecto en PDF.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://protocololeviatham.github.io/OrionCodeLabs33/Ori%C3%B3n.html">
+  <meta name="theme-color" content="#FFFFFF">
+  <link rel="icon" type="image/png" href="assets/img/logo-dark.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+  <!-- PDF.js Client-Side Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    if (window.pdfjsLib) {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary: #1D4ED8;
+      --primary-hover: #1E40AF;
+      --primary-light: #EFF6FF;
+      --primary-border: #BFDBFE;
+      --indigo: #4F46E5;
+      --emerald: #059669;
+      --primary-grad: linear-gradient(135deg, #1D4ED8 0%, #4F46E5 100%);
+      --bg-body: #F8FAFC;
+      --bg-chat: #FFFFFF;
+      --text-main: #090D16;
+      --text-sub: #475569;
+      --text-muted: #64748B;
+      --border: #E2E8F0;
+      --msg-bot-bg: #F8FAFC;
+      --msg-user-bg: #1D4ED8;
+      --shadow-sm: 0 2px 8px rgba(9, 13, 22, 0.04);
+      --shadow-md: 0 12px 32px rgba(9, 13, 22, 0.07);
+      --shadow-lg: 0 20px 48px rgba(29, 78, 216, 0.14);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: var(--font-sans);
+      font-style: normal !important;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100dvh;
+      overflow: hidden;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      overscroll-behavior: none;
+    }
+
+    #app-layout {
+      display: flex;
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      height: 100%;
+      background: var(--bg-chat);
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      flex-direction: column;
+    }
+
+    @media (min-width: 920px) {
+      body {
+        padding: 16px;
+        background: radial-gradient(circle at 50% 0%, #EFF6FF 0%, #F8FAFC 70%);
+      }
+      #app-layout {
+        border-radius: 22px;
+        border: 1px solid var(--border);
+        height: calc(100dvh - 32px);
+      }
+    }
+
+    /* ======================================================================
+       HEADER EJECUTIVO CON AVATAR ORION EN VIVO + ONDA ACÚSTICA
+       ====================================================================== */
+    header {
+      padding: 12px 18px;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      z-index: 20;
+      flex-shrink: 0;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .back-btn {
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    .back-btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary-border);
+      color: var(--primary);
+      transform: translateX(-2px);
+    }
+
+    .bot-identity {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 0;
+    }
+
+    .avatar-container {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #EFF6FF 0%, #EEF2FF 100%);
+      border: 1.5px solid var(--primary-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(29, 78, 216, 0.10);
+    }
+
+    #orion-avatar-canvas {
+      width: 38px;
+      height: 38px;
+      display: block;
+    }
+
+    .status-dot-badge {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 12px;
+      height: 12px;
+      background: #10B981;
+      border: 2px solid #FFFFFF;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+    }
+
+    .bot-info {
+      min-width: 0;
+    }
+
+    .bot-title-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .bot-info h1 {
+      font-family: var(--font-display);
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+
+    .engine-pill {
+      font-family: var(--font-sans);
+      font-size: 0.66rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      border: 1px solid var(--primary-border);
+      padding: 2px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .bot-sub-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .bot-info p {
+      font-size: 0.74rem;
+      color: var(--text-sub);
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #voice-wave-canvas {
+      width: 48px;
+      height: 16px;
+      display: none;
+      vertical-align: middle;
+    }
+
+    #voice-wave-canvas.is-active {
+      display: inline-block;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .action-btn {
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      color: var(--text-sub);
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 11px;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .action-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary-border);
+    }
+
+    .action-btn.active-voice {
+      color: var(--primary);
+      background: var(--primary-light);
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.12);
+    }
+
+    /* ======================================================================
+       ÁREA DE MENSAJES + MARCA DE AGUA CONSTELACIÓN DE ORIÓN
+       ====================================================================== */
+    #messages-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 22px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      scroll-behavior: smooth;
+      position: relative;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(29, 78, 216, 0.03) 0%, transparent 45%),
+        radial-gradient(circle at 15% 85%, rgba(79, 70, 229, 0.03) 0%, transparent 45%),
+        #FFFFFF;
+    }
+
+    /* Constelación minimalista de fondo */
+    .orion-watermark {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(440px, 78vw);
+      height: min(440px, 78vw);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+    }
+
+    .message-row {
+      display: flex;
+      gap: 11px;
+      max-width: 86%;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: slideIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      position: relative;
+      z-index: 1;
+    }
+
+    .message-row.user {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .message-row.bot {
+      align-self: flex-start;
+    }
+
+    @media (max-width: 640px) {
+      .message-row {
+        max-width: 93%;
+      }
+    }
+
+    .msg-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #EFF6FF 0%, #EEF2FF 100%);
+      border: 1px solid var(--primary-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--primary);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.72rem;
+    }
+
+    .bubble {
+      padding: 14px 17px;
+      border-radius: 18px;
+      font-size: 0.92rem;
+      line-height: 1.62;
+      position: relative;
+      word-wrap: break-word;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .message-row.bot .bubble {
+      background: var(--msg-bot-bg);
+      color: var(--text-main);
+      border-top-left-radius: 5px;
+      border: 1px solid var(--border);
+    }
+
+    .message-row.user .bubble {
+      background: var(--primary-grad);
+      color: #FFFFFF;
+      border-top-right-radius: 5px;
+      box-shadow: 0 6px 18px rgba(29, 78, 216, 0.22);
+    }
+
+    .bubble strong {
+      font-weight: 700;
+    }
+
+    .bubble p + p {
+      margin-top: 8px;
+    }
+
+    /* ======================================================================
+       PROCESO DE RAZONAMIENTO (<think> / .thought-process)
+       ====================================================================== */
+    details.thought-process {
+      background: #FFFFFF;
+      border: 1px solid var(--primary-border);
+      border-radius: 12px;
+      margin-bottom: 11px;
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      overflow: hidden;
+      transition: all 0.25s ease;
+    }
+
+    details.thought-process summary {
+      padding: 8px 12px;
+      cursor: pointer;
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      user-select: none;
+      outline: none;
+      background: #EFF6FF;
+      list-style: none;
+    }
+
+    details.thought-process summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.thought-process summary:hover {
+      background: #DBEAFE;
+    }
+
+    details.thought-process .thought-content {
+      padding: 10px 13px;
+      border-top: 1px solid var(--primary-border);
+      background: #F8FAFC;
+      color: var(--text-sub);
+      line-height: 1.5;
+      white-space: pre-wrap;
+      font-size: 0.78rem;
+    }
+
+    .gear-icon {
+      animation: spin 4s linear infinite;
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* ======================================================================
+       SMART CARDS [[CARD:...]] Y PÍLDORAS DE NAVEGACIÓN [[NAV:...]]
+       ====================================================================== */
+    .smart-card {
+      background: #FFFFFF;
+      border: 1px solid var(--primary-border);
+      border-left: 4px solid var(--primary);
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-top: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      box-shadow: 0 4px 12px rgba(29, 78, 216, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .smart-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(29, 78, 216, 0.14);
+      border-color: var(--primary);
+    }
+
+    .smart-card-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .smart-card-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      color: var(--text-main);
+      font-size: 0.86rem;
+    }
+
+    .smart-card-sub {
+      font-size: 0.73rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .smart-card-icon {
+      background: var(--primary-light);
+      color: var(--primary);
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .nav-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--primary-grad);
+      color: #FFFFFF !important;
+      padding: 8px 15px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.8rem;
+      margin-top: 9px;
+      margin-right: 6px;
+      box-shadow: 0 4px 12px rgba(29, 78, 216, 0.24);
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .nav-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(29, 78, 216, 0.34);
+    }
+
+    .nav-pill svg {
+      width: 14px;
+      height: 14px;
+      stroke: #FFFFFF;
+    }
+
+    /* ======================================================================
+       SUGERENCIAS RÁPIDAS (CHIPS HORIZONTALES)
+       ====================================================================== */
+    #quick-chips {
+      display: flex;
+      gap: 8px;
+      padding: 10px 18px;
+      overflow-x: auto;
+      background: rgba(255, 255, 255, 0.96);
+      border-top: 1px solid var(--border);
+      scrollbar-width: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+      z-index: 10;
+    }
+
+    #quick-chips::-webkit-scrollbar {
+      display: none;
+    }
+
+    .chip {
+      padding: 7px 14px;
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      color: var(--text-sub);
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chip:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary-border);
+      transform: translateY(-1px);
+    }
+
+    /* ======================================================================
+       BARRA DE PROGRESO COOLDOWN 33s & DOCK DE ENTRADA
+       ====================================================================== */
+    .cooldown-rail {
+      width: 100%;
+      height: 3px;
+      background: transparent;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    #cooldown-rail-fill {
+      width: 0%;
+      height: 100%;
+      background: var(--primary-grad);
+      transition: width 0.25s linear;
+    }
+
+    #input-dock {
+      padding: 11px 18px;
+      padding-bottom: max(12px, env(safe-area-inset-bottom));
+      background: #FFFFFF;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex-shrink: 0;
+      z-index: 20;
+    }
+
+    #pdf-badge-container {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--primary-light);
+      border: 1px solid var(--primary-border);
+      padding: 7px 12px;
+      border-radius: 10px;
+      font-size: 0.78rem;
+      color: var(--primary);
+      font-weight: 700;
+      animation: slideIn 0.2s ease-out forwards;
+    }
+
+    .pdf-badge-left {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .remove-pdf-btn {
+      background: none;
+      border: none;
+      color: #EF4444;
+      cursor: pointer;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+
+    .input-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 9px;
+      width: 100%;
+    }
+
+    .input-wrapper {
+      flex: 1;
+      background: #F8FAFC;
+      border-radius: 20px;
+      padding: 5px 8px 5px 14px;
+      display: flex;
+      align-items: center;
+      border: 1.5px solid var(--border);
+      transition: all 0.2s ease;
+      gap: 4px;
+    }
+
+    .input-wrapper:focus-within {
+      background: #FFFFFF;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.10);
+    }
+
+    textarea {
+      width: 100%;
+      border: none;
+      background: transparent;
+      resize: none;
+      max-height: 115px;
+      padding: 7px 0;
+      font-size: 0.92rem;
+      color: var(--text-main);
+      outline: none;
+      line-height: 1.45;
+    }
+
+    textarea::placeholder {
+      color: #94A3B8;
+    }
+
+    .dock-icon-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 7px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .dock-icon-btn:hover {
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .dock-icon-btn.recording {
+      color: #EF4444;
+      background: #FEE2E2;
+      animation: pulseRed 1.5s infinite;
+    }
+
+    @keyframes pulseRed {
+      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+      70% { box-shadow: 0 0 0 9px rgba(239, 68, 68, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+
+    #send-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: var(--primary-grad);
+      color: #FFFFFF;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      box-shadow: 0 6px 16px rgba(29, 78, 216, 0.25);
+      transition: all 0.2s ease;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.8rem;
+    }
+
+    #send-btn:hover:not(:disabled) {
+      transform: translateY(-1px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(29, 78, 216, 0.32);
+    }
+
+    #send-btn:active:not(:disabled) {
+      transform: scale(0.96);
+    }
+
+    #send-btn:disabled {
+      background: #E2E8F0;
+      color: #64748B;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    /* ======================================================================
+       MODALES (PRIVACIDAD PDF.JS & CONFIGURACIÓN DE VOZ)
+       ====================================================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(9, 13, 22, 0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-box {
+      background: #FFFFFF;
+      border-radius: 20px;
+      padding: 24px;
+      max-width: 420px;
+      width: 100%;
+      border: 1px solid var(--border);
+      box-shadow: 0 24px 48px rgba(9, 13, 22, 0.18);
+      text-align: center;
+      transform: translateY(16px);
+      transition: transform 0.25s ease;
+    }
+
+    .modal-overlay.show .modal-box {
+      transform: translateY(0);
+    }
+
+    .modal-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px auto;
+      border: 1px solid var(--primary-border);
+    }
+
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .modal-text {
+      font-size: 0.86rem;
+      color: var(--text-sub);
+      line-height: 1.58;
+      margin-bottom: 18px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .modal-btn {
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      flex: 1;
+    }
+
+    .modal-btn.cancel {
+      background: #F1F5F9;
+      color: var(--text-sub);
+    }
+
+    .modal-btn.cancel:hover {
+      background: #E2E8F0;
+    }
+
+    .modal-btn.confirm {
+      background: var(--primary-grad);
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(29, 78, 216, 0.22);
+    }
+
+    .voice-options {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    .voice-option-btn {
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      background: #F8FAFC;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.86rem;
+      color: var(--text-main);
+      transition: all 0.2s ease;
+    }
+
+    .voice-option-btn:hover,
+    .voice-option-btn.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    @keyframes slideIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .typing {
+      display: flex;
+      gap: 5px;
+      padding: 5px 4px;
+      align-items: center;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      background: var(--primary);
+      border-radius: 50%;
+      animation: bounce 1.4s infinite ease-in-out both;
+    }
+
+    .dot:nth-child(1) { animation-delay: -0.32s; }
+    .dot:nth-child(2) { animation-delay: -0.16s; }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0.3); opacity: 0.45; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="app-layout">
+    <!-- HEADER CORPORATIVO ORION IA -->
+    <header>
+      <div class="header-left">
+        <a href="index.html" class="back-btn" title="Volver a OrionCodeLabs33">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          <span>Inicio</span>
+        </a>
+
+        <div class="bot-identity">
+          <div class="avatar-container" title="Núcleo Neural ORION IA">
+            <canvas id="orion-avatar-canvas" width="76" height="76"></canvas>
+            <div class="status-dot-badge"></div>
+          </div>
+          <div class="bot-info">
+            <div class="bot-title-row">
+              <h1>ORION IA</h1>
+              <span class="engine-pill">Qwen 3.8 + QLoRA</span>
+            </div>
+            <div class="bot-sub-row">
+              <p id="orion-status-label">Arquitecto de Software &amp; Ventas · OrionCodeLabs33</p>
+              <canvas id="voice-wave-canvas" width="96" height="32" aria-hidden="true"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button class="action-btn" id="voice-toggle-btn" onclick="openVoiceModal()" title="Activar o configurar voz de ORION IA">
+          <svg id="voice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          </svg>
+        </button>
+        <button class="action-btn" onclick="clearChat()" title="Reiniciar conversación">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 6 5 6 21 6"></polyline>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- ÁREA DE MENSAJES + MARCA DE AGUA CONSTELACIÓN DE ORIÓN -->
+    <div id="messages-area">
+      <svg class="orion-watermark" viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="130" cy="130" r="98" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="72" y1="56" x2="178" y2="66" stroke="#CBD5E1" stroke-width="1.2"/>
+        <line x1="72" y1="56" x2="108" y2="130" stroke="#CBD5E1" stroke-width="1.2"/>
+        <line x1="178" y1="66" x2="152" y2="120" stroke="#CBD5E1" stroke-width="1.2"/>
+        <line x1="108" y1="130" x2="130" y2="125" stroke="#93C5FD" stroke-width="1.8"/>
+        <line x1="130" y1="125" x2="152" y2="120" stroke="#93C5FD" stroke-width="1.8"/>
+        <line x1="108" y1="130" x2="86" y2="204" stroke="#CBD5E1" stroke-width="1.2"/>
+        <line x1="152" y1="120" x2="188" y2="198" stroke="#CBD5E1" stroke-width="1.2"/>
+        <line x1="86" y1="204" x2="188" y2="198" stroke="#CBD5E1" stroke-width="1.2"/>
+        <circle cx="72" cy="56" r="3.5" fill="#CBD5E1"/>
+        <circle cx="178" cy="66" r="3.2" fill="#CBD5E1"/>
+        <circle cx="108" cy="130" r="3.2" fill="#93C5FD"/>
+        <circle cx="130" cy="125" r="4" fill="#60A5FA"/>
+        <circle cx="152" cy="120" r="3.2" fill="#93C5FD"/>
+        <circle cx="86" cy="204" r="3.2" fill="#CBD5E1"/>
+        <circle cx="188" cy="198" r="3.8" fill="#CBD5E1"/>
+      </svg>
+    </div>
+
+    <!-- CHIPS DE CONSULTA RÁPIDA DE ORIONCODELABS33 -->
+    <div id="quick-chips">
+      <div class="chip" onclick="sendQuick('Quiero cotizar una página web o plataforma a medida')">🚀 Cotizar Web o App</div>
+      <div class="chip" onclick="sendQuick('¿Cómo funciona el motor propio ORION IA con Qwen 3.8 y QLoRA?')">🧠 ¿Cómo funciona ORION IA?</div>
+      <div class="chip" onclick="sendQuick('Contame las métricas del primer mes del caso de éxito CvStudio33.com.ar')">📈 Caso de Éxito CvStudio33</div>
+      <div class="chip" onclick="sendQuick('Quiero crear una Tienda Online integrada con Mercado Pago')">🛒 Tienda + Mercado Pago</div>
+      <div class="chip" onclick="sendQuick('Necesito un Agente IA para atender y vender por WhatsApp 24/7')">🤖 Bot Ventas WhatsApp 24/7</div>
+      <div class="chip" onclick="sendQuick('¿Cuánto demoran en entregar un proyecto y cómo manejan los plazos?')">⏱️ Plazos (3 a 15 días máx.)</div>
+      <div class="chip" onclick="handlePdfClick()">📄 Analizar mi Proyecto en PDF</div>
+    </div>
+
+    <!-- BARRA DE ENFRIAMIENTO (COOLDOWN 33s) -->
+    <div class="cooldown-rail" aria-hidden="true">
+      <div id="cooldown-rail-fill"></div>
+    </div>
+
+    <!-- DOCK INFERIOR DE ENTRADA -->
+    <div id="input-dock">
+      <div id="pdf-badge-container">
+        <div class="pdf-badge-left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          <span id="pdf-filename">documento.pdf</span>
+        </div>
+        <button class="remove-pdf-btn" onclick="clearPdfAttachment()" title="Quitar archivo">✕</button>
+      </div>
+
+      <div class="input-row">
+        <div class="input-wrapper">
+          <input type="file" id="pdf-upload" accept="application/pdf" style="display:none" onchange="processPdfFile(event)">
+
+          <button class="dock-icon-btn" onclick="handlePdfClick()" title="Adjuntar documento o brief en PDF">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
+          </button>
+
+          <textarea id="user-input" rows="1" placeholder="Escribí tu consulta o contale tu idea a ORION IA..."></textarea>
+
+          <button class="dock-icon-btn" id="mic-btn" onclick="toggleDictation()" title="Hablar por micrófono">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+          </button>
+        </div>
+
+        <button id="send-btn" onclick="sendMessage()" aria-label="Enviar mensaje">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="margin-left:1px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE PRIVACIDAD PDF (100% EN NAVEGADOR) -->
+  <div class="modal-overlay" id="privacy-modal">
+    <div class="modal-box">
+      <div class="modal-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+      </div>
+      <div class="modal-title">Lectura Local y Privada de PDF</div>
+      <div class="modal-text">
+        En <strong>OrionCodeLabs33</strong> protegemos tu propiedad intelectual (Ley 24.766 y Ley 25.326). El documento PDF que adjuntes (propuesta, requerimiento técnico, presupuesto o CV) se procesa <strong>100% en la memoria local de tu navegador</strong> para que ORION IA pueda analizarlo al instante sin almacenarlo en servidores externos.
+      </div>
+      <div class="modal-actions">
+        <button class="modal-btn cancel" onclick="closePrivacyModal()">Cancelar</button>
+        <button class="modal-btn confirm" onclick="acceptPrivacyAndUpload()">Entendido, Subir PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE CONFIGURACIÓN DE VOZ NEURAL -->
+  <div class="modal-overlay" id="voice-modal">
+    <div class="modal-box">
+      <div class="modal-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+      </div>
+      <div class="modal-title">Síntesis de Voz de ORION IA</div>
+      <div class="modal-text">
+        Elegí el perfil de voz con el que preferís que ORION IA te lea sus respuestas técnicas y recomendaciones:
+      </div>
+      <div class="voice-options">
+        <button class="voice-option-btn" id="btn-voice-male" onclick="selectVoicePreference('male')">
+          <span>🎙️ Voz Ejecutiva Masculina</span>
+          <span id="check-male">✓</span>
+        </button>
+        <button class="voice-option-btn" id="btn-voice-female" onclick="selectVoicePreference('female')">
+          <span>🎙️ Voz Ejecutiva Femenina</span>
+          <span id="check-female" style="display:none;">✓</span>
+        </button>
+      </div>
+      <div class="modal-actions">
+        <button class="modal-btn cancel" onclick="disableVoice()">Silenciar Voz</button>
+        <button class="modal-btn confirm" onclick="closeVoiceModal()">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // CONFIGURACIÓN CENTRAL Y CONEXIÓN AL CEREBRO DE ORION IA (CLOUDFLARE WORKER)
+    // =========================================================================
+    const WORKER_URL = "https://orionbbot.lautybg22.workers.dev/";
+    const STORAGE_KEY = "orion_ia_memory_v1";
+
+    const messagesArea = document.getElementById('messages-area');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+    const micBtn = document.getElementById('mic-btn');
+    const voiceToggleBtn = document.getElementById('voice-toggle-btn');
+    const voiceIcon = document.getElementById('voice-icon');
+    const statusLabel = document.getElementById('orion-status-label');
+    const voiceWaveCanvas = document.getElementById('voice-wave-canvas');
+    const cooldownRailFill = document.getElementById('cooldown-rail-fill');
+
+    let conversationHistory = [];
+    let isWaiting = false;
+    let isCoolingDown = false;
+    let orionVisualState = 'idle'; // 'idle' | 'thinking' | 'speaking'
+
+    // Variables PDF.js
+    let currentPdfText = "";
+    let currentPdfName = "";
+
+    // Variables Voz y Audio
+    let voiceEnabled = false;
+    let preferredGender = localStorage.getItem('orion_voice_gender') || 'male';
+    let availableVoices = [];
+
+    // =========================================================================
+    // 1. MOTOR DE ANIMACIÓN REMOTION-STYLE EN VIVO (AVATAR ORION + ONDA ACÚSTICA)
+    // =========================================================================
+    (function initOrionAvatarAndWaveEngine() {
+      const avatarCanvas = document.getElementById('orion-avatar-canvas');
+      if (!avatarCanvas) return;
+      const actx = avatarCanvas.getContext('2d');
+      const wctx = voiceWaveCanvas ? voiceWaveCanvas.getContext('2d') : null;
+      let frame = 0;
+
+      const stars = [
+        { x: 0.30, y: 0.25 },
+        { x: 0.72, y: 0.28 },
+        { x: 0.42, y: 0.50 },
+        { x: 0.50, y: 0.48 },
+        { x: 0.58, y: 0.46 },
+        { x: 0.34, y: 0.76 },
+        { x: 0.70, y: 0.74 }
+      ];
+
+      function renderLoop() {
+        frame++;
+        const w = avatarCanvas.width;
+        const h = avatarCanvas.height;
+        actx.clearRect(0, 0, w, h);
+
+        const speed = orionVisualState === 'thinking' ? 0.12 : orionVisualState === 'speaking' ? 0.09 : 0.035;
+        const pulse = 1 + (orionVisualState === 'idle' ? 0.06 : 0.14) * Math.sin(frame * speed);
+
+        // Anillo orbital exterior
+        actx.save();
+        actx.translate(w / 2, h / 2);
+        actx.rotate(frame * (orionVisualState === 'thinking' ? 0.04 : 0.012));
+        actx.strokeStyle = orionVisualState === 'thinking' ? '#4F46E5' : '#1D4ED8';
+        actx.lineWidth = 2;
+        actx.beginPath();
+        actx.ellipse(0, 0, 26 * pulse, 11 * pulse, -0.5, 0, Math.PI * 2);
+        actx.stroke();
+        actx.restore();
+
+        // Cinturón y nodos de la Constelación de Orión
+        actx.strokeStyle = 'rgba(29, 78, 216, 0.45)';
+        actx.lineWidth = 1.5;
+        actx.beginPath();
+        actx.moveTo(stars[0].x * w, stars[0].y * h);
+        actx.lineTo(stars[2].x * w, stars[2].y * h);
+        actx.lineTo(stars[3].x * w, stars[3].y * h);
+        actx.lineTo(stars[4].x * w, stars[4].y * h);
+        actx.lineTo(stars[1].x * w, stars[1].y * h);
+        actx.moveTo(stars[2].x * w, stars[2].y * h);
+        actx.lineTo(stars[5].x * w, stars[5].y * h);
+        actx.moveTo(stars[4].x * w, stars[4].y * h);
+        actx.lineTo(stars[6].x * w, stars[6].y * h);
+        actx.stroke();
+
+        stars.forEach((s, i) => {
+          const isBelt = i >= 2 && i <= 4;
+          const r = (isBelt ? 3.2 : 2.5) * (1 + 0.18 * Math.sin(frame * speed + i));
+          actx.fillStyle = isBelt ? '#1D4ED8' : '#4F46E5';
+          actx.beginPath();
+          actx.arc(s.x * w, s.y * h, r, 0, Math.PI * 2);
+          actx.fill();
+        });
+
+        // Onda acústica si está hablando o escuchando
+        if (wctx && voiceWaveCanvas.classList.contains('is-active')) {
+          const ww = voiceWaveCanvas.width;
+          const wh = voiceWaveCanvas.height;
+          wctx.clearRect(0, 0, ww, wh);
+          const bars = 8;
+          const bw = 3;
+          const gap = 3;
+          for (let i = 0; i < bars; i++) {
+            const amp = Math.abs(Math.sin(frame * 0.16 + i * 0.7)) * (wh - 6) + 4;
+            const x = 4 + i * (bw + gap);
+            const y = (wh - amp) / 2;
+            wctx.fillStyle = '#1D4ED8';
+            wctx.beginPath();
+            wctx.roundRect(x, y, bw, amp, 2);
+            wctx.fill();
+          }
+        }
+
+        window.requestAnimationFrame(renderLoop);
+      }
+
+      window.requestAnimationFrame(renderLoop);
+    })();
+
+    // =========================================================================
+    // 2. SISTEMA DE SONIDO SUTIL Y HÁPTICA
+    // =========================================================================
+    function playReceiveSound() {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        const ctx = new AudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(540, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.14);
+        gain.gain.setValueAtTime(0.04, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.16);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.16);
+      } catch (e) {}
+    }
+
+    function triggerHaptic() {
+      if (navigator.vibrate) {
+        try { navigator.vibrate(25); } catch (e) {}
+      }
+    }
+
+    // =========================================================================
+    // 3. SISTEMA DE VOZ NEURAL (TEXT-TO-SPEECH)
+    // =========================================================================
+    function loadVoices() {
+      if (!('speechSynthesis' in window)) return;
+      availableVoices = window.speechSynthesis.getVoices();
+    }
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+      loadVoices();
+    }
+
+    function openVoiceModal() {
+      updateVoiceModalUI();
+      document.getElementById('voice-modal').classList.add('show');
+    }
+
+    function closeVoiceModal() {
+      document.getElementById('voice-modal').classList.remove('show');
+    }
+
+    function selectVoicePreference(gender) {
+      preferredGender = gender;
+      localStorage.setItem('orion_voice_gender', gender);
+      voiceEnabled = true;
+      updateVoiceModalUI();
+      updateHeaderVoiceIcon();
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    }
+
+    function disableVoice() {
+      voiceEnabled = false;
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      orionVisualState = 'idle';
+      if (voiceWaveCanvas) voiceWaveCanvas.classList.remove('is-active');
+      updateHeaderVoiceIcon();
+      closeVoiceModal();
+    }
+
+    function updateVoiceModalUI() {
+      document.getElementById('btn-voice-male').classList.toggle('selected', preferredGender === 'male');
+      document.getElementById('btn-voice-female').classList.toggle('selected', preferredGender === 'female');
+      document.getElementById('check-male').style.display = preferredGender === 'male' ? 'inline' : 'none';
+      document.getElementById('check-female').style.display = preferredGender === 'female' ? 'inline' : 'none';
+    }
+
+    function updateHeaderVoiceIcon() {
+      if (voiceEnabled) {
+        voiceToggleBtn.classList.add('active-voice');
+        voiceIcon.innerHTML = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>`;
+      } else {
+        voiceToggleBtn.classList.remove('active-voice');
+        voiceIcon.innerHTML = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>`;
+      }
+    }
+
+    function speakText(rawText) {
+      if (!voiceEnabled || !('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+
+      let cleanText = rawText
+        .replace(/<think>[\s\S]*?<\/think>/gi, '')
+        .replace(/<details[\s\S]*?<\/details>/gi, '')
+        .replace(/\[\[CARD:.*?\]\]/g, '')
+        .replace(/\[\[NAV:.*?\]\]/g, '')
+        .replace(/<[^>]*>?/gm, '')
+        .replace(/[*#_~`]/g, '');
+
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      utterance.lang = 'es-AR';
+      utterance.rate = 1.05;
+
+      if (availableVoices.length === 0) loadVoices();
+      const spanishVoices = availableVoices.filter(v => v.lang.startsWith('es'));
+
+      if (spanishVoices.length > 0) {
+        const femaleKeywords = ['female', 'mujer', 'sabina', 'helena', 'paulina', 'laura', 'monica', 'lucia', 'mia', 'sofia', 'dalia'];
+        const maleKeywords = ['male', 'hombre', 'pablo', 'raul', 'jorge', 'alvaro', 'diego', 'carlos', 'tomas'];
+        let selectedVoice = null;
+
+        if (preferredGender === 'female') {
+          selectedVoice = spanishVoices.find(v => femaleKeywords.some(k => v.name.toLowerCase().includes(k)));
+        } else {
+          selectedVoice = spanishVoices.find(v => maleKeywords.some(k => v.name.toLowerCase().includes(k)));
+          if (!selectedVoice) {
+            selectedVoice = spanishVoices.find(v => !femaleKeywords.some(k => v.name.toLowerCase().includes(k)));
+          }
+        }
+        utterance.voice = selectedVoice || spanishVoices[0];
+      }
+
+      utterance.onstart = () => {
+        orionVisualState = 'speaking';
+        if (voiceWaveCanvas) voiceWaveCanvas.classList.add('is-active');
+      };
+      utterance.onend = () => {
+        orionVisualState = 'idle';
+        if (voiceWaveCanvas) voiceWaveCanvas.classList.remove('is-active');
+      };
+      utterance.onerror = () => {
+        orionVisualState = 'idle';
+        if (voiceWaveCanvas) voiceWaveCanvas.classList.remove('is-active');
+      };
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    // =========================================================================
+    // 4. DICTADO POR VOZ (SPEECH RECOGNITION)
+    // =========================================================================
+    let recognition = null;
+    let isRecording = false;
+
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognition = new SpeechRecognition();
+      recognition.lang = 'es-AR';
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      recognition.onstart = function () {
+        isRecording = true;
+        micBtn.classList.add('recording');
+        if (voiceWaveCanvas) voiceWaveCanvas.classList.add('is-active');
+        userInput.placeholder = "Escuchando tu consulta...";
+      };
+
+      recognition.onresult = function (event) {
+        const transcript = event.results[0][0].transcript;
+        userInput.value = (userInput.value + " " + transcript).trim();
+        userInput.dispatchEvent(new Event('input'));
+      };
+
+      recognition.onerror = function () {
+        stopDictation();
+      };
+
+      recognition.onend = function () {
+        stopDictation();
+      };
+    } else {
+      micBtn.style.display = 'none';
+    }
+
+    function toggleDictation() {
+      if (!recognition) {
+        alert("Tu navegador no soporta reconocimiento de voz directo.");
+        return;
+      }
+      if (isRecording) {
+        recognition.stop();
+      } else {
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        recognition.start();
+      }
+    }
+
+    function stopDictation() {
+      isRecording = false;
+      micBtn.classList.remove('recording');
+      if (voiceWaveCanvas) voiceWaveCanvas.classList.remove('is-active');
+      userInput.placeholder = "Escribí tu consulta o contale tu idea a ORION IA...";
+    }
+
+    // =========================================================================
+    // 5. LECTOR LOCAL DE PDF CON PDF.JS Y PRIVACIDAD
+    // =========================================================================
+    function handlePdfClick() {
+      const accepted = sessionStorage.getItem('orion_pdf_privacy_accepted');
+      if (accepted === 'true') {
+        document.getElementById('pdf-upload').click();
+      } else {
+        document.getElementById('privacy-modal').classList.add('show');
+      }
+    }
+
+    function closePrivacyModal() {
+      document.getElementById('privacy-modal').classList.remove('show');
+    }
+
+    function acceptPrivacyAndUpload() {
+      sessionStorage.setItem('orion_pdf_privacy_accepted', 'true');
+      closePrivacyModal();
+      document.getElementById('pdf-upload').click();
+    }
+
+    async function processPdfFile(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      if (file.type !== 'application/pdf') {
+        alert('Por favor seleccioná un archivo PDF válido.');
+        return;
+      }
+
+      document.getElementById('pdf-filename').textContent = "Analizando " + file.name + "...";
+      document.getElementById('pdf-badge-container').style.display = 'flex';
+
+      try {
+        const arrayBuffer = await file.arrayBuffer();
+        const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        let extractedText = "";
+
+        const maxPages = Math.min(pdf.numPages, 5);
+        for (let i = 1; i <= maxPages; i++) {
+          const page = await pdf.getPage(i);
+          const textContent = await page.getTextContent();
+          const pageText = textContent.items.map(item => item.str).join(' ');
+          extractedText += pageText + "\n";
+        }
+
+        currentPdfText = extractedText.trim();
+        currentPdfName = file.name;
+        document.getElementById('pdf-filename').textContent = file.name + " (Listo para analizar)";
+
+        if (userInput.value.trim() === "") {
+          userInput.value = "Analizá este documento PDF que adjunté y decime cómo podemos desarrollarlo o mejorarlo en OrionCodeLabs33.";
+          userInput.dispatchEvent(new Event('input'));
+        }
+      } catch (error) {
+        console.error('Error leyendo PDF:', error);
+        alert('No pudimos leer este PDF. Verificá que contenga texto seleccionable.');
+        clearPdfAttachment();
+      }
+    }
+
+    function clearPdfAttachment() {
+      currentPdfText = "";
+      currentPdfName = "";
+      document.getElementById('pdf-upload').value = "";
+      document.getElementById('pdf-badge-container').style.display = 'none';
+    }
+
+    // =========================================================================
+    // 6. AUTO-RESIZE TEXTAREA Y MEMORIA LOCALSTORAGE
+    // =========================================================================
+    userInput.addEventListener('input', function () {
+      this.style.height = 'auto';
+      this.style.height = Math.min(this.scrollHeight, 115) + 'px';
+      if (!isCoolingDown) {
+        sendBtn.disabled = (this.value.trim() === '' && currentPdfText === '');
+      }
+    });
+
+    userInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        if (!sendBtn.disabled && !isWaiting && !isCoolingDown) sendMessage();
+      }
+    });
+
+    const welcomeMessage =
+      "¡Hola! Soy **ORION IA**, el cerebro neural propio de **OrionCodeLabs33** (entrenado sobre base **Qwen 3.8 + QLoRA** en servidores NVIDIA de 40GB).\n\n" +
+      "Estoy acá para asesorarte en vivo sobre:\n" +
+      "- **Páginas Web, Tiendas Online y Plataformas SaaS** (como nuestro caso de éxito **CvStudio33.com.ar**).\n" +
+      "- **Agentes de Ventas IA 24/7**, Sistemas de Gestión (CRM/Stock) y Automatización en Python.\n" +
+      "- **Plazos ágiles de 3 a 15 días máximo** según agenda y volumen de código, o revisión de tu proyecto en **PDF**.\n\n" +
+      "¿Qué tenés en mente construir o escalar hoy?";
+
+    function loadMemory() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          conversationHistory = JSON.parse(saved);
+          if (conversationHistory.length > 0) {
+            conversationHistory.forEach(msg => {
+              let displayContent = msg.content;
+              if (msg.role === 'user' && displayContent.includes('[CONTEXTO OCULTO DEL DOCUMENTO PDF')) {
+                displayContent = displayContent.split('[CONTEXTO OCULTO DEL DOCUMENTO PDF')[0].trim() + "\n\n📎 *(Documento PDF Analizado)*";
+              }
+              appendMessage(displayContent, msg.role === 'user' ? 'user' : 'bot', false);
+            });
+            return;
+          }
+        } catch (e) {}
+      }
+      appendMessage(welcomeMessage, 'bot', false);
+    }
+
+    function saveToMemory() {
+      if (conversationHistory.length > 15) {
+        conversationHistory = conversationHistory.slice(conversationHistory.length - 15);
+      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(conversationHistory));
+    }
+
+    function clearChat() {
+      localStorage.removeItem(STORAGE_KEY);
+      conversationHistory = [];
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      orionVisualState = 'idle';
+      if (voiceWaveCanvas) voiceWaveCanvas.classList.remove('is-active');
+      clearPdfAttachment();
+      // Conserva el SVG watermark y limpia los mensajes
+      const rows = messagesArea.querySelectorAll('.message-row');
+      rows.forEach(r => r.remove());
+      appendMessage(welcomeMessage, 'bot', false);
+    }
+
+    function sendQuick(text) {
+      if (isWaiting || isCoolingDown) return;
+      userInput.value = text;
+      sendMessage();
+    }
+
+    // =========================================================================
+    // 7. SISTEMA DE ENFRIAMIENTO ANTI-SPAM (33 SEGUNDOS CON BARRA VISUAL)
+    // =========================================================================
+    function startCooldown(seconds) {
+      isCoolingDown = true;
+      sendBtn.disabled = true;
+      let remaining = seconds;
+      const total = seconds;
+
+      sendBtn.innerHTML = `<span>${remaining}s</span>`;
+      if (cooldownRailFill) cooldownRailFill.style.width = '100%';
+
+      const interval = setInterval(() => {
+        remaining--;
+        if (remaining > 0) {
+          sendBtn.innerHTML = `<span>${remaining}s</span>`;
+          if (cooldownRailFill) {
+            cooldownRailFill.style.width = `${((remaining / total) * 100).toFixed(1)}%`;
+          }
+        } else {
+          clearInterval(interval);
+          isCoolingDown = false;
+          if (cooldownRailFill) cooldownRailFill.style.width = '0%';
+          sendBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="margin-left:1px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>`;
+          sendBtn.disabled = (userInput.value.trim() === '' && currentPdfText === '');
+        }
+      }, 1000);
+    }
+
+    // =========================================================================
+    // 8. FORMATEADOR INTELIGENTE (<think>, [[CARD:...]], [[NAV:...]], MARKDOWN)
+    // =========================================================================
+    function formatMessage(rawText) {
+      let text = rawText || "";
+      let thoughtHTML = "";
+
+      const thinkRegex = /<think>([\s\S]*?)<\/think>/i;
+      const thinkMatch = text.match(thinkRegex);
+
+      if (thinkMatch) {
+        const thoughtContent = thinkMatch[1].trim();
+        if (thoughtContent.length > 0) {
+          thoughtHTML = `
+            <details class="thought-process">
+              <summary>
+                <svg class="gear-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                <span>Razonamiento de ORION IA</span>
+              </summary>
+              <div class="thought-content">${thoughtContent.replace(/\n/g, '<br>')}</div>
+            </details>
+          `;
+        }
+        text = text.replace(thinkRegex, '').trim();
+      } else if (text.includes('<think>')) {
+        const parts = text.split('<think>');
+        text = parts[0].trim();
+        const openThought = parts[1].trim();
+        if (openThought) {
+          thoughtHTML = `
+            <details class="thought-process">
+              <summary>
+                <svg class="gear-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle></svg>
+                <span>Razonamiento de ORION IA</span>
+              </summary>
+              <div class="thought-content">${openThought.replace(/\n/g, '<br>')}</div>
+            </details>
+          `;
+        }
+      }
+
+      text = text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<strong>$1</strong>')
+        .replace(/^- (.*)/gm, '• $1')
+        .replace(/\n/g, '<br>');
+
+      // Smart Cards de Servicios [[CARD:Nombre del Servicio]]
+      const cardRegex = /\[\[CARD:(.*?)\]\]/g;
+      text = text.replace(cardRegex, (match, serviceName) => {
+        const cleanName = serviceName.trim();
+        const url = `contacto.html?servicio=${encodeURIComponent(cleanName)}#cotizador`;
+        return `
+          <a href="${url}" class="smart-card">
+            <div class="smart-card-info">
+              <span class="smart-card-title">⚡ ${cleanName}</span>
+              <span class="smart-card-sub">Ingeniería OrionCodeLabs33 · Tocá para cotizar ahora</span>
+            </div>
+            <div class="smart-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </div>
+          </a>
+        `;
+      });
+
+      // Píldoras de Navegación [[NAV:archivo.html]]
+      const navRegex = /\[\[NAV:(.*?)\]\]/g;
+      text = text.replace(navRegex, (match, fileTarget) => {
+        const cleanTarget = fileTarget.trim();
+        let btnLabel = "Ir a la sección";
+        if (cleanTarget.includes('servicios')) btnLabel = "Explorar Catálogo de Servicios";
+        else if (cleanTarget.includes('portafolio')) btnLabel = "Ver Proyectos y Documentación ORION IA";
+        else if (cleanTarget.includes('contacto')) btnLabel = "Abrir Cotizador Online en 30s";
+        else if (cleanTarget.includes('legales')) btnLabel = "Ver Garantías y Marco Legal";
+        else if (cleanTarget.includes('index')) btnLabel = "Volver al Inicio";
+
+        return `
+          <br>
+          <a href="${cleanTarget}" class="nav-pill">
+            <span>${btnLabel}</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </a>
+        `;
+      });
+
+      return thoughtHTML + text;
+    }
+
+    // =========================================================================
+    // 9. EFECTO TYPEWRITER CON PRESERVACIÓN DE DOM Y COMPONENTES
+    // =========================================================================
+    function typeWriterEffect(element, htmlContent, callback) {
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = htmlContent;
+
+      const thoughtNode = tempDiv.querySelector('details.thought-process');
+      if (thoughtNode) {
+        element.appendChild(thoughtNode.cloneNode(true));
+        thoughtNode.remove();
+      }
+
+      const nodes = Array.from(tempDiv.childNodes);
+      let i = 0;
+
+      function typeNextNode() {
+        if (i < nodes.length) {
+          const currentNode = nodes[i];
+          if (currentNode.nodeType === Node.TEXT_NODE) {
+            const text = currentNode.textContent;
+            let charIndex = 0;
+            const textNode = document.createTextNode('');
+            element.appendChild(textNode);
+
+            function typeChar() {
+              if (charIndex < text.length) {
+                textNode.textContent += text.charAt(charIndex);
+                charIndex++;
+                messagesArea.scrollTop = messagesArea.scrollHeight;
+                setTimeout(typeChar, 9);
+              } else {
+                i++;
+                typeNextNode();
+              }
+            }
+            typeChar();
+          } else {
+            element.appendChild(currentNode.cloneNode(true));
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+            i++;
+            setTimeout(typeNextNode, 35);
+          }
+        } else if (callback) {
+          callback();
+        }
+      }
+
+      typeNextNode();
+    }
+
+    function appendMessage(text, sender, animate = true) {
+      const row = document.createElement('div');
+      row.className = `message-row ${sender}`;
+
+      if (sender === 'bot') {
+        const avatar = document.createElement('div');
+        avatar.className = 'msg-avatar';
+        avatar.innerHTML = '&lt;O&gt;';
+        row.appendChild(avatar);
+      }
+
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble';
+      row.appendChild(bubble);
+      messagesArea.appendChild(row);
+
+      const formattedHTML = formatMessage(text);
+
+      if (sender === 'bot' && animate) {
+        typeWriterEffect(bubble, formattedHTML, () => {
+          playReceiveSound();
+          triggerHaptic();
+          speakText(text);
+        });
+      } else {
+        bubble.innerHTML = formattedHTML;
+        messagesArea.scrollTop = messagesArea.scrollHeight;
+      }
+    }
+
+    function showTyping() {
+      const row = document.createElement('div');
+      row.className = 'message-row bot';
+      row.id = 'typing-row';
+      row.innerHTML = `
+        <div class="msg-avatar">&lt;O&gt;</div>
+        <div class="bubble"><div class="typing"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
+      `;
+      messagesArea.appendChild(row);
+      messagesArea.scrollTop = messagesArea.scrollHeight;
+    }
+
+    function removeTyping() {
+      const row = document.getElementById('typing-row');
+      if (row) row.remove();
+    }
+
+    // =========================================================================
+    // 10. ENVÍO AL CEREBRO ORION IA (https://orionbbot.lautybg22.workers.dev/)
+    // =========================================================================
+    async function sendMessage() {
+      let text = userInput.value.trim();
+      if ((text === '' && currentPdfText === '') || isWaiting || isCoolingDown) return;
+
+      if (isRecording && recognition) recognition.stop();
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+
+      let displayMessage = text;
+      let payloadMessage = text;
+
+      if (currentPdfText !== "") {
+        displayMessage = text + `\n\n📎 *(Archivo Adjunto: ${currentPdfName})*`;
+        payloadMessage =
+          text +
+          `\n\n[CONTEXTO OCULTO DEL DOCUMENTO PDF ADJUNTO POR EL CLIENTE]:\n"""\n${currentPdfText}\n"""\n[FIN DEL DOCUMENTO PDF. Analizalo con precisión comercial y técnica como ORION IA de OrionCodeLabs33.]`;
+        clearPdfAttachment();
+      }
+
+      appendMessage(displayMessage, 'user', false);
+      userInput.value = '';
+      userInput.style.height = 'auto';
+      sendBtn.disabled = true;
+      isWaiting = true;
+      orionVisualState = 'thinking';
+      if (statusLabel) statusLabel.textContent = "Procesando en el núcleo ORION IA...";
+
+      conversationHistory.push({ role: "user", content: payloadMessage });
+      saveToMemory();
+
+      showTyping();
+
+      try {
+        const response = await fetch(WORKER_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: conversationHistory })
+        });
+
+        const data = await response.json();
+        removeTyping();
+
+        if (response.ok && data.choices && data.choices[0]?.message?.content) {
+          const reply = data.choices[0].message.content;
+          appendMessage(reply, 'bot', true);
+          conversationHistory.push({ role: "assistant", content: reply });
+          saveToMemory();
+        } else {
+          const errDetail = data?.error?.message || "Nuestros nodos de inferencia están procesando alto tráfico en este segundo.";
+          appendMessage(
+            `⚡ **Aviso del Núcleo ORION IA:** ${errDetail}\n\nPodés volver a enviarme tu consulta en unos segundos o avanzar directo a nuestro cotizador:\n[[NAV:contacto.html#cotizador]]`,
+            'bot',
+            false
+          );
+          conversationHistory.pop();
+        }
+      } catch (error) {
+        removeTyping();
+        appendMessage(
+          "⚡ **Conexión en espera con el nodo de ORION IA.** Verificá tu conexión o tocá abajo para cotizar tu proyecto directamente con nuestro equipo de ingeniería:\n[[NAV:contacto.html#cotizador]]",
+          'bot',
+          false
+        );
+        conversationHistory.pop();
+      } finally {
+        isWaiting = false;
+        orionVisualState = 'idle';
+        if (statusLabel) statusLabel.textContent = "Arquitecto de Software & Ventas · OrionCodeLabs33";
+        startCooldown(33);
+      }
+    }
+
+    window.onload = loadMemory;
+  </script>
+</body>
+</html>

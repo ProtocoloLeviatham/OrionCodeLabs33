@@ -326,8 +326,8 @@
         const btn = compilerEl.querySelector('.compiler-mode-toggle');
         if (btn) {
           btn.textContent = compilerEl.classList.contains('is-compiled')
-            ? '⚡ Loop Activo: Vista App en Vivo'
-            : '⚡ Loop Activo: Sintetizando Código';
+            ? 'Vista: Resultado en Vivo'
+            : 'Vista: Especificación';
         }
         compilerEl.dataset.busy = '0';
       }, 320);
