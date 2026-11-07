@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://orioncodelabs33.com.ar/</loc>
+    <loc>https://protocololeviatham.github.io/OrionCodeLabs33/</loc>
     <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://orioncodelabs33.com.ar/servicios.html</loc>
+    <loc>https://protocololeviatham.github.io/OrionCodeLabs33/servicios.html</loc>
     <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://orioncodelabs33.com.ar/portafolio.html</loc>
+    <loc>https://protocololeviatham.github.io/OrionCodeLabs33/portafolio.html</loc>
     <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://orioncodelabs33.com.ar/nosotros.html</loc>
+    <loc>https://protocololeviatham.github.io/OrionCodeLabs33/nosotros.html</loc>
     <lastmod>2026-11-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://orioncodelabs33.com.ar/contacto.html</loc>
+    <loc>https://protocololeviatham.github.io/OrionCodeLabs33/contacto.html</loc>
     <lastmod>2026-11-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://orioncodelabs33.com.ar/legales.html</loc>
+    <loc>https://protocololeviatham.github.io/OrionCodeLabs33/legales.html</loc>
     <lastmod>2026-11-07</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.80</priority>
   </url>
 </urlset>

@@ -35,25 +35,56 @@
   <link rel="stylesheet" href="assets/css/layout.css">
   <link rel="stylesheet" href="assets/css/animations.css">
 
-  <!-- Schema.org JSON-LD para SEO en Argentina -->
+  <!-- Schema.org JSON-LD Estructurado Completo (@graph) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": ["Organization", "ProfessionalService"],
-    "name": "OrionCodeLabs33",
-    "slogan": "Si puedes imaginarlo, Podemos crearlo",
-    "url": "https://orioncodelabs33.com.ar/",
-    "logo": "https://orioncodelabs33.com.ar/assets/img/logo-light.png",
-    "description": "Empresa de desarrollo de software a medida, aplicaciones web y móviles, automatización con Python, infraestructura Cloudflare/Supabase/Firebase y creadores del motor de Inteligencia Artificial ORION utilizado en CvStudio33.com.ar.",
-    "areaServed": { "@type": "Country", "name": "Argentina" }
+    "@graph": [
+      {
+        "@type": ["Organization", "ProfessionalService"],
+        "@id": "https://protocololeviatham.github.io/OrionCodeLabs33/#organization",
+        "name": "OrionCodeLabs33",
+        "slogan": "Si puedes imaginarlo, Podemos crearlo",
+        "url": "https://protocololeviatham.github.io/OrionCodeLabs33/",
+        "logo": "https://protocololeviatham.github.io/OrionCodeLabs33/assets/img/logo-light.png",
+        "description": "Estudio de ingeniería de software a medida y laboratorio de inteligencia artificial propietario en Argentina. Creadores del motor neural ORION IA y de la plataforma SaaS CvStudio33.com.ar.",
+        "areaServed": [
+          { "@type": "Country", "name": "Argentina" },
+          { "@type": "Place", "name": "Latinoamérica y Global" }
+        ],
+        "knowsAbout": [
+          "Ingeniería de Software a Medida",
+          "Inteligencia Artificial Propietaria ORION IA",
+          "Desarrollo Web Full-Stack y PWA",
+          "Aplicaciones Móviles iOS y Android",
+          "Infraestructura Cloudflare Edge y Supabase PostgreSQL",
+          "Sistemas CRM, ERP y Automatización con Python"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://protocololeviatham.github.io/OrionCodeLabs33/#website",
+        "url": "https://protocololeviatham.github.io/OrionCodeLabs33/",
+        "name": "OrionCodeLabs33 — Ingeniería de Software & ORION IA",
+        "publisher": { "@id": "https://protocololeviatham.github.io/OrionCodeLabs33/#organization" },
+        "inLanguage": "es-AR"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "ORION IA Neural Engine v3.3",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Cloud / Web / API",
+        "creator": { "@id": "https://protocololeviatham.github.io/OrionCodeLabs33/#organization" },
+        "description": "Motor propietario de inteligencia artificial desarrollado sobre base Qwen 3.8 con adaptación matemática QLoRA en servidores NVIDIA de 40GB VRAM."
+      }
+    ]
   }
   </script>
 </head>
 <body>
 
   <!-- ========================================================================
-       HEADER SUPERIOR LIMPIO (Solo Logo Oficial + Estado ORION IA + Cotizar)
-       La navegación principal vive en el Dock Inferior Animado.
+       HEADER SUPERIOR LIMPIO (Logo Oficial + Estado ORION IA + Cotizar)
        ======================================================================== -->
   <header class="site-header" role="banner">
     <div class="container header-inner">
@@ -62,9 +93,9 @@
       </a>
 
       <div class="header-right-status">
-        <a href="nosotros.html" class="orion-ai-pill" title="Conocer nuestro motor propio ORION IA">
+        <a href="portafolio.html#orion-ia" class="orion-ai-pill" title="Conocer nuestro motor propio ORION IA">
           <span class="status-dot" aria-hidden="true"></span>
-          <span>Motor Propio <strong>ORION IA</strong> Activo</span>
+          <span>Arquitectura Propia <strong>ORION IA</strong></span>
         </a>
         <a href="contacto.html#cotizador" class="btn btn-primary btn-sm">
           <span>Cotizar Proyecto</span>
@@ -76,27 +107,67 @@
 
   <main id="contenido-principal">
     <!-- ======================================================================
-         HERO PRINCIPAL: TÍTULO GANCHO + SUBTÍTULO + ANIMACIÓN GLITCH CONTENIDA
+         HERO INSTITUCIONAL: QUÉ SOMOS, A QUÉ PÚBLICO VAMOS Y QUÉ OFRECEMOS
+         + ESCENARIO DE PRESENTACIÓN REMOTION A 60 FPS
          ====================================================================== -->
-    <section class="hero-section">
+    <section class="hero-section" data-composition-id="home-hero-composition" data-duration="2.4">
       <div class="container hero-grid">
 
-        <!-- Columna Izquierda -->
-        <div class="hero-content">
+        <!-- Columna Izquierda: Identidad Institucional, Público Objetivo y Oferta -->
+        <div class="hero-content hf-clip" data-start="0.05">
           <div class="hero-badge">
             <span class="status-dot" aria-hidden="true"></span>
-            <span>Páginas Web, Apps &amp; Inteligencia Artificial que Venden por Vos 24/7</span>
+            <span>Estudio de Ingeniería de Software &amp; Laboratorio de Inteligencia Artificial en Argentina</span>
           </div>
 
           <h1 class="hero-title">
-            Convertimos tu idea en una web, app o plataforma con IA lista para atraer clientes y facturar todos los días
+            Ingeniería de software a medida e inteligencia artificial propietaria para escalar tu operación
           </h1>
 
           <p class="hero-subtitle">
-            En <strong>OrionCodeLabs33</strong> creamos sitios web rápidos, tiendas online, sistemas a medida y asistentes con nuestra propia Inteligencia Artificial <strong>ORION IA</strong>.Somos los creadores detrás de <strong>CvStudio33.com.ar</strong> (+200k seguidores en TikTok y miles de ventas reales). <strong>Si querés ser otro caso de éxito, nosotros te ayudamos.</strong>
+            En <strong>OrionCodeLabs33</strong> diseñamos, programamos y desplegamos plataformas web de alto rendimiento, aplicaciones móviles nativas, sistemas corporativos y soluciones impulsadas por nuestro motor neural propio <strong>ORION IA</strong>. Construimos activos tecnológicos reales entregados llave en mano.
           </p>
 
-          <!-- ANIMACIÓN EN CÓDIGO PURO (Caja 100% bloqueada, sin etiquetas "render/code", cero estiramiento) -->
+          <!-- Matriz Institucional de 3 Pilares: Qué Somos · A Qué Público Vamos · Qué Ofrecemos -->
+          <div class="institutional-identity-grid" aria-label="Identidad, público y oferta de OrionCodeLabs33">
+            <article class="identity-pillar-card">
+              <div class="identity-pillar-head">
+                <span class="identity-pillar-icon" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                </span>
+                <h2 class="identity-pillar-title">Qué somos</h2>
+              </div>
+              <p class="identity-pillar-desc">
+                Un estudio de ingeniería de software y laboratorio de IA propio en Argentina, creadores del motor <strong>ORION IA</strong> y de plataformas SaaS en producción como <strong>CvStudio33.com.ar</strong>.
+              </p>
+            </article>
+
+            <article class="identity-pillar-card">
+              <div class="identity-pillar-head">
+                <span class="identity-pillar-icon" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </span>
+                <h2 class="identity-pillar-title">A qué público vamos</h2>
+              </div>
+              <p class="identity-pillar-desc">
+                Trabajamos junto a <strong>empresas, comercios, profesionales independientes, startups y emprendedores</strong> que necesitan digitalizar procesos, vender online o lanzar un producto propio.
+              </p>
+            </article>
+
+            <article class="identity-pillar-card">
+              <div class="identity-pillar-head">
+                <span class="identity-pillar-icon" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </span>
+                <h2 class="identity-pillar-title">Qué ofrecemos</h2>
+              </div>
+              <p class="identity-pillar-desc">
+                Desarrollo de <strong>plataformas web, tiendas e-commerce, apps iOS/Android, sistemas CRM/ERP, automatización en Python e integración de ORION IA</strong> con código 100% tuyo.
+              </p>
+            </article>
+          </div>
+
+          <!-- Animación del Lema Oficial en Código Puro -->
           <div id="orion-motto-box" class="orion-motto-box" aria-label="Si puedes imaginarlo, Podemos crearlo">
             <div class="orion-motto-stage">
               <div class="motto-code-layer">
@@ -104,10 +175,9 @@
               </div>
               <div class="motto-render-layer">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;" aria-hidden="true">
-                  <path d="M6 17L18 7" stroke="#4F46E5" stroke-width="1.8" stroke-linecap="round"/>
-                  <polygon points="6,13 7,16 10,17 7,18 6,21 5,18 2,17 5,16" fill="#2563EB"/>
-                  <polygon points="12,8 13.3,11.2 16.5,12.5 13.3,13.8 12,17 10.7,13.8 7.5,12.5 10.7,11.2" fill="#4F46E5"/>
-                  <polygon points="18,3 19,6 22,7 19,8 18,11 17,8 14,7 17,6" fill="#7C3AED"/>
+                  <path d="M6 17L18 7" stroke="#1D4ED8" stroke-width="1.8" stroke-linecap="round"/>
+                  <polygon points="6,13 7,16 10,17 7,18 6,21 5,18 2,17 5,16" fill="#1D4ED8"/>
+                  <polygon points="12,8 13.3,11.2 16.5,12.5 13.3,13.8 12,17 10.7,13.8 7.5,12.5 10.7,11.2" fill="#4338CA"/>
                 </svg>
                 <span class="motto-render-text">Si puedes imaginarlo, Podemos crearlo</span>
               </div>
@@ -116,23 +186,52 @@
 
           <div class="hero-cta-group">
             <a href="contacto.html#cotizador" class="btn btn-primary btn-lg">
-              <span>Quiero Empezar mi Proyecto Ahora</span>
+              <span>Iniciar Consulta Técnica</span>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
             <a href="#caso-exito-cvstudio33" class="btn btn-secondary btn-lg">
-              <span>Ver Caso de Éxito Real (+200k y Ventas)</span>
+              <span>Inspeccionar Caso de Estudio CvStudio33</span>
             </a>
           </div>
         </div>
 
-        <!-- Columna Derecha: Panel Interactivo Rediseñado orion-engine://stack-produccion (Con Vista Rápida + Botón de Cerrar + Ficha Completa) -->
-        <div class="hero-showcase-panel" aria-label="Arquitectura Tecnológica OrionCodeLabs33">
+        <!-- Columna Derecha: Reproductor de Presentación Remotion (60 FPS) + Stack de Producción Interactivo -->
+        <div class="hero-showcase-panel hf-clip" data-start="0.18" aria-label="Arquitectura Tecnológica OrionCodeLabs33">
           <div class="showcase-header">
             <div class="window-dots" aria-hidden="true">
               <span></span><span></span><span></span>
             </div>
-            <span style="font-family:var(--font-mono);font-size:0.74rem;font-weight:700;color:var(--text-primary);">orion-engine://stack-produccion</span>
-            <span class="badge-verified">4 Motores Activos</span>
+            <span style="font-family:var(--font-display);font-size:0.78rem;font-weight:700;color:var(--text-primary);">Arquitectura de Producción OrionCodeLabs33</span>
+            <span class="badge-verified">4 Divisiones Nucleares</span>
+          </div>
+
+          <!-- Animación de Presentación Hecha a Código con Remotion (60 FPS Determinista) -->
+          <div class="remotion-player-shell" data-remotion-composition="hero-architecture" style="margin-bottom:0.95rem;">
+            <div class="remotion-player-topbar">
+              <span class="remotion-player-title">
+                <span class="status-dot" aria-hidden="true"></span>
+                <span>Presentación de Arquitectura en Vivo</span>
+              </span>
+              <span class="remotion-player-meta" data-remotion-frame>ESCENA 01 · FRAME 000/300 · 60 FPS</span>
+            </div>
+            <div class="remotion-canvas-stage" style="aspect-ratio:16/8.5;min-height:190px;max-height:225px;">
+              <canvas aria-label="Animación de arquitectura OrionCodeLabs33 renderizada a 60 FPS"></canvas>
+            </div>
+            <div class="remotion-progress-rail"><div class="remotion-progress-fill"></div></div>
+            <div class="remotion-scene-selector" style="grid-template-columns:repeat(3,minmax(0,1fr));">
+              <button type="button" class="remotion-scene-btn is-active" data-remotion-scene="0">
+                <strong>01 · Plataformas</strong>
+                <span>Web, Apps &amp; UI</span>
+              </button>
+              <button type="button" class="remotion-scene-btn" data-remotion-scene="1">
+                <strong>02 · ORION IA</strong>
+                <span>Núcleo Neural Propio</span>
+              </button>
+              <button type="button" class="remotion-scene-btn" data-remotion-scene="2">
+                <strong>03 · Cloud Edge</strong>
+                <span>SLA 99.99% &amp; WAF</span>
+              </button>
+            </div>
           </div>
 
           <div class="showcase-stack-list">
@@ -257,22 +356,22 @@
           <div id="showcase-inline-drawer" class="showcase-inline-drawer" role="region" aria-label="Vista rápida del módulo seleccionado">
             <div class="showcase-drawer-head">
               <div>
-                <span style="font-family:var(--font-mono);font-size:0.66rem;color:#38BDF8;font-weight:700;">RESUMEN EJECUTIVO DEL MÓDULO</span>
-                <h4 id="showcase-drawer-title" style="font-family:var(--font-display);font-size:0.95rem;font-weight:800;color:#FFFFFF;margin-top:0.15rem;">IA Propia "ORION" &amp; Bots 24/7</h4>
+                <span style="font-family:var(--font-sans);font-size:0.7rem;color:var(--brand-blue);font-weight:700;">Resumen Ejecutivo del Módulo</span>
+                <h4 id="showcase-drawer-title" style="font-family:var(--font-display);font-size:0.95rem;font-weight:800;color:var(--text-primary);margin-top:0.15rem;">IA Propia "ORION" &amp; Bots 24/7</h4>
               </div>
               <button type="button" id="showcase-drawer-close" class="showcase-drawer-close" aria-label="Cerrar resumen">✕ Cerrar</button>
             </div>
-            <p id="showcase-drawer-problem" style="font-size:0.78rem;color:#FDA4AF;line-height:1.48;margin:0;"></p>
-            <p id="showcase-drawer-solution" style="font-size:0.78rem;color:#A7F3D0;line-height:1.48;margin:0;"></p>
+            <p id="showcase-drawer-problem" style="font-size:0.79rem;color:#B91C1C;line-height:1.5;margin:0;"></p>
+            <p id="showcase-drawer-solution" style="font-size:0.79rem;color:#047857;line-height:1.5;margin:0;"></p>
             <div style="display:flex;flex-wrap:wrap;gap:0.55rem;padding-top:0.35rem;">
               <button type="button" id="showcase-drawer-open-modal" class="btn btn-primary btn-sm" data-open-service="orion_ai">Ver Ficha Técnica Completa →</button>
-              <a href="contacto.html#cotizador" class="btn btn-secondary btn-sm" style="background:rgba(255,255,255,0.1);color:#FFFFFF;border-color:rgba(255,255,255,0.22);">Cotizar Ahora</a>
+              <a href="contacto.html#cotizador" class="btn btn-secondary btn-sm">Cotizar Ahora</a>
             </div>
           </div>
 
           <div style="margin-top:0.95rem;padding:0.7rem 0.9rem;border-radius:var(--radius-xs);background:var(--bg-secondary);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;font-size:0.75rem;color:var(--text-secondary);">
-            <span>Tocá cualquier fila para desplegar su resumen o abrir su Ficha Técnica con cierre rápido</span>
-            <a href="portafolio.html" style="color:var(--brand-blue);font-weight:800;">Ver los 4 Proyectos Insignia →</a>
+            <span>Seleccioná cualquier fila para inspeccionar su arquitectura o abrir su Ficha Técnica</span>
+            <a href="portafolio.html" style="color:var(--brand-blue);font-weight:700;">Ver Portafolio de Ingeniería →</a>
           </div>
         </div>
 
@@ -312,16 +411,15 @@
     </div>
 
     <!-- ======================================================================
-         SECCIÓN DESTACADA: NUESTRA PROPIA IA "ORION" & CASO INSIGNIA CVSTUDIO33.COM.AR
-         (Con Logos Oficiales, Métricas Animadas en Vivo y Alianza Jooble & Adzuna)
+         SECCIÓN DESTACADA: CASO DE ESTUDIO EN PRODUCCIÓN — CVSTUDIO33.COM.AR
          ====================================================================== -->
     <section id="caso-exito-cvstudio33" class="section">
       <div class="container">
         <div class="section-header">
-          <span class="hero-badge">Caso de Éxito Auditado · Un Solo Ecosistema Unificado que Factura 24/7</span>
-          <h2 class="section-title">No hacemos simples páginas web: construimos empresas digitales rentables con nuestra propia IA ORION</h2>
+          <span class="hero-badge">Caso de Estudio en Producción · Ecosistema SaaS Desarrollado por OrionCodeLabs33</span>
+          <h2 class="section-title">Ingeniería aplicada con resultados medibles: el caso CvStudio33.com.ar</h2>
           <p class="section-desc">
-            Mirá cómo diseñamos y escalamos desde cero <strong>CvStudio33.com.ar</strong> hasta convertirlo en un SaaS valuado en <strong>+5.000 USD</strong>, con <strong>+200k seguidores</strong>, ventas automáticas todos los días y alianzas internacionales con <strong>Jooble</strong> y <strong>Adzuna</strong>. <strong>Si querés ser otro caso de éxito, nosotros te ayudamos.</strong>
+            Diseñamos, programamos y escalamos desde cero <strong>CvStudio33.com.ar</strong> hasta consolidarlo como una plataforma SaaS con una valorización actual que ronda los <strong>+5.000 USD</strong>, impulsada por nuestro motor <strong>ORION IA</strong> y alianzas internacionales con <strong>Jooble</strong> y <strong>Adzuna</strong>.
           </p>
         </div>
 
@@ -333,13 +431,12 @@
                 <img src="assets/img/logo-cvstudio33.png" alt="Logo Oficial CvStudio33.com.ar" width="54" height="54">
               </a>
               <div>
-                <div style="display:flex;align-items:center;gap:0.55rem;flex-wrap:wrap;margin-bottom:0.25rem;">
-                  <span class="badge-verified">Caso de Éxito Insignia · Ingeniería 100% OrionCodeLabs33</span>
-                  <span style="font-family:var(--font-mono);font-size:0.72rem;color:var(--brand-violet);font-weight:800;">CEREBRO ORION IA // ACTIVO 24/7</span>
-                </div>
                 <h3 style="font-family:var(--font-display);font-size:clamp(1.25rem, 2.5vw, 1.65rem);font-weight:800;color:var(--text-primary);line-height:1.2;">
-                  CvStudio33.com.ar — SaaS Empleabilidad con IA NYX (Cerebro ORION), Mirror CV &amp; Portal de Empleo Propio
+                  CvStudio33.com.ar — Plataforma SaaS de Empleabilidad con IA NYX, Mirror CV y Portal de Empleo Propio
                 </h3>
+                <p style="font-size:0.84rem;color:var(--text-secondary);margin-top:0.25rem;">
+                  Arquitectura full-stack sobre Cloudflare Edge, Supabase PostgreSQL y núcleo neural ORION IA en tiempo real.
+                </p>
               </div>
             </div>
 
@@ -846,66 +943,94 @@
 
   <!-- ========================================================================
        FOOTER CORPORATIVO EXCLUSIVO DE ORIONCODELABS33
-       (Con Matriz de 5 Pilares incluyendo Ciberseguridad + Video en Loop)
+       (Con Bloque Pre-Footer de 5 Pilares en Paleta Blanca Moderna + Video en Loop)
        ======================================================================== -->
   <footer class="site-footer" role="contentinfo">
     <div class="container">
 
-      <!-- Matriz Ejecutiva Oscura de 5 Pilares (Arquitectura, Edge, Ciberseguridad, Código Propio y Marco Legal) -->
-      <div class="footer-telemetry-banner" aria-label="Garantías de Ingeniería, Ciberseguridad y Normativa Legal de OrionCodeLabs33">
-        <div class="footer-telemetry-item">
-          <div class="footer-telemetry-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(-30 12 12)"/></svg>
-          </div>
+      <!-- Módulo Pre-Footer de 5 Pilares en Paleta Blanca Moderna (Sin etiquetas genéricas ni cursivas) -->
+      <div class="footer-telemetry-banner orion-white-pillars" aria-label="Respaldo Tecnológico, Ciberseguridad y Garantía Legal de OrionCodeLabs33">
+        <div class="white-pillars-header">
           <div>
-            <span class="telemetry-tag">NÚCLEO NEURAL</span>
-            <strong>Arquitectura ORION IA</strong>
-            <span>Motor Propietario v3.3 · Qwen 3.8 + QLoRA en GPUs NVIDIA 40GB</span>
+            <h3>Respaldo de Ingeniería, Ciberseguridad y Garantía Legal</h3>
+            <p>Estándares técnicos y normativos aplicados en cada desarrollo entregado por OrionCodeLabs33.</p>
           </div>
+          <a href="legales.html" class="btn btn-secondary btn-sm">Ver Marco Normativo Completo →</a>
         </div>
 
         <div class="footer-telemetry-item">
-          <div class="footer-telemetry-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <div class="footer-telemetry-head">
+            <div class="footer-telemetry-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(-30 12 12)"/></svg>
+            </div>
+            <div>
+              <strong>Motor Propio ORION IA</strong>
+              <span>Arquitectura Neural v3.3</span>
+            </div>
           </div>
-          <div>
-            <span class="telemetry-tag">INFRAESTRUCTURA GLOBAL</span>
-            <strong>Despliegue Global Edge</strong>
-            <span>Latencia &lt; 15ms · SLA 99.99% sobre +310 nodos Cloudflare Edge</span>
-          </div>
-        </div>
-
-        <div class="footer-telemetry-item is-cyber">
-          <div class="footer-telemetry-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-          </div>
-          <div>
-            <span class="telemetry-tag">BLINDAJE ACTIVO 24/7</span>
-            <strong>Ciberseguridad &amp; Zero-Trust</strong>
-            <span>Firewall WAF L7 · Anti-DDoS · OWASP Top 10 · Aislamiento RLS</span>
-          </div>
+          <p class="footer-telemetry-desc">
+            Entrenado sobre base Qwen 3.8 con adaptación matemática QLoRA en servidores NVIDIA de 40GB VRAM.
+          </p>
         </div>
 
         <div class="footer-telemetry-item">
-          <div class="footer-telemetry-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <div class="footer-telemetry-head">
+            <div class="footer-telemetry-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <div>
+              <strong>Infraestructura Global Edge</strong>
+              <span>SLA 99.99% · Latencia &lt; 15ms</span>
+            </div>
           </div>
-          <div>
-            <span class="telemetry-tag">PROPIEDAD INTELECTUAL</span>
-            <strong>Código 100% Propio</strong>
-            <span>Entrega Llave en Mano sin ataduras ni licencias ocultas (Ley 11.723)</span>
+          <p class="footer-telemetry-desc">
+            Ejecución distribuida sobre más de 310 nodos de Cloudflare Edge y bases de datos en tiempo real.
+          </p>
+        </div>
+
+        <div class="footer-telemetry-item is-cyber-highlight">
+          <div class="footer-telemetry-head">
+            <div class="footer-telemetry-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <div>
+              <strong>Ciberseguridad Activa</strong>
+              <span>Arquitectura Zero-Trust</span>
+            </div>
           </div>
+          <p class="footer-telemetry-desc">
+            Protección perimetral WAF Capa 7, mitigación Anti-DDoS, estándares OWASP Top 10 y aislamiento RLS.
+          </p>
         </div>
 
         <div class="footer-telemetry-item">
-          <div class="footer-telemetry-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <div class="footer-telemetry-head">
+            <div class="footer-telemetry-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <div>
+              <strong>Código 100% Propio</strong>
+              <span>Propiedad Intelectual Total</span>
+            </div>
           </div>
-          <div>
-            <span class="telemetry-tag">CUMPLIMIENTO NORMATIVO</span>
-            <strong>Seguridad &amp; Normativa AR</strong>
-            <span>Cifrado TLS 1.3 · Ley 25.326 · Ley 24.240 · Delitos Inf. Ley 26.388</span>
+          <p class="footer-telemetry-desc">
+            Entrega llave en mano de repositorios y bases de datos sin licencias mensuales ocultas (Ley 11.723).
+          </p>
+        </div>
+
+        <div class="footer-telemetry-item">
+          <div class="footer-telemetry-head">
+            <div class="footer-telemetry-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div>
+              <strong>Respaldo Normativo AR</strong>
+              <span>Cumplimiento Legal Argentino</span>
+            </div>
           </div>
+          <p class="footer-telemetry-desc">
+            Cifrado TLS 1.3, Protección de Datos (Ley 25.326), Defensa del Consumidor (Ley 24.240) y Ley 26.388.
+          </p>
         </div>
       </div>
 
@@ -927,11 +1052,11 @@
               aria-label="Animación oficial del logo OrionCodeLabs33"
             ></video>
           </div>
-          <p style="font-family:var(--font-mono);font-size:var(--text-xs);font-weight:800;color:var(--brand-blue);margin-bottom:0.4rem;">
-            &lt;O&gt; OrionCodeLabs33 · «Si puedes imaginarlo, Podemos crearlo»
+          <p style="font-family:var(--font-display);font-size:var(--text-xs);font-weight:800;color:var(--brand-blue);margin-bottom:0.4rem;">
+            &lt;O&gt; OrionCodeLabs33 · Si puedes imaginarlo, Podemos crearlo
           </p>
           <p style="font-size:var(--text-xs);color:var(--text-muted);line-height:1.6;">
-            Laboratorio e ingeniería de software de alta precisión en Argentina. Creadores de arquitecturas web full-stack, aplicaciones móviles nativas, automatización avanzada e inteligencia artificial propietaria <strong>ORION IA</strong>.
+            Estudio e ingeniería de software de alta precisión en Argentina. Creadores de arquitecturas web full-stack, aplicaciones móviles nativas, automatización avanzada e inteligencia artificial propietaria <strong>ORION IA</strong>.
           </p>
         </div>
 
@@ -942,7 +1067,7 @@
             <li><a href="index.html">Inicio · Plataforma Central</a></li>
             <li><a href="servicios.html">Enciclopedia de Servicios</a></li>
             <li><a href="portafolio.html#orion-ia">Documentación ORION IA</a></li>
-            <li><a href="portafolio.html">Proyectos, Procesos 3D &amp; Stack</a></li>
+            <li><a href="portafolio.html">Proyectos, Procesos &amp; Stack</a></li>
             <li><a href="contacto.html#cotizador">Cotizador Interactivo Online</a></li>
             <li><a href="legales.html">Marco Legal, Ciberseguridad &amp; SLA</a></li>
             <li><a href="sitemap.xml">Índice Sitemap XML</a></li>
@@ -968,7 +1093,7 @@
         <nav aria-label="Metodología OrionCodeLabs33">
           <h3 class="footer-col-title">Ingeniería OrionCodeLabs33</h3>
           <ul class="footer-nav-list">
-            <li><a href="portafolio.html#proceso-ingenieria">Pipeline 3D de Construcción en 5 Fases</a></li>
+            <li><a href="portafolio.html#proceso-ingenieria">Proceso de Construcción en 4 Fases</a></li>
             <li><a href="portafolio.html#stack-oficial">Matriz de Lenguajes &amp; Runtimes</a></li>
             <li><a href="portafolio.html#orion-ia">Arquitectura Neural ORION IA v3.3</a></li>
             <li><a href="legales.html#propiedad-intelectual">Cesión Total de Propiedad Intelectual</a></li>
@@ -1004,8 +1129,8 @@
   </footer>
 
   <!-- ========================================================================
-       MENÚ INFERIOR PROTAGONISTA v3 (CRYSTAL FLOATING DOCK + POPOVER ORION 2 OPCIONES)
-       Inicio | Servicios | ORION (2 Opciones: Documentación / Hablar con ORION) | Proyectos | Contacto
+       MENÚ INFERIOR PROTAGONISTA v4 (ARCHITECTURAL WHITE DOCK)
+       Inicio | Servicios | ORION (Directo a Orión.html) | Proyectos | Contacto
        ======================================================================== -->
   <nav class="orion-bottom-dock" aria-label="Menú Principal de Navegación">
     <a href="index.html" class="dock-item is-active" aria-current="page">
@@ -1025,18 +1150,14 @@
       <span>Servicios</span>
     </a>
 
-    <!-- Botón Central Oficial: ORION (Despliega 2 Opciones: Documentación en Proyectos / Hablar con ORION en Orión.html) -->
-    <a href="portafolio.html#orion-ia" class="dock-item-orion" aria-label="ORION Inteligencia Artificial — Abrir opciones" aria-haspopup="dialog" aria-expanded="false">
+    <!-- Botón Central Oficial: ORION (Enlace directo y exclusivo al Chatbot Orión.html) -->
+    <a href="Orión.html" class="dock-item-orion" aria-label="Abrir Chatbot ORION IA">
       <div class="dock-orion-orb">
         <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <!-- Brackets de Código Oficiales < > -->
           <path d="M8.5 11.5L3 18L8.5 24.5" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M27.5 11.5L33 18L27.5 24.5" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <!-- Letra O Central Geométrica -->
           <rect x="11.5" y="9" width="13" height="18" rx="6.5" stroke="#FFFFFF" stroke-width="2.6"/>
-          <!-- Anillo Orbital Diagonal de Circuito -->
           <ellipse cx="18" cy="18" rx="15.5" ry="5.4" transform="rotate(-32 18 18)" stroke="#38BDF8" stroke-width="1.6" stroke-dasharray="7 3"/>
-          <!-- Las 3 Estrellas del Cinturón de Orión (Alnitak, Alnilam, Mintaka) -->
           <circle cx="15" cy="19.5" r="1.35" fill="#93C5FD"/>
           <circle cx="18" cy="18" r="1.75" fill="#FFFFFF"/>
           <circle cx="21" cy="16.5" r="1.35" fill="#38BDF8"/>
@@ -1065,6 +1186,7 @@
     </a>
   </nav>
 
+  <script src="assets/js/orion-motion-engine.js" defer></script>
   <script src="assets/js/animations.js" defer></script>
   <script src="assets/js/app.js" defer></script>
 </body>

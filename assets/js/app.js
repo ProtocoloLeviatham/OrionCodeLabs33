@@ -741,97 +741,19 @@
   }
 
   /**
-   * 3B. MENÚ EMERGENTE DEL BOTÓN "ORION" EN EL DOCK INFERIOR (2 OPCIONES)
-   * 1. Ver Documentación ORION (portafolio.html#orion-ia)
-   * 2. Hablar con ORION (Orión.html)
+   * 3B. BOTÓN CENTRAL "ORION" EN EL DOCK INFERIOR:
+   * Navegación directa y exclusiva al Chatbot Orión.html
    */
-  function initOrionDockPopover() {
+  function initOrionDirectChatbotLink() {
     const orionDockBtn = document.querySelector('.dock-item-orion');
     if (!orionDockBtn) return;
-
-    let popover = document.getElementById('orion-dock-popover');
-    if (!popover) {
-      popover = document.createElement('div');
-      popover.id = 'orion-dock-popover';
-      popover.className = 'orion-dock-popover';
-      popover.setAttribute('role', 'dialog');
-      popover.setAttribute('aria-label', 'Centro de Comando ORION IA');
-      popover.innerHTML = `
-        <div class="orion-popover-head">
-          <span class="orion-popover-badge">
-            <span class="status-dot" aria-hidden="true"></span>
-            <span>NÚCLEO NEURAL ORION IA · QWEN 3.8 + QLORA</span>
-          </span>
-          <button type="button" class="orion-popover-close" data-close-orion-popover aria-label="Cerrar menú ORION">✕</button>
-        </div>
-        <div class="orion-popover-grid">
-          <a href="portafolio.html#orion-ia" class="orion-popover-option">
-            <div class="orion-popover-option-icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-              </svg>
-            </div>
-            <div class="orion-popover-option-text">
-              <strong>Ver Documentación ORION</strong>
-              <span>Arquitectura Qwen 3.8, servidores NVIDIA 40GB, QLoRA y visión a 5 años</span>
-            </div>
-          </a>
-          <a href="Orión.html" class="orion-popover-option">
-            <div class="orion-popover-option-icon" style="background:linear-gradient(135deg,#059669 0%,#2563EB 100%);" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                <circle cx="9" cy="10" r="1" fill="currentColor"/>
-                <circle cx="15" cy="10" r="1" fill="currentColor"/>
-              </svg>
-            </div>
-            <div class="orion-popover-option-text">
-              <strong>Hablar con ORION</strong>
-              <span>Abrir el Chatbot Inteligente de ORION IA en vivo (Orión.html)</span>
-            </div>
-          </a>
-        </div>
-      `;
-      document.body.appendChild(popover);
+    if (orionDockBtn.tagName.toLowerCase() === 'a') {
+      orionDockBtn.setAttribute('href', 'Orión.html');
+    } else {
+      orionDockBtn.addEventListener('click', () => {
+        window.location.href = 'Orión.html';
+      });
     }
-
-    function togglePopover(forceState) {
-      const isOpen =
-        typeof forceState === 'boolean'
-          ? forceState
-          : !popover.classList.contains('is-open');
-      popover.classList.toggle('is-open', isOpen);
-      orionDockBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    }
-
-    orionDockBtn.setAttribute('aria-haspopup', 'dialog');
-    orionDockBtn.setAttribute('aria-expanded', 'false');
-
-    orionDockBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      togglePopover();
-    });
-
-    document.addEventListener('click', (e) => {
-      if (e.target.closest('[data-close-orion-popover]')) {
-        togglePopover(false);
-        return;
-      }
-      if (
-        popover.classList.contains('is-open') &&
-        !popover.contains(e.target) &&
-        !orionDockBtn.contains(e.target)
-      ) {
-        togglePopover(false);
-      }
-    });
-
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && popover.classList.contains('is-open')) {
-        togglePopover(false);
-      }
-    });
   }
 
   /**
@@ -960,7 +882,7 @@
     initCompactServicesConsole();
     initShowcaseStackPanel();
     initServiceModals();
-    initOrionDockPopover();
+    initOrionDirectChatbotLink();
     initQuoteCalculator();
   });
 })();

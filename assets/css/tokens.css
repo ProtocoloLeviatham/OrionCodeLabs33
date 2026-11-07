@@ -1,110 +1,115 @@
 /* ==========================================================================
-   OrionCodeLabs33 v3 — Architectural White, Cosmic Night & Orion Belt System
+   OrionCodeLabs33 v4 — Pure White Architectural & Swiss-Editorial Design System
    Archivo 1: assets/css/tokens.css
-   Diseñado para Web App Moderna de Alta Conversión (Blanco Puro + Azul Noche
-   #070B1F / #0B132B + Cobalto Eléctrico #2563EB + Violeta Orión #7C3AED)
+   - Tipografía moderna sin cursivas: Plus Jakarta Sans + Inter + JetBrains Mono
+   - Paleta Blanca Ejecutiva (#FFFFFF / #F8FAFC / #E2E8F0) + Tinta (#090D16)
+   - Cero cursivas (font-style: normal global) y estructura de alta precisión
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
 
 :root {
-  /* Familias Tipográficas Distintivas (Anti-Plantilla Genérica) */
-  --font-sans: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-display: 'Bricolage Grotesque', 'Instrument Sans', sans-serif;
+  /* Familias Tipográficas Modernas (100% Rectas, Cero Cursivas) */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
 
-  /* Escala Tipográfica Fluida y Equilibrada */
-  --text-xs: clamp(0.75rem, 0.72rem + 0.14vw, 0.8125rem);
-  --text-sm: clamp(0.875rem, 0.84rem + 0.18vw, 0.9375rem);
-  --text-base: clamp(0.98rem, 0.95rem + 0.2vw, 1.0625rem);
-  --text-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.275rem);
-  --text-xl: clamp(1.3rem, 1.18rem + 0.55vw, 1.55rem);
-  --text-2xl: clamp(1.6rem, 1.38rem + 1vw, 2.15rem);
-  --text-3xl: clamp(1.95rem, 1.62rem + 1.65vw, 2.85rem);
-  --text-hero: clamp(2.15rem, 1.68rem + 2.4vw, 3.65rem);
+  /* Escala Tipográfica Ejecutiva */
+  --text-xs: clamp(0.75rem, 0.72rem + 0.12vw, 0.8125rem);
+  --text-sm: clamp(0.865rem, 0.83rem + 0.16vw, 0.9375rem);
+  --text-base: clamp(0.975rem, 0.94rem + 0.18vw, 1.05rem);
+  --text-lg: clamp(1.1rem, 1.04rem + 0.3vw, 1.24rem);
+  --text-xl: clamp(1.26rem, 1.16rem + 0.5vw, 1.5rem);
+  --text-2xl: clamp(1.55rem, 1.35rem + 0.95vw, 2.05rem);
+  --text-3xl: clamp(1.85rem, 1.55rem + 1.45vw, 2.65rem);
+  --text-hero: clamp(2.1rem, 1.65rem + 2.15vw, 3.45rem);
 
-  /* Paleta Principal: Blanco Arquitectónico & Tinta Orión (#0B132B / #070B1F) */
+  /* Paleta Blanca Arquitectónica Moderna */
   --bg-primary: #FFFFFF;
-  --bg-secondary: #F6F8FC;
-  --bg-tertiary: #EEF2F9;
+  --bg-secondary: #F8FAFC;
+  --bg-tertiary: #F1F5F9;
   --bg-surface: #FFFFFF;
-  --bg-surface-hover: #F8FAFF;
-  --bg-glass: rgba(255, 255, 255, 0.88);
-  --bg-dock: rgba(255, 255, 255, 0.92);
-  --bg-code: #070B1F;
-  --bg-cosmos: #070B1F;
+  --bg-surface-hover: #F8FAFC;
+  --bg-glass: rgba(255, 255, 255, 0.92);
+  --bg-dock: rgba(255, 255, 255, 0.95);
+  --bg-code: #090D16;
+  --bg-cosmos: #090D16;
 
-  /* Textos de Alto Contraste y Lectura Limpia */
-  --text-primary: #0B132B;
+  /* Jerarquía de Textos de Alto Contraste */
+  --text-primary: #090D16;
   --text-secondary: #334155;
   --text-muted: #64748B;
   --text-on-brand: #FFFFFF;
 
-  /* Colores de Marca Extraídos del Logo Oficial OrionCodeLabs33 */
-  --brand-navy: #0B132B;
-  --brand-cosmos: #070B1F;
-  --brand-blue: #2563EB;
-  --brand-blue-bright: #1D4ED8;
-  --brand-indigo: #4F46E5;
-  --brand-violet: #7C3AED;
-  --brand-purple: #9333EA;
-  --brand-cyan: #0284C7;
-  --brand-emerald: #059669;
-  --brand-amber: #D97706;
+  /* Acentos Institucionales OrionCodeLabs33 */
+  --brand-navy: #090D16;
+  --brand-cosmos: #090D16;
+  --brand-blue: #1D4ED8;
+  --brand-blue-bright: #2563EB;
+  --brand-indigo: #4338CA;
+  --brand-violet: #6D28D9;
+  --brand-purple: #7E22CE;
+  --brand-cyan: #0369A1;
+  --brand-emerald: #047857;
+  --brand-amber: #B45309;
 
-  /* Gradientes de Ingeniería */
-  --gradient-orion: linear-gradient(135deg, #2563EB 0%, #4F46E5 50%, #9333EA 100%);
-  --gradient-brand: var(--gradient-orion);
-  --gradient-orion-dark: linear-gradient(135deg, #070B1F 0%, #0F172A 45%, #1E1B4B 100%);
-  --gradient-orion-subtle: linear-gradient(135deg, rgba(37, 99, 235, 0.06) 0%, rgba(124, 58, 237, 0.08) 100%);
+  /* Gradientes Sobrios y Arquitectónicos */
+  --gradient-orion: linear-gradient(135deg, #090D16 0%, #1D4ED8 60%, #4338CA 100%);
+  --gradient-brand: linear-gradient(135deg, #1D4ED8 0%, #4338CA 100%);
+  --gradient-orion-dark: linear-gradient(135deg, #090D16 0%, #0F172A 60%, #1E293B 100%);
+  --gradient-orion-subtle: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
   --gradient-surface-sheen: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
 
-  /* Bordes y Sombras Multicapa (Estética Limpia de Web App) */
+  /* Líneas Estructurales y Sombras Limpias */
   --border-subtle: #E2E8F0;
   --border-medium: #CBD5E1;
-  --border-strong: rgba(37, 99, 235, 0.32);
-  --border-focus: #2563EB;
+  --border-strong: rgba(29, 78, 216, 0.28);
+  --border-focus: #1D4ED8;
 
-  --shadow-xs: 0 1px 2px rgba(11, 19, 43, 0.04);
-  --shadow-sm: 0 4px 12px -2px rgba(11, 19, 43, 0.06), 0 1px 3px rgba(11, 19, 43, 0.04);
-  --shadow-md: 0 14px 34px -8px rgba(11, 19, 43, 0.09), 0 4px 10px -3px rgba(11, 19, 43, 0.04);
-  --shadow-lg: 0 24px 56px -12px rgba(11, 19, 43, 0.14), 0 8px 20px -6px rgba(37, 99, 235, 0.08);
-  --shadow-glow: 0 10px 30px -6px rgba(37, 99, 235, 0.35);
-  --shadow-dock: 0 20px 50px -10px rgba(11, 19, 43, 0.18), 0 4px 16px rgba(37, 99, 235, 0.1), inset 0 0 0 1px rgba(37, 99, 235, 0.14);
+  --shadow-xs: 0 1px 2px rgba(9, 13, 22, 0.03);
+  --shadow-sm: 0 2px 8px -2px rgba(9, 13, 22, 0.05), 0 1px 2px rgba(9, 13, 22, 0.03);
+  --shadow-md: 0 12px 28px -8px rgba(9, 13, 22, 0.07), 0 4px 10px -3px rgba(9, 13, 22, 0.03);
+  --shadow-lg: 0 20px 44px -12px rgba(9, 13, 22, 0.11), 0 6px 16px -4px rgba(29, 78, 216, 0.05);
+  --shadow-glow: 0 8px 24px -6px rgba(29, 78, 216, 0.28);
+  --shadow-dock: 0 16px 40px -8px rgba(9, 13, 22, 0.14), 0 2px 10px rgba(9, 13, 22, 0.05), inset 0 0 0 1px rgba(226, 232, 240, 0.95);
 
-  /* Radios y Dimensiones */
-  --radius-xs: 8px;
-  --radius-sm: 12px;
-  --radius-md: 16px;
-  --radius-lg: 22px;
-  --radius-xl: 30px;
+  /* Radios Geométricos Modernos */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
   --radius-pill: 9999px;
   --radius-full: 9999px;
 
   --header-height: 68px;
-  --dock-height: 74px;
+  --dock-height: 72px;
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 
   --container-max: 1260px;
   --container-pad: clamp(1rem, 4vw, 2.5rem);
 
-  /* Escala Z-Index Estricta */
+  /* Escala Z-Index */
   --z-header: 90;
   --z-dock: 150;
-  --z-dock-popover: 165;
   --z-modal-backdrop: 240;
 
-  /* Curvas Físicas de Animación */
+  /* Curvas Físicas */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Reset y Bloqueo Estricto de Viewport Móvil (Web App Nativa) */
+/* Reset y Prohibición Estricta de Cursivas en Toda la Plataforma */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-style: normal !important;
+}
+
+em, i, cite, dfn, var, address, blockquote {
+  font-style: normal !important;
 }
 
 html {
@@ -120,6 +125,7 @@ html {
   overscroll-behavior-x: none;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 
 body {
@@ -132,8 +138,9 @@ body {
   overflow-x: clip;
   overscroll-behavior-x: none;
   position: relative;
-  /* Espacio reservado abajo para el Dock de Navegación en celular y PC */
   padding-bottom: calc(var(--dock-height) + var(--safe-bottom) + 32px);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 main, section, header, footer {
@@ -142,7 +149,7 @@ main, section, header, footer {
   overflow-x: clip;
 }
 
-img, svg, video {
+img, svg, video, canvas {
   max-width: 100%;
   height: auto;
   display: block;
@@ -156,6 +163,7 @@ a {
 button, input, select, textarea {
   font: inherit;
   color: inherit;
+  font-style: normal !important;
 }
 
 :focus-visible {

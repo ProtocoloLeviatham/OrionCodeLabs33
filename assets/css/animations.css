@@ -812,6 +812,35 @@
   100% { stroke-opacity: 1; filter: drop-shadow(0 0 12px rgba(147, 51, 234, 0.65)); }
 }
 
+/* --------------------------------------------------------------------------
+   9. CONTRATO DE AISLAMIENTO REMOTION + HYPERFRAMES (CERO COLISIONES)
+      - Los contenedores [data-remotion-composition] son controlados cuadro a
+        cuadro (60 FPS) por interpolate() y spring() sin transiciones CSS.
+      - Los contenedores [data-composition-id] y sus .hf-clip son controlados
+        por window.__timelines de HyperFrames sin conflictos de transform.
+   -------------------------------------------------------------------------- */
+[data-remotion-composition] {
+  position: relative;
+  contain: layout paint;
+  user-select: none;
+}
+
+[data-remotion-composition] *,
+[data-remotion-composition] canvas {
+  transition: none !important;
+}
+
+[data-composition-id] {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+}
+
+[data-composition-id] .hf-clip {
+  will-change: opacity, transform;
+  /* Sin transform ni transition CSS estático para evitar gsap_css_transform_conflict */
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -819,7 +848,8 @@
     transition-duration: 0.01ms !important;
   }
   .reveal-on-scroll,
-  .process-3d-step {
+  .process-3d-step,
+  [data-composition-id] .hf-clip {
     opacity: 1 !important;
     transform: none !important;
     filter: none !important;

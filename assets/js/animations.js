@@ -153,16 +153,20 @@
 
   /**
    * Coreografía de aparición progresiva al hacer scroll
+   * (Aislada de los contenedores Remotion y HyperFrames para evitar colisiones)
    */
   function initScrollReveal() {
     const targets = document.querySelectorAll(
-      '.service-category-card, .bento-card, .tech-logo-card, .showcase-row, .reveal-on-scroll'
+      '.service-category-card, .bento-card, .tech-logo-card, .showcase-row, .identity-pillar-card, .reveal-on-scroll'
     );
     if (!targets.length || !('IntersectionObserver' in window)) return;
 
     targets.forEach((el, i) => {
+      if (el.closest('[data-remotion-composition]') || el.closest('[data-composition-id]')) {
+        return;
+      }
       el.classList.add('reveal-on-scroll');
-      el.style.transitionDelay = `${(i % 6) * 45}ms`;
+      el.style.transitionDelay = `${(i % 6) * 40}ms`;
     });
 
     const observer = new IntersectionObserver(
@@ -177,7 +181,11 @@
       { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
     );
 
-    targets.forEach((el) => observer.observe(el));
+    targets.forEach((el) => {
+      if (el.classList.contains('reveal-on-scroll')) {
+        observer.observe(el);
+      }
+    });
   }
 
   /**

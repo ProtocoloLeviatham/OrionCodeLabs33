@@ -218,109 +218,98 @@
 }
 
 /* --------------------------------------------------------------------------
-   3. NAVBAR INFERIOR PROTAGONISTA v3 (CRYSTAL GLASS DOCK + POPOVER ORION)
-      Items: Inicio | Servicios | ORION (2 Opciones) | Proyectos | Contacto
+   3. NAVBAR INFERIOR PROTAGONISTA v4 (ARCHITECTURAL WHITE DOCK)
+      Items: Inicio | Servicios | ORION (Directo a Orión.html) | Proyectos | Contacto
    -------------------------------------------------------------------------- */
 .orion-bottom-dock {
   position: fixed;
-  left: 10px;
-  right: 10px;
-  bottom: calc(10px + var(--safe-bottom));
+  left: 12px;
+  right: 12px;
+  bottom: calc(12px + var(--safe-bottom));
   z-index: var(--z-dock, 150);
   height: var(--dock-height);
-  max-width: 580px;
+  max-width: 560px;
   margin-inline: auto;
-  background: rgba(255, 255, 255, 0.93);
-  backdrop-filter: blur(24px) saturate(190%);
-  -webkit-backdrop-filter: blur(24px) saturate(190%);
-  border-radius: 26px;
-  padding: 0 0.5rem;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 22px;
+  padding: 0 0.45rem;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   align-items: center;
+  border: 1px solid #E2E8F0;
   box-shadow:
-    0 20px 50px -10px rgba(11, 19, 43, 0.2),
-    0 4px 18px rgba(37, 99, 235, 0.12),
-    inset 0 0 0 1.5px rgba(37, 99, 235, 0.18);
-  transition: transform 0.32s var(--ease-out-expo), box-shadow 0.32s ease;
-}
-
-.orion-bottom-dock::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(90deg, rgba(37, 99, 235, 0.04) 0%, rgba(124, 58, 237, 0.06) 50%, rgba(37, 99, 235, 0.04) 100%);
-  pointer-events: none;
+    0 18px 42px -10px rgba(9, 13, 22, 0.14),
+    0 4px 12px rgba(9, 13, 22, 0.05);
+  transition: transform 0.28s var(--ease-out-expo), box-shadow 0.28s ease;
 }
 
 @media (min-width: 768px) {
   .orion-bottom-dock {
     bottom: 18px;
     border-radius: 9999px;
-    padding: 0 0.85rem;
-    max-width: 610px;
+    padding: 0 0.75rem;
+    max-width: 590px;
   }
 }
 
 .dock-item {
   position: relative;
-  height: 58px;
+  height: 54px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 4px;
   color: #475569;
-  font-size: 0.7rem;
-  font-weight: 700;
+  font-family: var(--font-sans);
+  font-size: 0.71rem;
+  font-weight: 600;
   letter-spacing: -0.01em;
-  border-radius: 18px;
-  transition: color 0.25s ease, transform 0.25s var(--ease-spring), background-color 0.25s ease, box-shadow 0.25s ease;
+  border-radius: 14px;
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
   user-select: none;
   z-index: 1;
 }
 
 .dock-item svg {
-  width: 21px;
-  height: 21px;
-  transition: transform 0.28s var(--ease-spring), stroke 0.25s ease, color 0.25s ease;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.22s var(--ease-out-expo), color 0.2s ease;
 }
 
 .dock-item:hover {
   color: var(--brand-blue);
-  background: rgba(37, 99, 235, 0.07);
+  background: #F8FAFC;
 }
 
 .dock-item:hover svg {
-  transform: translateY(-3px) scale(1.1);
+  transform: translateY(-2px);
   color: var(--brand-blue);
 }
 
 .dock-item.is-active {
-  color: var(--brand-navy);
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(124, 58, 237, 0.12) 100%);
-  box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.24);
+  color: var(--text-primary);
+  font-weight: 700;
+  background: #F1F5F9;
 }
 
 .dock-item.is-active svg {
   color: var(--brand-blue);
-  transform: translateY(-2px);
 }
 
-/* Indicador luminoso inferior en el item activo */
 .dock-item.is-active::after {
   content: '';
   position: absolute;
-  bottom: 5px;
-  width: 20px;
-  height: 3.5px;
+  bottom: 4px;
+  width: 16px;
+  height: 3px;
   border-radius: 99px;
-  background: var(--gradient-orion);
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.45);
+  background: var(--brand-blue);
 }
 
-/* Botón Central Especial: ORION (Despliega 2 Opciones al Tocar) */
+/* Botón Central ORION: Enlace directo y exclusivo al Chatbot Orión.html */
 .dock-item-orion {
   position: relative;
   display: flex;
@@ -328,240 +317,70 @@
   align-items: center;
   justify-content: center;
   gap: 3px;
-  color: var(--brand-navy);
+  color: var(--text-primary);
   font-family: var(--font-display);
-  font-size: 0.71rem;
+  font-size: 0.7rem;
   font-weight: 800;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   user-select: none;
   background: transparent;
   border: none;
   cursor: pointer;
   z-index: 2;
   padding: 0;
+  text-decoration: none;
 }
 
 .dock-orion-orb {
-  width: 52px;
-  height: 52px;
-  margin-top: -24px;
+  width: 50px;
+  height: 50px;
+  margin-top: -22px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 25%, #1E293B 0%, #070B1F 70%, #0B132B 100%);
+  background: #090D16;
   display: grid;
   place-items: center;
   color: #FFFFFF;
   box-shadow:
-    0 10px 26px rgba(37, 99, 235, 0.48),
-    0 0 0 3.5px #FFFFFF,
-    inset 0 0 12px rgba(56, 189, 248, 0.35);
-  transition: transform 0.32s var(--ease-spring), box-shadow 0.32s ease;
+    0 10px 24px rgba(29, 78, 216, 0.32),
+    0 0 0 3.5px #FFFFFF;
+  border: 1.5px solid rgba(56, 189, 248, 0.45);
+  transition: transform 0.28s var(--ease-spring), box-shadow 0.28s ease, border-color 0.28s ease;
   position: relative;
   overflow: hidden;
 }
 
-.dock-orion-orb::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: 50%;
-  background: conic-gradient(from 0deg, transparent 0%, #38BDF8 25%, #8B5CF6 50%, transparent 80%);
-  opacity: 0.55;
-  animation: orionOrbSpin 6s linear infinite;
-  pointer-events: none;
-}
-
-.dock-orion-orb::after {
-  content: '';
-  position: absolute;
-  inset: 2px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #162447 0%, #070B1F 85%);
-  pointer-events: none;
-}
-
-@keyframes orionOrbSpin {
-  to { transform: rotate(360deg); }
-}
-
 .dock-item-orion:hover .dock-orion-orb,
-.dock-item-orion.is-active .dock-orion-orb,
-.dock-item-orion[aria-expanded="true"] .dock-orion-orb {
-  transform: translateY(-5px) scale(1.08);
+.dock-item-orion.is-active .dock-orion-orb {
+  transform: translateY(-4px) scale(1.06);
+  border-color: #38BDF8;
   box-shadow:
-    0 14px 32px rgba(124, 58, 237, 0.65),
-    0 0 0 3.5px #2563EB,
-    inset 0 0 16px rgba(168, 85, 247, 0.5);
+    0 14px 30px rgba(29, 78, 216, 0.45),
+    0 0 0 3.5px #FFFFFF;
 }
 
 .dock-orion-orb svg {
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   position: relative;
   z-index: 2;
 }
 
-/* Popover Flotante de 2 Opciones del Botón ORION */
-.orion-dock-popover {
-  position: fixed;
-  left: 50%;
-  bottom: calc(var(--dock-height) + var(--safe-bottom) + 24px);
-  transform: translateX(-50%) translateY(16px) scale(0.94);
-  width: min(92vw, 430px);
-  background: rgba(11, 19, 43, 0.97);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  color: #FFFFFF;
-  border-radius: 22px;
-  padding: 1rem;
-  border: 1.5px solid rgba(56, 189, 248, 0.38);
-  box-shadow: 0 24px 60px rgba(7, 11, 31, 0.55), 0 0 30px rgba(37, 99, 235, 0.28);
-  z-index: var(--z-dock-popover, 165);
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.26s var(--ease-out-expo), transform 0.28s var(--ease-spring), visibility 0.26s ease;
-}
-
-.orion-dock-popover.is-open {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translateX(-50%) translateY(0) scale(1);
-}
-
-.orion-dock-popover::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%) rotate(45deg);
-  width: 16px;
-  height: 16px;
-  background: #0B132B;
-  border-right: 1.5px solid rgba(56, 189, 248, 0.38);
-  border-bottom: 1.5px solid rgba(56, 189, 248, 0.38);
-}
-
-.orion-popover-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-  padding-bottom: 0.65rem;
-  margin-bottom: 0.7rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.orion-popover-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  font-weight: 700;
-  color: #38BDF8;
-}
-
-.orion-popover-close {
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  color: #CBD5E1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 0.8rem;
-  font-weight: 800;
-  transition: all 0.18s ease;
-}
-
-.orion-popover-close:hover {
-  background: rgba(244, 63, 94, 0.22);
-  color: #FFFFFF;
-  border-color: rgba(244, 63, 94, 0.5);
-}
-
-.orion-popover-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 0.6rem;
-}
-
-.orion-popover-option {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  padding: 0.85rem 0.95rem;
-  border-radius: 15px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #FFFFFF;
-  text-align: left;
-  transition: transform 0.22s var(--ease-spring), background-color 0.22s ease, border-color 0.22s ease;
-}
-
-.orion-popover-option:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.28) 0%, rgba(124, 58, 237, 0.28) 100%);
-  border-color: #38BDF8;
-}
-
-.orion-popover-option-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  background: var(--gradient-orion);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  color: #FFFFFF;
-  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
-}
-
-.orion-popover-option-text {
-  min-width: 0;
-  flex: 1;
-}
-
-.orion-popover-option-text strong {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 0.88rem;
-  font-weight: 800;
-  color: #FFFFFF;
-  line-height: 1.25;
-}
-
-.orion-popover-option-text span {
-  display: block;
-  font-size: 0.73rem;
-  color: #94A3B8;
-  margin-top: 0.15rem;
-  line-height: 1.35;
-}
-
 /* --------------------------------------------------------------------------
-   4. HERO ARQUITECTÓNICO (BLANCO LIMPIO + PANEL DE INGENIERÍA)
+   4. HERO INSTITUCIONAL & MATRIZ EJECUTIVA (QUÉ SOMOS / PÚBLICO / QUÉ OFRECEMOS)
    -------------------------------------------------------------------------- */
 .hero-section {
   position: relative;
-  padding-block: clamp(2.25rem, 5vw, 4.5rem);
+  padding-block: clamp(2.25rem, 5vw, 4.25rem);
   overflow: hidden;
-  background:
-    radial-gradient(700px circle at 12% 15%, rgba(37, 99, 235, 0.06), transparent 65%),
-    radial-gradient(600px circle at 88% 25%, rgba(124, 58, 237, 0.06), transparent 65%),
-    var(--bg-primary);
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 2.25rem;
-  align-items: center;
+  align-items: start;
 }
 
 .hero-grid > * {
@@ -569,26 +388,26 @@
   max-width: 100%;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1040px) {
   .hero-grid {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-    gap: 3.5rem;
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+    gap: 3rem;
   }
 }
 
 .hero-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
-  padding: 0.42rem 0.95rem;
-  border-radius: var(--radius-pill);
-  background: var(--bg-secondary);
+  gap: 0.5rem;
+  padding: 0.38rem 0.85rem;
+  border-radius: var(--radius-xs);
+  background: #F8FAFC;
   border: 1px solid var(--border-subtle);
+  font-family: var(--font-sans);
   font-size: var(--text-xs);
-  font-weight: 700;
-  color: var(--brand-navy);
-  margin-bottom: 1.15rem;
-  box-shadow: var(--shadow-xs);
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 1.1rem;
   max-width: 100%;
   flex-wrap: wrap;
 }
@@ -598,22 +417,88 @@
   font-size: var(--text-hero);
   font-weight: 800;
   line-height: 1.08;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.032em;
   color: var(--text-primary);
-  margin-bottom: 1.15rem;
+  margin-bottom: 1rem;
   overflow-wrap: break-word;
 }
 
 .hero-subtitle {
   font-size: var(--text-base);
   color: var(--text-secondary);
-  line-height: 1.68;
+  line-height: 1.65;
   margin-bottom: 0.75rem;
 }
 
 .hero-subtitle strong {
   color: var(--text-primary);
   font-weight: 700;
+}
+
+/* Matriz Institucional de 3 Pilares en el Inicio: Qué Somos / A Quién Vamos / Qué Ofrecemos */
+.institutional-identity-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.85rem;
+  margin-block: 1.35rem;
+}
+
+@media (min-width: 680px) {
+  .institutional-identity-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.identity-pillar-card {
+  background: #F8FAFC;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.05rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 0;
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.identity-pillar-card:hover {
+  background: #FFFFFF;
+  border-color: var(--brand-blue);
+  box-shadow: var(--shadow-sm);
+}
+
+.identity-pillar-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.identity-pillar-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  color: var(--brand-blue);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.identity-pillar-title {
+  font-family: var(--font-display);
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.identity-pillar-desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0;
 }
 
 .hero-cta-group {
@@ -1067,36 +952,32 @@
   transform: translateY(-1px);
 }
 
-.service-card-footer {
+.service-card-footer,
+.cat-card-footer {
   padding-top: 0.95rem;
   border-top: 1px solid var(--border-subtle);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
+  justify-content: flex-end;
+  gap: 0.65rem;
   min-width: 0;
 }
 
-.tech-stack-row {
-  font-family: var(--font-mono);
-  font-size: 0.69rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  min-width: 0;
-  overflow-wrap: break-word;
-  flex: 1 1 160px;
+.tech-stack-row,
+.cat-card-stack {
+  display: none !important;
 }
 
 .service-detail-trigger {
   font-family: var(--font-display);
   font-size: var(--text-xs);
-  font-weight: 800;
+  font-weight: 700;
   color: var(--brand-blue);
-  background: rgba(37, 99, 235, 0.08);
-  border: 1px solid rgba(37, 99, 235, 0.22);
-  border-radius: var(--radius-sm);
-  padding: 0.5rem 0.85rem;
+  background: #F8FAFC;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  padding: 0.55rem 0.95rem;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -1107,17 +988,15 @@
 }
 
 @media (max-width: 520px) {
-  .service-card-footer {
+  .service-card-footer,
+  .cat-card-footer {
     flex-direction: column;
     align-items: stretch;
-  }
-  .tech-stack-row {
-    flex: none;
   }
   .service-detail-trigger {
     width: 100%;
     padding: 0.65rem 1rem;
-    background: var(--gradient-orion);
+    background: var(--brand-navy);
     color: #FFFFFF;
     border-color: transparent;
   }
@@ -2437,10 +2316,10 @@
 }
 
 /* --------------------------------------------------------------------------
-   9. FOOTER CORPORATIVO EXCLUSIVO DE ORIONCODELABS33
+   9. FOOTER CORPORATIVO EXCLUSIVO & BLOQUE PRE-FOOTER EN PALETA BLANCA MODERNA
    -------------------------------------------------------------------------- */
 .site-footer {
-  background: linear-gradient(180deg, #F4F7FB 0%, #E9EFF8 100%);
+  background: #F8FAFC;
   border-top: 1px solid var(--border-subtle);
   padding-top: clamp(3rem, 6vw, 4.75rem);
   padding-bottom: clamp(2.25rem, 4vw, 3.25rem);
@@ -2449,30 +2328,61 @@
   overflow-x: clip;
 }
 
-/* Matriz Ejecutiva de Ciberseguridad, Telemetría e Infraestructura Propia OrionCodeLabs33 */
-.footer-telemetry-banner {
-  background: linear-gradient(145deg, #070B1F 0%, #0F172A 55%, #1E1B4B 100%);
-  color: #F8FAFC;
-  border: 1.5px solid rgba(56, 189, 248, 0.32);
-  border-radius: var(--radius-xl);
-  padding: clamp(1.25rem, 3vw, 1.85rem);
+/* Módulo Pre-Footer de 5 Pilares Rediseñado desde Cero en Paleta Blanca Moderna */
+.footer-telemetry-banner,
+.orion-white-pillars {
+  background: #FFFFFF;
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.35rem, 3vw, 2rem);
   margin-bottom: 2.75rem;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 1rem;
-  box-shadow: 0 22px 50px rgba(7, 11, 31, 0.24);
+  box-shadow: var(--shadow-sm);
   position: relative;
   overflow: hidden;
 }
 
+.white-pillars-header {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-bottom: 1.1rem;
+  margin-bottom: 0.35rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.white-pillars-header h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.white-pillars-header p {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin: 0;
+}
+
 @media (min-width: 680px) {
-  .footer-telemetry-banner {
+  .footer-telemetry-banner,
+  .orion-white-pillars {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 1120px) {
-  .footer-telemetry-banner {
+  .footer-telemetry-banner,
+  .orion-white-pillars {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
@@ -2481,78 +2391,92 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
-  gap: 0.65rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  justify-content: flex-start;
+  gap: 0.6rem;
+  background: #F8FAFC;
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 1rem 1.05rem;
+  padding: 1.1rem 1.15rem;
   min-width: 0;
-  transition: transform 0.22s var(--ease-spring), border-color 0.22s ease, background-color 0.22s ease;
+  transition: transform 0.2s var(--ease-out-expo), border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .footer-telemetry-item:hover {
-  transform: translateY(-3px);
-  border-color: #38BDF8;
-  background: rgba(37, 99, 235, 0.16);
+  transform: translateY(-2px);
+  border-color: var(--brand-blue);
+  background: #FFFFFF;
+  box-shadow: var(--shadow-sm);
 }
 
 .footer-telemetry-item.is-cyber-highlight {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.16) 0%, rgba(37, 99, 235, 0.18) 100%);
-  border-color: rgba(52, 211, 153, 0.45);
+  background: #F8FAFC;
+  border-color: var(--border-subtle);
+}
+
+.footer-telemetry-item.is-cyber-highlight:hover {
+  background: #FFFFFF;
+  border-color: var(--brand-emerald);
 }
 
 .footer-telemetry-head {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.7rem;
   width: 100%;
 }
 
 .footer-telemetry-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 11px;
-  background: rgba(56, 189, 248, 0.15);
-  border: 1px solid rgba(56, 189, 248, 0.35);
-  color: #38BDF8;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  color: var(--brand-blue);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-shadow: var(--shadow-xs);
 }
 
 .footer-telemetry-item.is-cyber-highlight .footer-telemetry-icon {
-  background: rgba(16, 185, 129, 0.2);
-  border-color: rgba(52, 211, 153, 0.5);
-  color: #34D399;
+  background: #FFFFFF;
+  border-color: rgba(4, 120, 87, 0.25);
+  color: var(--brand-emerald);
 }
 
 .footer-telemetry-item strong {
   display: block;
   font-family: var(--font-display);
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   font-weight: 800;
-  color: #FFFFFF;
+  color: var(--text-primary);
   line-height: 1.25;
+  letter-spacing: -0.01em;
 }
 
 .footer-telemetry-item span {
   display: block;
-  font-family: var(--font-mono);
-  font-size: 0.69rem;
-  color: #38BDF8;
-  font-weight: 700;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: var(--brand-blue);
+  font-weight: 600;
+  margin-bottom: 0.1rem;
+}
+
+.footer-telemetry-item.is-cyber-highlight span {
+  color: var(--brand-emerald);
 }
 
 .footer-telemetry-desc {
-  font-size: 0.74rem;
-  color: #CBD5E1;
-  line-height: 1.48;
+  font-family: var(--font-sans);
+  font-size: 0.77rem;
+  color: var(--text-secondary);
+  line-height: 1.54;
   margin: 0;
 }
 
-/* Bloque del Video del Logo en el Footer: Autoajustable al ancho de cualquier dispositivo */
+/* Bloque del Video del Logo en el Footer */
 .footer-video-showcase {
   width: 100%;
   max-width: min(380px, 86vw);
@@ -2612,7 +2536,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--gradient-orion);
+  background: var(--brand-blue);
 }
 
 .footer-nav-list {
@@ -2659,15 +2583,15 @@
    -------------------------------------------------------------------------- */
 .showcase-inline-drawer {
   margin-top: 0.85rem;
-  background: linear-gradient(145deg, #070B1F 0%, #111C38 100%);
-  color: #F8FAFC;
-  border: 1.5px solid rgba(56, 189, 248, 0.4);
+  background: #F8FAFC;
+  color: var(--text-primary);
+  border: 1.5px solid var(--brand-blue);
   border-radius: var(--radius-md);
   padding: 1rem 1.1rem;
   display: none;
   flex-direction: column;
   gap: 0.75rem;
-  box-shadow: 0 14px 32px rgba(7, 11, 31, 0.26);
+  box-shadow: var(--shadow-md);
   animation: drawerFadeSlide 0.25s var(--ease-out-expo);
 }
 
@@ -2686,7 +2610,7 @@
   justify-content: space-between;
   gap: 0.75rem;
   padding-bottom: 0.6rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .showcase-drawer-close {
@@ -2696,23 +2620,25 @@
   gap: 0.35rem;
   padding: 0.36rem 0.75rem;
   border-radius: 8px;
-  background: rgba(244, 63, 94, 0.18);
-  border: 1px solid rgba(244, 63, 94, 0.48);
-  color: #FFE4E6;
+  background: #090D16;
+  border: 1px solid #090D16;
+  color: #FFFFFF;
   font-family: var(--font-display);
   font-size: 0.74rem;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.18s ease;
 }
 
 .showcase-drawer-close:hover {
   background: #E11D48;
+  border-color: #E11D48;
   color: #FFFFFF;
 }
 
 /* --------------------------------------------------------------------------
-   11. PÁGINA DE PROYECTOS (PORTAFOLIO v3): 4 PROYECTOS INSIGNIA + CONSTELACIÓN ORIÓN
+   11. PÁGINA DE PROYECTOS (PORTAFOLIO v4): ARQUITECTURA BLANCA LIMPIA +
+       REPRODUCTORES REMOTION (60 FPS) + CONSOLA INTERACTIVA DE 5 AÑOS (2026–2030)
    -------------------------------------------------------------------------- */
 .projects-subnav {
   display: flex;
@@ -2728,16 +2654,14 @@
   display: none;
 }
 
-/* PROYECTO 01: ORIÓN IA — CÁMARA ESPACIAL, CONSTELACIÓN, QWEN 3.8 + QLORA + NVIDIA 40GB */
+/* PROYECTO 01: ORIÓN IA — ARQUITECTURA EJECUTIVA BLANCA + ESTUDIO CINEMATOGRÁFICO REMOTION */
 .orion-cosmos-flagship {
-  background: radial-gradient(circle at 75% 20%, rgba(124, 58, 237, 0.24) 0%, transparent 50%),
-              radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.25) 0%, transparent 55%),
-              linear-gradient(155deg, #050817 0%, #0B132B 55%, #161233 100%);
-  color: #F8FAFC;
-  border: 1.5px solid rgba(56, 189, 248, 0.4);
+  background: #FFFFFF;
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);
-  padding: clamp(1.35rem, 3.8vw, 2.75rem);
-  box-shadow: 0 28px 65px rgba(7, 11, 31, 0.35);
+  padding: clamp(1.35rem, 3.5vw, 2.5rem);
+  box-shadow: var(--shadow-md);
   position: relative;
   overflow: hidden;
   margin-bottom: 2.25rem;
@@ -2746,41 +2670,149 @@
 .orion-cosmos-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 1.85rem;
-  align-items: center;
+  gap: 2rem;
+  align-items: start;
   position: relative;
   z-index: 2;
 }
 
-@media (min-width: 980px) {
+@media (min-width: 1024px) {
   .orion-cosmos-grid {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
 }
 
-/* Escenario Espacial Interactivo de la Constelación de Orión Hecho a Código */
-.orion-constellation-stage {
-  background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.18) 0%, rgba(5, 8, 23, 0.95) 75%);
-  border: 1.5px solid rgba(56, 189, 248, 0.38);
-  border-radius: 22px;
-  padding: 1.15rem;
-  position: relative;
+/* Reproductor Dedicado Remotion (60 FPS Frame/Spring Engine) */
+.remotion-player-shell {
+  background: #090D16;
+  border: 1px solid #1E293B;
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: inset 0 0 40px rgba(37, 99, 235, 0.2), 0 16px 40px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 20px 45px rgba(9, 13, 22, 0.16);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-.constellation-svg-viewport {
+.remotion-player-topbar {
+  background: #0F172A;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.65rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.remotion-player-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #F8FAFC;
+}
+
+.remotion-player-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #38BDF8;
+}
+
+.remotion-canvas-stage {
+  position: relative;
   width: 100%;
-  height: auto;
-  max-height: 340px;
+  aspect-ratio: 16 / 10;
+  min-height: 250px;
+  max-height: 380px;
+  background: radial-gradient(circle at 50% 45%, #111C38 0%, #060913 85%);
+  overflow: hidden;
+}
+
+.remotion-canvas-stage canvas {
+  width: 100%;
+  height: 100%;
   display: block;
 }
 
+.remotion-scene-selector {
+  background: #0F172A;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.6rem 0.75rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+@media (min-width: 640px) {
+  .remotion-scene-selector {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.remotion-scene-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.45rem 0.6rem;
+  text-align: left;
+  cursor: pointer;
+  color: #94A3B8;
+  transition: all 0.18s ease;
+}
+
+.remotion-scene-btn strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #E2E8F0;
+}
+
+.remotion-scene-btn span {
+  display: block;
+  font-size: 0.65rem;
+  color: #64748B;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.remotion-scene-btn:hover,
+.remotion-scene-btn.is-active {
+  background: rgba(29, 78, 216, 0.28);
+  border-color: #38BDF8;
+  color: #FFFFFF;
+}
+
+.remotion-scene-btn.is-active strong {
+  color: #38BDF8;
+}
+
+.remotion-progress-rail {
+  height: 4px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.remotion-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #2563EB 0%, #38BDF8 50%, #818CF8 100%);
+}
+
+/* Matriz de Especificaciones de ORION IA en Superficie Blanca */
 .orion-specs-matrix {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 0.9rem;
-  margin-top: 1.5rem;
+  margin-top: 1.75rem;
   position: relative;
   z-index: 2;
 }
@@ -2798,85 +2830,222 @@
 }
 
 .orion-spec-tile {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(56, 189, 248, 0.28);
+  background: #F8FAFC;
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 1.05rem;
+  padding: 1.15rem;
   min-width: 0;
-  transition: transform 0.22s var(--ease-spring), border-color 0.22s ease;
+  transition: transform 0.2s var(--ease-out-expo), border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .orion-spec-tile:hover {
-  transform: translateY(-3px);
-  border-color: #38BDF8;
+  transform: translateY(-2px);
+  background: #FFFFFF;
+  border-color: var(--brand-blue);
+  box-shadow: var(--shadow-sm);
 }
 
 .orion-spec-tile h4 {
   font-family: var(--font-display);
   font-size: 0.92rem;
   font-weight: 800;
-  color: #FFFFFF;
+  color: var(--text-primary);
   margin-bottom: 0.35rem;
 }
 
 .orion-spec-tile p {
-  font-size: 0.78rem;
-  color: #CBD5E1;
-  line-height: 1.52;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
 }
 
-/* Hoja de Ruta a 5 Años de ORION IA */
+/* CONSOLA EJECUTIVA INTERACTIVA DE EVOLUCIÓN A 5 AÑOS (2026 – 2030) */
 .orion-roadmap-5y {
-  margin-top: 1.6rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(168, 85, 247, 0.35);
+  margin-top: 2rem;
+  background: #F8FAFC;
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  padding: clamp(1rem, 2.5vw, 1.5rem);
+  padding: clamp(1.25rem, 3vw, 1.85rem);
   position: relative;
   z-index: 2;
 }
 
-.roadmap-steps-grid {
+.roadmap-console-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.15rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.roadmap-year-tabs {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 0.8rem;
-  margin-top: 0.9rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin-bottom: 1.25rem;
 }
 
 @media (min-width: 768px) {
-  .roadmap-steps-grid {
+  .roadmap-year-tabs {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
 
-.roadmap-year-card {
-  background: rgba(7, 11, 31, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 14px;
-  padding: 0.85rem;
-  min-width: 0;
+.roadmap-year-btn {
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.85rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.roadmap-year-card strong {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  color: #38BDF8;
-  margin-bottom: 0.25rem;
+.roadmap-year-btn:hover {
+  border-color: var(--brand-blue);
+  transform: translateY(-1px);
 }
 
-.roadmap-year-card h5 {
-  font-family: var(--font-display);
-  font-size: 0.84rem;
-  font-weight: 800;
+.roadmap-year-btn.is-active {
+  background: #090D16;
+  border-color: #090D16;
   color: #FFFFFF;
-  margin-bottom: 0.25rem;
+  box-shadow: var(--shadow-sm);
 }
 
-.roadmap-year-card p {
-  font-size: 0.72rem;
-  color: #94A3B8;
-  line-height: 1.42;
+.roadmap-year-btn strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--brand-blue);
+}
+
+.roadmap-year-btn.is-active strong {
+  color: #38BDF8;
+}
+
+.roadmap-year-btn span {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: 0.15rem;
+}
+
+.roadmap-year-btn.is-active span {
+  color: #E2E8F0;
+}
+
+.roadmap-stage-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+@media (min-width: 960px) {
+  .roadmap-stage-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  }
+}
+
+.roadmap-detail-panel {
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  box-shadow: var(--shadow-xs);
+}
+
+.roadmap-kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+  padding-top: 0.95rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+@media (max-width: 520px) {
+  .roadmap-kpi-strip {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.roadmap-kpi-box {
+  background: #F8FAFC;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  padding: 0.65rem 0.75rem;
+}
+
+.roadmap-kpi-box span {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.roadmap-kpi-box strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-top: 0.15rem;
+}
+
+.roadmap-deliverables-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.5rem;
+}
+
+.roadmap-deliverables-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-size: 0.81rem;
+  color: var(--text-secondary);
+  line-height: 1.48;
+  background: #F8FAFC;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  padding: 0.55rem 0.75rem;
+}
+
+.roadmap-chart-panel {
+  background: #090D16;
+  border: 1px solid #1E293B;
+  border-radius: var(--radius-md);
+  padding: 1.15rem;
+  color: #F8FAFC;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.roadmap-chart-canvas-wrap {
+  position: relative;
+  width: 100%;
+  height: 210px;
+}
+
+.roadmap-chart-canvas-wrap canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 /* PROYECTO 02: INGENIERÍA INVERSA DE CVSTUDIO33.COM.AR */
@@ -2901,9 +3070,9 @@
 
 .reverse-eng-card {
   background: #FFFFFF;
-  border: 1px solid rgba(37, 99, 235, 0.2);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 1rem 1.05rem;
+  padding: 1.05rem 1.1rem;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
@@ -2915,16 +3084,16 @@
   font-family: var(--font-display);
   font-size: 0.88rem;
   font-weight: 800;
-  color: var(--brand-navy);
+  color: var(--text-primary);
 }
 
 .reverse-eng-card p {
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   color: var(--text-secondary);
-  line-height: 1.48;
+  line-height: 1.52;
 }
 
-/* PROYECTOS 03 Y 04: ORION TRADING LAB (88% MARGEN DE ERROR BAJANDO) + CONSTRUCTOR WEB LOW-COST */
+/* PROYECTOS 03 Y 04: ORION TRADING LAB (88% MARGEN DE ERROR) + CONSTRUCTOR WEB EMPRENDEDORES */
 .projects-dual-showcase {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -2939,30 +3108,30 @@
 }
 
 .trading-lab-card {
-  background: linear-gradient(155deg, #070B1F 0%, #0F1E36 60%, #0B2926 100%);
-  color: #F8FAFC;
-  border: 1.5px solid rgba(52, 211, 153, 0.42);
+  background: #FFFFFF;
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);
   padding: clamp(1.35rem, 3vw, 2.1rem);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 1.15rem;
-  box-shadow: 0 22px 50px rgba(7, 11, 31, 0.22);
+  box-shadow: var(--shadow-sm);
   min-width: 0;
 }
 
 .trading-telemetry-box {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(52, 211, 153, 0.32);
+  background: #F8FAFC;
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 1rem;
+  padding: 1.05rem;
 }
 
 .error-reduction-bar {
   height: 10px;
   border-radius: 99px;
-  background: rgba(255, 255, 255, 0.12);
+  background: #E2E8F0;
   overflow: hidden;
   margin: 0.55rem 0;
   position: relative;
@@ -2972,7 +3141,7 @@
   height: 100%;
   width: 88%;
   border-radius: 99px;
-  background: linear-gradient(90deg, #F59E0B 0%, #38BDF8 55%, #10B981 100%);
+  background: linear-gradient(90deg, #D97706 0%, #2563EB 55%, #059669 100%);
   animation: tradingErrorPulse 4s ease-in-out infinite alternate;
 }
 
@@ -2982,15 +3151,15 @@
 }
 
 .entrepreneur-builder-card {
-  background: linear-gradient(155deg, #FFFFFF 0%, #F0F7FF 55%, #F5F3FF 100%);
-  border: 1.5px solid rgba(37, 99, 235, 0.32);
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);
   padding: clamp(1.35rem, 3vw, 2.1rem);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 1.15rem;
-  box-shadow: 0 22px 50px rgba(37, 99, 235, 0.09);
+  box-shadow: var(--shadow-sm);
   min-width: 0;
 }
 
@@ -3014,12 +3183,12 @@
 
 .price-anchor-box.is-expensive {
   background: #FFF1F2;
-  border: 1px solid rgba(225, 29, 72, 0.25);
+  border: 1px solid rgba(225, 29, 72, 0.22);
 }
 
 .price-anchor-box.is-orion-lowcost {
   background: #ECFDF5;
-  border: 1.5px solid rgba(5, 150, 105, 0.4);
+  border: 1px solid rgba(4, 120, 87, 0.32);
 }
 
 /* --------------------------------------------------------------------------
