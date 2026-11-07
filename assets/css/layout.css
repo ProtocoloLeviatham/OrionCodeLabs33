@@ -218,78 +218,93 @@
 }
 
 /* --------------------------------------------------------------------------
-   3. NAVBAR INFERIOR PROTAGONISTA (FLOATING DOCK EN CELULAR Y PC)
-      Items: Inicio | Servicios | ORION (Centro) | Proyectos | Contacto
+   3. NAVBAR INFERIOR PROTAGONISTA v3 (CRYSTAL GLASS DOCK + POPOVER ORION)
+      Items: Inicio | Servicios | ORION (2 Opciones) | Proyectos | Contacto
    -------------------------------------------------------------------------- */
 .orion-bottom-dock {
   position: fixed;
   left: 10px;
   right: 10px;
   bottom: calc(10px + var(--safe-bottom));
-  z-index: 150;
+  z-index: var(--z-dock, 150);
   height: var(--dock-height);
-  max-width: 560px;
+  max-width: 580px;
   margin-inline: auto;
-  background: var(--bg-dock);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border-radius: 24px;
-  padding: 0 0.45rem;
+  background: rgba(255, 255, 255, 0.93);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border-radius: 26px;
+  padding: 0 0.5rem;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   align-items: center;
-  box-shadow: var(--shadow-dock);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 20px 50px -10px rgba(11, 19, 43, 0.2),
+    0 4px 18px rgba(37, 99, 235, 0.12),
+    inset 0 0 0 1.5px rgba(37, 99, 235, 0.18);
+  transition: transform 0.32s var(--ease-out-expo), box-shadow 0.32s ease;
+}
+
+.orion-bottom-dock::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, rgba(37, 99, 235, 0.04) 0%, rgba(124, 58, 237, 0.06) 50%, rgba(37, 99, 235, 0.04) 100%);
+  pointer-events: none;
 }
 
 @media (min-width: 768px) {
   .orion-bottom-dock {
     bottom: 18px;
     border-radius: 9999px;
-    padding: 0 0.75rem;
-    max-width: 590px;
+    padding: 0 0.85rem;
+    max-width: 610px;
   }
 }
 
 .dock-item {
   position: relative;
-  height: 56px;
+  height: 58px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 4px;
-  color: #94A3B8;
-  font-size: 0.68rem;
-  font-weight: 600;
+  color: #475569;
+  font-size: 0.7rem;
+  font-weight: 700;
   letter-spacing: -0.01em;
-  border-radius: 16px;
-  transition: color 0.25s ease, transform 0.25s var(--ease-spring), background-color 0.25s ease;
+  border-radius: 18px;
+  transition: color 0.25s ease, transform 0.25s var(--ease-spring), background-color 0.25s ease, box-shadow 0.25s ease;
   user-select: none;
+  z-index: 1;
 }
 
 .dock-item svg {
   width: 21px;
   height: 21px;
-  transition: transform 0.28s var(--ease-spring), stroke 0.25s ease;
+  transition: transform 0.28s var(--ease-spring), stroke 0.25s ease, color 0.25s ease;
 }
 
 .dock-item:hover {
-  color: #F8FAFC;
-  background: rgba(255, 255, 255, 0.06);
+  color: var(--brand-blue);
+  background: rgba(37, 99, 235, 0.07);
 }
 
 .dock-item:hover svg {
-  transform: translateY(-2px) scale(1.08);
+  transform: translateY(-3px) scale(1.1);
+  color: var(--brand-blue);
 }
 
 .dock-item.is-active {
-  color: #FFFFFF;
-  background: rgba(37, 99, 235, 0.22);
+  color: var(--brand-navy);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(124, 58, 237, 0.12) 100%);
+  box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.24);
 }
 
 .dock-item.is-active svg {
-  color: #60A5FA;
+  color: var(--brand-blue);
   transform: translateY(-2px);
 }
 
@@ -297,15 +312,15 @@
 .dock-item.is-active::after {
   content: '';
   position: absolute;
-  bottom: 4px;
-  width: 18px;
-  height: 3px;
+  bottom: 5px;
+  width: 20px;
+  height: 3.5px;
   border-radius: 99px;
-  background: linear-gradient(90deg, #38BDF8, #8B5CF6);
-  box-shadow: 0 0 10px #38BDF8;
+  background: var(--gradient-orion);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.45);
 }
 
-/* Botón Central Especial: ORION (Motor de IA & ADN) */
+/* Botón Central Especial: ORION (Despliega 2 Opciones al Tocar) */
 .dock-item-orion {
   position: relative;
   display: flex;
@@ -313,36 +328,220 @@
   align-items: center;
   justify-content: center;
   gap: 3px;
-  color: #FFFFFF;
-  font-size: 0.7rem;
+  color: var(--brand-navy);
+  font-family: var(--font-display);
+  font-size: 0.71rem;
   font-weight: 800;
   letter-spacing: 0.04em;
   user-select: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+  padding: 0;
 }
 
 .dock-orion-orb {
-  width: 48px;
-  height: 48px;
-  margin-top: -22px;
+  width: 52px;
+  height: 52px;
+  margin-top: -24px;
   border-radius: 50%;
-  background: var(--gradient-orion);
+  background: radial-gradient(circle at 30% 25%, #1E293B 0%, #070B1F 70%, #0B132B 100%);
   display: grid;
   place-items: center;
   color: #FFFFFF;
-  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.55), 0 0 0 4px #0B132B;
-  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s ease;
+  box-shadow:
+    0 10px 26px rgba(37, 99, 235, 0.48),
+    0 0 0 3.5px #FFFFFF,
+    inset 0 0 12px rgba(56, 189, 248, 0.35);
+  transition: transform 0.32s var(--ease-spring), box-shadow 0.32s ease;
   position: relative;
+  overflow: hidden;
+}
+
+.dock-orion-orb::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0%, #38BDF8 25%, #8B5CF6 50%, transparent 80%);
+  opacity: 0.55;
+  animation: orionOrbSpin 6s linear infinite;
+  pointer-events: none;
+}
+
+.dock-orion-orb::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #162447 0%, #070B1F 85%);
+  pointer-events: none;
+}
+
+@keyframes orionOrbSpin {
+  to { transform: rotate(360deg); }
 }
 
 .dock-item-orion:hover .dock-orion-orb,
-.dock-item-orion.is-active .dock-orion-orb {
-  transform: translateY(-4px) scale(1.08);
-  box-shadow: 0 12px 30px rgba(124, 58, 237, 0.75), 0 0 0 4px #2563EB;
+.dock-item-orion.is-active .dock-orion-orb,
+.dock-item-orion[aria-expanded="true"] .dock-orion-orb {
+  transform: translateY(-5px) scale(1.08);
+  box-shadow:
+    0 14px 32px rgba(124, 58, 237, 0.65),
+    0 0 0 3.5px #2563EB,
+    inset 0 0 16px rgba(168, 85, 247, 0.5);
 }
 
 .dock-orion-orb svg {
-  width: 26px;
-  height: 26px;
+  width: 34px;
+  height: 34px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Popover Flotante de 2 Opciones del Botón ORION */
+.orion-dock-popover {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--dock-height) + var(--safe-bottom) + 24px);
+  transform: translateX(-50%) translateY(16px) scale(0.94);
+  width: min(92vw, 430px);
+  background: rgba(11, 19, 43, 0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  color: #FFFFFF;
+  border-radius: 22px;
+  padding: 1rem;
+  border: 1.5px solid rgba(56, 189, 248, 0.38);
+  box-shadow: 0 24px 60px rgba(7, 11, 31, 0.55), 0 0 30px rgba(37, 99, 235, 0.28);
+  z-index: var(--z-dock-popover, 165);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.26s var(--ease-out-expo), transform 0.28s var(--ease-spring), visibility 0.26s ease;
+}
+
+.orion-dock-popover.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.orion-dock-popover::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 16px;
+  height: 16px;
+  background: #0B132B;
+  border-right: 1.5px solid rgba(56, 189, 248, 0.38);
+  border-bottom: 1.5px solid rgba(56, 189, 248, 0.38);
+}
+
+.orion-popover-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-bottom: 0.65rem;
+  margin-bottom: 0.7rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.orion-popover-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #38BDF8;
+}
+
+.orion-popover-close {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #CBD5E1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 800;
+  transition: all 0.18s ease;
+}
+
+.orion-popover-close:hover {
+  background: rgba(244, 63, 94, 0.22);
+  color: #FFFFFF;
+  border-color: rgba(244, 63, 94, 0.5);
+}
+
+.orion-popover-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.6rem;
+}
+
+.orion-popover-option {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 0.95rem;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  text-align: left;
+  transition: transform 0.22s var(--ease-spring), background-color 0.22s ease, border-color 0.22s ease;
+}
+
+.orion-popover-option:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.28) 0%, rgba(124, 58, 237, 0.28) 100%);
+  border-color: #38BDF8;
+}
+
+.orion-popover-option-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--gradient-orion);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #FFFFFF;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+}
+
+.orion-popover-option-text {
+  min-width: 0;
+  flex: 1;
+}
+
+.orion-popover-option-text strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.25;
+}
+
+.orion-popover-option-text span {
+  display: block;
+  font-size: 0.73rem;
+  color: #94A3B8;
+  margin-top: 0.15rem;
+  line-height: 1.35;
 }
 
 /* --------------------------------------------------------------------------
@@ -1048,14 +1247,15 @@
 }
 
 /* --------------------------------------------------------------------------
-   8. MODAL / BOTTOM-SHEET DE DETALLE TÉCNICO COMPLETO
+   8. MODAL / BOTTOM-SHEET DE FICHA TÉCNICA v2 (CON BOTÓN CERRAR FIJO Y CERO DESBORDES)
    -------------------------------------------------------------------------- */
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 220;
-  background: rgba(11, 19, 43, 0.6);
-  backdrop-filter: blur(8px);
+  z-index: var(--z-modal-backdrop, 240);
+  background: rgba(7, 11, 31, 0.68);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -1080,25 +1280,26 @@
 
 .bottom-sheet {
   width: 100%;
-  max-width: 820px;
-  max-height: 88dvh;
+  max-width: 860px;
+  max-height: 90dvh;
   background: var(--bg-surface);
   border-top: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-  padding: 1.4rem var(--container-pad) calc(1.75rem + var(--safe-bottom));
-  overflow-y: auto;
-  overflow-x: hidden;
+  border-radius: 26px 26px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   transform: translateY(100%);
   transition: transform 0.32s var(--ease-out-expo);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 28px 70px rgba(7, 11, 31, 0.38);
 }
 
 @media (min-width: 768px) {
   .bottom-sheet {
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-xl);
+    border: 1px solid rgba(37, 99, 235, 0.22);
+    border-radius: 26px;
+    max-height: 86dvh;
     transform: translateY(20px) scale(0.97);
-    padding: 2.25rem;
   }
 }
 
@@ -1106,13 +1307,110 @@
   transform: translateY(0) scale(1);
 }
 
-/* Ficha Técnica Estructurada (Engineering Spec Sheet) */
+/* Barra Superior Fija (Sticky Header) con Manija y Botón Cerrar Siempre Visible */
+.bottom-sheet-sticky-head {
+  flex-shrink: 0;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.85rem var(--container-pad) 0.95rem;
+  position: relative;
+  z-index: 10;
+}
+
+.sheet-grab-bar {
+  width: 44px;
+  height: 5px;
+  border-radius: 99px;
+  background: #CBD5E1;
+  margin: 0 auto 0.65rem;
+}
+
+@media (min-width: 768px) {
+  .sheet-grab-bar {
+    display: none;
+  }
+}
+
+.sheet-head-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.85rem;
+  min-width: 0;
+}
+
+.sheet-head-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.sheet-close-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 42px;
+  padding: 0.5rem 0.95rem;
+  border-radius: 12px;
+  background: #0B132B;
+  color: #FFFFFF;
+  border: 1.5px solid rgba(56, 189, 248, 0.4);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(11, 19, 43, 0.16);
+  transition: transform 0.2s var(--ease-spring), background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.sheet-close-btn:hover {
+  background: #E11D48;
+  border-color: #FDA4AF;
+  transform: scale(1.04);
+}
+
+/* Cuerpo Interno Desplazable de la Ficha (Sin Desbordes) */
+.bottom-sheet-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1.25rem var(--container-pad) 1.5rem;
+  min-width: 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Barra Inferior Fija (Sticky Footer) con Cierre Rápido + Cotizar */
+.bottom-sheet-sticky-foot {
+  flex-shrink: 0;
+  background: #F8FAFC;
+  border-top: 1px solid var(--border-subtle);
+  padding: 0.9rem var(--container-pad) calc(0.95rem + var(--safe-bottom));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  z-index: 10;
+}
+
+@media (max-width: 560px) {
+  .bottom-sheet-sticky-foot {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .bottom-sheet-sticky-foot .btn {
+    width: 100%;
+  }
+}
+
+/* Ficha Técnica Estructurada (Problema -> Solución -> Pasos -> Entregables) */
 .spec-sheet-meta-bar {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 1.15rem;
-  padding-bottom: 1rem;
+  margin-bottom: 1.1rem;
+  padding-bottom: 0.95rem;
   border-bottom: 1px solid var(--border-subtle);
 }
 
@@ -1120,27 +1418,82 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.3rem 0.7rem;
-  border-radius: var(--radius-full);
+  padding: 0.3rem 0.72rem;
+  border-radius: var(--radius-pill);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.71rem;
   font-weight: 700;
   background: var(--bg-secondary);
   color: var(--text-primary);
   border: 1px solid var(--border-subtle);
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .spec-meta-pill.is-accent {
-  background: rgba(37, 99, 235, 0.08);
+  background: rgba(37, 99, 235, 0.09);
   color: var(--brand-blue);
-  border-color: rgba(37, 99, 235, 0.24);
+  border-color: rgba(37, 99, 235, 0.26);
+}
+
+/* Bloques Gancho Problema vs Solución dentro de la Ficha y Tarjetas */
+.problem-solution-banner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.85rem;
+  margin: 1rem 0 1.25rem;
+}
+
+@media (min-width: 680px) {
+  .problem-solution-banner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.ps-box {
+  border-radius: var(--radius-md);
+  padding: 1rem 1.1rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.ps-box.is-problem {
+  background: linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%);
+  border: 1px solid rgba(225, 29, 72, 0.24);
+}
+
+.ps-box.is-solution {
+  background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
+  border: 1px solid rgba(5, 150, 105, 0.28);
+}
+
+.ps-box-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.4rem;
+}
+
+.ps-box.is-problem .ps-box-tag { color: #BE123C; }
+.ps-box.is-solution .ps-box-tag { color: #047857; }
+
+.ps-box p {
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  line-height: 1.55;
+  font-weight: 500;
 }
 
 .spec-sheet-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 1rem;
-  margin: 1.25rem 0;
+  margin: 1.15rem 0;
 }
 
 @media (min-width: 680px) {
@@ -1153,8 +1506,9 @@
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 1.1rem 1.15rem;
+  padding: 1.05rem 1.15rem;
   min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .spec-card-box.is-full {
@@ -1169,9 +1523,9 @@
   font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   color: var(--brand-blue);
-  margin-bottom: 0.55rem;
+  margin-bottom: 0.5rem;
 }
 
 .spec-workflow-list {
@@ -1200,13 +1554,14 @@
   color: var(--text-secondary);
   line-height: 1.45;
   min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .spec-workflow-num {
-  width: 22px;
-  height: 22px;
-  border-radius: 6px;
-  background: var(--gradient-brand);
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  background: var(--gradient-orion);
   color: #FFFFFF;
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -1683,32 +2038,46 @@
 .cvstudio-live-metrics-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.85rem;
+  gap: 0.9rem;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 440px) {
   .cvstudio-live-metrics-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 920px) {
+  /* Mosaico Asimétrico de 6 Estadísticas (12 Columnas) */
   .cvstudio-live-metrics-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1rem;
   }
-}
-
-@media (min-width: 1120px) {
-  .cvstudio-live-metrics-grid {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+  .cvstudio-live-metrics-grid > .cvstudio-metric-card:nth-child(1) {
+    grid-column: span 7;
+  }
+  .cvstudio-live-metrics-grid > .cvstudio-metric-card:nth-child(2) {
+    grid-column: span 5;
+  }
+  .cvstudio-live-metrics-grid > .cvstudio-metric-card:nth-child(3) {
+    grid-column: span 5;
+  }
+  .cvstudio-live-metrics-grid > .cvstudio-metric-card:nth-child(4) {
+    grid-column: span 7;
+  }
+  .cvstudio-live-metrics-grid > .cvstudio-metric-card:nth-child(5) {
+    grid-column: span 6;
+  }
+  .cvstudio-live-metrics-grid > .cvstudio-metric-card:nth-child(6) {
+    grid-column: span 6;
   }
 }
 
 .cvstudio-metric-card {
   background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
-  border: 1px solid rgba(37, 99, 235, 0.16);
+  border: 1px solid rgba(37, 99, 235, 0.18);
   border-radius: var(--radius-md);
-  padding: 0.95rem 1rem;
+  padding: 1.05rem 1.15rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1719,10 +2088,35 @@
   min-width: 0;
 }
 
+.cvstudio-metric-card.is-valuation-card {
+  background: linear-gradient(135deg, #0B132B 0%, #1E1B4B 100%);
+  border-color: rgba(168, 85, 247, 0.55);
+  color: #FFFFFF;
+  box-shadow: 0 12px 28px rgba(124, 58, 237, 0.2);
+}
+
+.cvstudio-metric-card.is-valuation-card .cvstudio-metric-value {
+  color: #38BDF8;
+}
+
+.cvstudio-metric-card.is-valuation-card .cvstudio-metric-label {
+  color: #FFFFFF;
+}
+
+.cvstudio-metric-card.is-valuation-card .cvstudio-metric-sub {
+  color: #CBD5E1;
+}
+
+.cvstudio-metric-card.is-valuation-card .cvstudio-metric-tag {
+  background: rgba(56, 189, 248, 0.18);
+  color: #38BDF8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
 .cvstudio-metric-card:hover {
   transform: translateY(-3px);
   border-color: var(--brand-blue);
-  box-shadow: 0 10px 22px rgba(37, 99, 235, 0.12);
+  box-shadow: 0 12px 26px rgba(37, 99, 235, 0.14);
 }
 
 .cvstudio-metric-top {
@@ -2055,57 +2449,107 @@
   overflow-x: clip;
 }
 
-/* Cinta Superior de Telemetría e Infraestructura Propia OrionCodeLabs33 */
+/* Matriz Ejecutiva de Ciberseguridad, Telemetría e Infraestructura Propia OrionCodeLabs33 */
 .footer-telemetry-banner {
-  background: #FFFFFF;
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 1.1rem 1.35rem;
-  margin-bottom: 2.5rem;
+  background: linear-gradient(145deg, #070B1F 0%, #0F172A 55%, #1E1B4B 100%);
+  color: #F8FAFC;
+  border: 1.5px solid rgba(56, 189, 248, 0.32);
+  border-radius: var(--radius-xl);
+  padding: clamp(1.25rem, 3vw, 1.85rem);
+  margin-bottom: 2.75rem;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 1rem;
-  box-shadow: var(--shadow-xs);
+  box-shadow: 0 22px 50px rgba(7, 11, 31, 0.24);
+  position: relative;
+  overflow: hidden;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 680px) {
   .footer-telemetry-banner {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1120px) {
+  .footer-telemetry-banner {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
 
 .footer-telemetry-item {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.65rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.05rem;
   min-width: 0;
+  transition: transform 0.22s var(--ease-spring), border-color 0.22s ease, background-color 0.22s ease;
+}
+
+.footer-telemetry-item:hover {
+  transform: translateY(-3px);
+  border-color: #38BDF8;
+  background: rgba(37, 99, 235, 0.16);
+}
+
+.footer-telemetry-item.is-cyber-highlight {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.16) 0%, rgba(37, 99, 235, 0.18) 100%);
+  border-color: rgba(52, 211, 153, 0.45);
+}
+
+.footer-telemetry-head {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
 }
 
 .footer-telemetry-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  background: rgba(37, 99, 235, 0.08);
-  color: var(--brand-blue);
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38BDF8;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
+.footer-telemetry-item.is-cyber-highlight .footer-telemetry-icon {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: rgba(52, 211, 153, 0.5);
+  color: #34D399;
+}
+
 .footer-telemetry-item strong {
   display: block;
   font-family: var(--font-display);
-  font-size: 0.84rem;
+  font-size: 0.88rem;
   font-weight: 800;
-  color: var(--text-primary);
+  color: #FFFFFF;
+  line-height: 1.25;
 }
 
 .footer-telemetry-item span {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--text-muted);
+  font-size: 0.69rem;
+  color: #38BDF8;
+  font-weight: 700;
+}
+
+.footer-telemetry-desc {
+  font-size: 0.74rem;
+  color: #CBD5E1;
+  line-height: 1.48;
+  margin: 0;
 }
 
 /* Bloque del Video del Logo en el Footer: Autoajustable al ancho de cualquier dispositivo */
@@ -2168,7 +2612,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--gradient-brand);
+  background: var(--gradient-orion);
 }
 
 .footer-nav-list {
@@ -2208,4 +2652,457 @@
     flex-direction: row;
     align-items: center;
   }
+}
+
+/* --------------------------------------------------------------------------
+   10. REDISEÑO DE STACK-PRODUCCIÓN INTERACTIVO (CON CAJÓN DE VISTA PREVIA Y BOTÓN CERRAR)
+   -------------------------------------------------------------------------- */
+.showcase-inline-drawer {
+  margin-top: 0.85rem;
+  background: linear-gradient(145deg, #070B1F 0%, #111C38 100%);
+  color: #F8FAFC;
+  border: 1.5px solid rgba(56, 189, 248, 0.4);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.1rem;
+  display: none;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: 0 14px 32px rgba(7, 11, 31, 0.26);
+  animation: drawerFadeSlide 0.25s var(--ease-out-expo);
+}
+
+.showcase-inline-drawer.is-open {
+  display: flex;
+}
+
+@keyframes drawerFadeSlide {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.showcase-drawer-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.showcase-drawer-close {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.36rem 0.75rem;
+  border-radius: 8px;
+  background: rgba(244, 63, 94, 0.18);
+  border: 1px solid rgba(244, 63, 94, 0.48);
+  color: #FFE4E6;
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.showcase-drawer-close:hover {
+  background: #E11D48;
+  color: #FFFFFF;
+}
+
+/* --------------------------------------------------------------------------
+   11. PÁGINA DE PROYECTOS (PORTAFOLIO v3): 4 PROYECTOS INSIGNIA + CONSTELACIÓN ORIÓN
+   -------------------------------------------------------------------------- */
+.projects-subnav {
+  display: flex;
+  gap: 0.55rem;
+  overflow-x: auto;
+  max-width: 100%;
+  padding-bottom: 0.35rem;
+  margin-top: 1.25rem;
+  scrollbar-width: none;
+}
+
+.projects-subnav::-webkit-scrollbar {
+  display: none;
+}
+
+/* PROYECTO 01: ORIÓN IA — CÁMARA ESPACIAL, CONSTELACIÓN, QWEN 3.8 + QLORA + NVIDIA 40GB */
+.orion-cosmos-flagship {
+  background: radial-gradient(circle at 75% 20%, rgba(124, 58, 237, 0.24) 0%, transparent 50%),
+              radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.25) 0%, transparent 55%),
+              linear-gradient(155deg, #050817 0%, #0B132B 55%, #161233 100%);
+  color: #F8FAFC;
+  border: 1.5px solid rgba(56, 189, 248, 0.4);
+  border-radius: var(--radius-xl);
+  padding: clamp(1.35rem, 3.8vw, 2.75rem);
+  box-shadow: 0 28px 65px rgba(7, 11, 31, 0.35);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2.25rem;
+}
+
+.orion-cosmos-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.85rem;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+@media (min-width: 980px) {
+  .orion-cosmos-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  }
+}
+
+/* Escenario Espacial Interactivo de la Constelación de Orión Hecho a Código */
+.orion-constellation-stage {
+  background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.18) 0%, rgba(5, 8, 23, 0.95) 75%);
+  border: 1.5px solid rgba(56, 189, 248, 0.38);
+  border-radius: 22px;
+  padding: 1.15rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 40px rgba(37, 99, 235, 0.2), 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+.constellation-svg-viewport {
+  width: 100%;
+  height: auto;
+  max-height: 340px;
+  display: block;
+}
+
+.orion-specs-matrix {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.9rem;
+  margin-top: 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+@media (min-width: 680px) {
+  .orion-specs-matrix {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1040px) {
+  .orion-specs-matrix {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.orion-spec-tile {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  border-radius: var(--radius-md);
+  padding: 1.05rem;
+  min-width: 0;
+  transition: transform 0.22s var(--ease-spring), border-color 0.22s ease;
+}
+
+.orion-spec-tile:hover {
+  transform: translateY(-3px);
+  border-color: #38BDF8;
+}
+
+.orion-spec-tile h4 {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 0.35rem;
+}
+
+.orion-spec-tile p {
+  font-size: 0.78rem;
+  color: #CBD5E1;
+  line-height: 1.52;
+}
+
+/* Hoja de Ruta a 5 Años de ORION IA */
+.orion-roadmap-5y {
+  margin-top: 1.6rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  border-radius: var(--radius-lg);
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  position: relative;
+  z-index: 2;
+}
+
+.roadmap-steps-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.8rem;
+  margin-top: 0.9rem;
+}
+
+@media (min-width: 768px) {
+  .roadmap-steps-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.roadmap-year-card {
+  background: rgba(7, 11, 31, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  padding: 0.85rem;
+  min-width: 0;
+}
+
+.roadmap-year-card strong {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: #38BDF8;
+  margin-bottom: 0.25rem;
+}
+
+.roadmap-year-card h5 {
+  font-family: var(--font-display);
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 0.25rem;
+}
+
+.roadmap-year-card p {
+  font-size: 0.72rem;
+  color: #94A3B8;
+  line-height: 1.42;
+}
+
+/* PROYECTO 02: INGENIERÍA INVERSA DE CVSTUDIO33.COM.AR */
+.reverse-eng-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.9rem;
+  margin: 1.25rem 0;
+}
+
+@media (min-width: 640px) {
+  .reverse-eng-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .reverse-eng-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.reverse-eng-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.05rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+  box-shadow: var(--shadow-xs);
+}
+
+.reverse-eng-card strong {
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--brand-navy);
+}
+
+.reverse-eng-card p {
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  line-height: 1.48;
+}
+
+/* PROYECTOS 03 Y 04: ORION TRADING LAB (88% MARGEN DE ERROR BAJANDO) + CONSTRUCTOR WEB LOW-COST */
+.projects-dual-showcase {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.75rem;
+}
+
+@media (min-width: 980px) {
+  .projects-dual-showcase {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.trading-lab-card {
+  background: linear-gradient(155deg, #070B1F 0%, #0F1E36 60%, #0B2926 100%);
+  color: #F8FAFC;
+  border: 1.5px solid rgba(52, 211, 153, 0.42);
+  border-radius: var(--radius-xl);
+  padding: clamp(1.35rem, 3vw, 2.1rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.15rem;
+  box-shadow: 0 22px 50px rgba(7, 11, 31, 0.22);
+  min-width: 0;
+}
+
+.trading-telemetry-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(52, 211, 153, 0.32);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+}
+
+.error-reduction-bar {
+  height: 10px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  margin: 0.55rem 0;
+  position: relative;
+}
+
+.error-reduction-fill {
+  height: 100%;
+  width: 88%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #F59E0B 0%, #38BDF8 55%, #10B981 100%);
+  animation: tradingErrorPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes tradingErrorPulse {
+  0% { width: 88%; }
+  100% { width: 34%; }
+}
+
+.entrepreneur-builder-card {
+  background: linear-gradient(155deg, #FFFFFF 0%, #F0F7FF 55%, #F5F3FF 100%);
+  border: 1.5px solid rgba(37, 99, 235, 0.32);
+  border-radius: var(--radius-xl);
+  padding: clamp(1.35rem, 3vw, 2.1rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.15rem;
+  box-shadow: 0 22px 50px rgba(37, 99, 235, 0.09);
+  min-width: 0;
+}
+
+.price-anchor-compare {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.75rem;
+}
+
+@media (min-width: 540px) {
+  .price-anchor-compare {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.price-anchor-box {
+  border-radius: var(--radius-md);
+  padding: 0.9rem 1rem;
+  min-width: 0;
+}
+
+.price-anchor-box.is-expensive {
+  background: #FFF1F2;
+  border: 1px solid rgba(225, 29, 72, 0.25);
+}
+
+.price-anchor-box.is-orion-lowcost {
+  background: #ECFDF5;
+  border: 1.5px solid rgba(5, 150, 105, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   12. MARCO LEGAL COMPLETO (legales.html — 14 SECCIONES NORMATIVAS)
+   -------------------------------------------------------------------------- */
+.legal-toc-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.65rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 640px) {
+  .legal-toc-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .legal-toc-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.legal-toc-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 0.95rem;
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+.legal-toc-link:hover {
+  border-color: var(--brand-blue);
+  color: var(--brand-blue);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xs);
+}
+
+.legal-articles-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.legal-article-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.25rem, 3vw, 1.85rem);
+  box-shadow: var(--shadow-xs);
+}
+
+.legal-article-card h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  color: var(--brand-navy);
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.legal-article-card p,
+.legal-article-card li {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.68;
+  max-width: none;
+}
+
+.legal-article-card ul {
+  margin-top: 0.6rem;
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
 }

@@ -1,11 +1,8 @@
 /**
  * ==========================================================================
- * OrionCodeLabs33 — Core Application Controller & Detailed Services Engine
- * Archivo 5: assets/js/app.js
- * - Base de Conocimiento Exhaustiva de Servicios 100% Realizables con
- *   Ingeniería asistida por nuestra IA propia "ORION", Cloudflare,
- *   Cloudflare Workers, Supabase, Firebase, Python, JS/TS, HTML5 y CSS3.
- * - Incluye casos reales detallados como CvStudio33.com.ar.
+ * OrionCodeLabs33 v3 — Core Application Controller, Problem/Solution Specs,
+ * Sticky Modal v2 & ORION 2-Option Dock Popover
+ * Archivo: assets/js/app.js
  * ==========================================================================
  */
 
@@ -16,33 +13,37 @@
     orion_ai: {
       code: 'MOD-01 // ORION-AI-CORE',
       shortTitle: 'IA Propia "ORION" & Bots 24/7',
-      title: 'Inteligencia Artificial para Ventas, Atención 24/7 & Motor Propio "ORION IA"',
-      badge: 'IA Propia ORION · Cerebro de IA NYX en CvStudio33.com.ar',
-      sla: 'Respuestas en < 1 segundo · Atiende y Vende 24/7',
-      modality: 'Llave en Mano · Conectado a tu Web y WhatsApp',
+      title: 'Inteligencia Artificial Propia "ORION IA", Agentes de Ventas 24/7 & Automatización',
+      badge: 'IA Propia ORION · Qwen 3.8 + QLoRA en NVIDIA 40GB · Cerebro de CvStudio33',
+      sla: 'Respuestas en < 1 segundo · Autoaprendizaje Nocturno 24/7',
+      modality: 'Llave en Mano · Conectado a tu Web, WhatsApp y Sistemas',
+      problem:
+        '¿Perdés ventas porque tardás en contestar WhatsApp o mensajes a la noche y los fines de semana, o porque los bots comunes responden como robots sin entender a tu cliente?',
+      solution:
+        'Conectamos nuestra propia Inteligencia Artificial ORION IA (creada sobre Qwen 3.8 con método QLoRA en servidores NVIDIA de 40GB) entrenada con tus precios, catálogo y forma de vender para atender, cotizar y cerrar ventas las 24 horas.',
       summary:
-        '¿Querés que tu negocio atienda clientes, cotice y venda las 24 horas sin depender de respuestas manuales? Integramos nuestra propia Inteligencia Artificial ORION IA (el mismo motor que impulsa el éxito de CvStudio33.com.ar con +15.000 visitas y +200k seguidores) entrenada con la información real de tu negocio.',
+        'Transformamos tu atención al cliente y tus operaciones con nuestro motor propietario ORION IA: el mismo cerebro neural que impulsa a IA NYX en CvStudio33.com.ar (+200k seguidores en TikTok, +15.000 visitas web y valuación SaaS de +5.000 USD). Aprende cada noche y se adapta 100% a tu negocio.',
       architecture:
-        'Motor ORION IA corriendo en la nube de Cloudflare y Supabase con memoria exacta de tus precios, catálogo y reglas comerciales para responder al instante sin inventar datos.',
+        'Motor ORION IA basado en Qwen 3.8 (Hugging Face) optimizado con adaptadores QLoRA en GPU NVIDIA de 40GB, conectado a Cloudflare Workers y memoria vectorial en Supabase PostgreSQL para responder al instante sin inventar datos.',
       workflowSteps: [
-        'Cargamos tus precios, catálogo, preguntas frecuentes y forma de vender.',
-        'Entrenamos tu asistente o plataforma con nuestro cerebro ORION IA.',
-        'Lo conectamos a tu WhatsApp Business, sitio web o plataforma SaaS.',
-        'Empezás a recibir clientes calificados, reservas o ventas automáticas 24/7.'
+        'Cargamos tus precios, catálogo, preguntas frecuentes y argumentos reales de venta.',
+        'Afinamos tu agente o módulo con nuestro cerebro ORION IA y memoria segura.',
+        'Lo integramos en tu WhatsApp Business Oficial, página web o plataforma SaaS.',
+        'Tu negocio atiende en menos de 1 segundo, califica clientes y vende en automático 24/7.'
       ],
       caseStudy:
-        'Caso de Éxito Real — CvStudio33.com.ar: Nuestro motor ORION IA potencia a IA NYX y su portal de empleo propio en alianza con Jooble y Adzuna, logrando +15.000 visitas web, +1.000 CVs creados, +1.000 USD facturados en compras web y +200 personas contratadas en su primer mes. Si querés ser otro caso de éxito, nosotros te ayudamos.',
-      stack: ['ORION IA Brain', 'IA NYX / AXON Arch', 'Python FastAPI', 'Cloudflare Workers AI', 'Supabase', 'WhatsApp Cloud API'],
+        'Caso de Éxito Real — CvStudio33.com.ar: Nuestro cerebro ORION IA potencia a IA NYX, AXON y su portal de empleo en alianza con Jooble y Adzuna, logrando +200k en TikTok, +15.000 visitas web, +1.000 CVs creados, +1.000 USD en compras web, +200 contratados en su 1er mes y una valorización SaaS que ronda los +5.000 USD.',
+      stack: ['ORION IA (Qwen 3.8 + QLoRA)', 'NVIDIA 40GB GPU', 'IA NYX / AXON Arch', 'Python FastAPI', 'Cloudflare Workers', 'Supabase Vector RAG', 'WhatsApp Cloud API'],
       timeline: '1 a 3 semanas listo para vender',
       deliverables: [
-        'Asistente o motor ORION IA entrenado con tus precios, productos y reglas reales',
-        'Conexión directa a tu WhatsApp Oficial o sitio web para atender y vender 24/7',
-        'Panel simple para ver conversaciones, clientes interesados y ventas cerradas',
-        'Soporte directo para actualizar promociones o nuevas funciones cuando quieras'
+        'Agente o motor ORION IA entrenado con tus precios, productos y reglas comerciales reales',
+        'Conexión directa a tu WhatsApp Oficial o sitio web para atender, cotizar y vender 24/7',
+        'Panel de control claro para supervisar conversaciones, clientes interesados y ventas',
+        'Actualización continua y soporte directo para sumar promociones o nuevas funciones'
       ],
       services: [
         'Asistente de Ventas por WhatsApp y Web que Atiende 24/7 con ORION IA',
-        'Plataformas Web con IA y Venta de Créditos/Tokens (Como CvStudio33.com.ar)',
+        'Plataformas Web SaaS con IA y Venta de Créditos/Tokens (Como CvStudio33.com.ar)',
         'Creación Automática de Presupuestos, Contratos y CVs Inteligentes',
         'Lectura Automática de Comprobantes de Pago, Facturas y PDFs con IA',
         'Agendamiento Automático de Turnos y Calificación de Clientes',
@@ -54,29 +55,33 @@
     web: {
       code: 'MOD-02 // FULLSTACK-PWA',
       shortTitle: 'Páginas Web & Web Apps',
-      title: 'Diseño de Páginas Web Profesionales, Landing Pages & Web Apps Rápidas',
-      badge: 'Diseño Único · Carga en < 1 Segundo · Se Adapta a Todo Celular',
-      sla: 'Puntaje Google 98–100 · Pensada para Convertir Visitas en Clientes',
-      modality: '100% Personalizada · Sin Plantillas Genéricas',
+      title: 'Diseño de Páginas Web Vendedoras, Landing Pages & Web Apps Nativas',
+      badge: 'Impacto en 5 Segundos · Carga Instantánea · Perfecta en Todo Celular',
+      sla: 'Puntaje Google 98–100 · Diseñada con Psicología de Conversión (CRO)',
+      modality: '100% A Medida · Código Propio sin Plantillas Genéricas',
+      problem:
+        '¿Sentís que la gente entra a tu web o tus redes, mira 5 segundos y se va sin preguntarte ni comprarte porque la página tarda en cargar, se ve corrida en el celular o no transmite confianza?',
+      solution:
+        'Diseñamos una página web o Web App con estética única, textos gancho persuasivos y navegación fluida de aplicación móvil que atrapa al visitante en los primeros 5 segundos y lo lleva directo a comprarte o hablarte.',
       summary:
-        'Creamos páginas web y aplicaciones modernas que impactan desde el primer segundo, se ven perfectas en cualquier celular como una app nativa y están diseñadas con psicología de ventas y SEO para que quienes entren te compren o te escriban.',
+        'Creamos páginas web corporativas, landing pages de alta conversión y plataformas completas que funcionan con la suavidad de una app nativa en cualquier celular, combinando ingeniería limpia, SEO para Google y ganchos comerciales reales.',
       architecture:
-        'Código limpio de alta velocidad en HTML5, CSS3, JavaScript/React y red global Cloudflare para que tu web nunca se cuelgue ni tarde en cargar.',
+        'Arquitectura frontend en HTML5 semántico, CSS3 con aceleración por hardware, JavaScript/TypeScript y despliegue global en la red Edge de Cloudflare (<15ms de latencia y blindaje SSL/WAF).',
       workflowSteps: [
-        'Definimos el objetivo principal: vender más, captar consultas o lanzar tu plataforma.',
-        'Diseñamos una interfaz limpia, moderna y única con animaciones fluidas.',
-        'Optimizamos todos los textos con ganchos comerciales y SEO para aparecer en Google.',
-        'Publicamos tu web con dominio propio, candado de seguridad SSL y máxima velocidad.'
+        'Definimos tu objetivo comercial: captar clientes por WhatsApp, vender online o lanzar tu SaaS.',
+        'Redactamos todos los títulos y textos con ganchos de venta (Problema → Solución → Acción).',
+        'Programamos tu web a medida con animaciones fluidas y adaptación perfecta a celulares.',
+        'La publicamos en tu propio dominio con certificado SSL, máxima velocidad y SEO en Google.'
       ],
       caseStudy:
-        'Experiencia Web-App Nativa: Olvidate de las páginas lentas o desarmadas en el celular. Tus clientes navegan con fluidez total y tienen botones claros de compra o contacto en todo momento.',
-      stack: ['HTML5 Semántico', 'CSS3 Animaciones Fluidas', 'JavaScript / React', 'Cloudflare CDN', 'Diseño Web-App Móvil', 'SEO Google Argentina'],
+        'Retención en 5 Segundos: Aplicamos la misma arquitectura visual y velocidad de carga que permitió a CvStudio33.com.ar convertir más de 15.000 visitas web de TikTok en más de 1.000 compras reales sin caídas.',
+      stack: ['HTML5 Semántico', 'CSS3 GPU Animations', 'JavaScript / TypeScript', 'React / Next.js', 'Cloudflare Edge CDN', 'PWA Mobile Lock', 'SEO Google AR'],
       timeline: '1 a 3 semanas',
       deliverables: [
-        'Página web o Web App completa adaptada a celulares, tablets y computadoras',
-        'Textos persuasivos (Copywriting) pensados para transformar curiosos en compradores',
-        'Dominio configurado, certificado de seguridad SSL y alojamiento ultrarrápido en Cloudflare',
-        'Posicionamiento inicial en Google (SEO) y conexión directa a tu WhatsApp'
+        'Página web o Web App completa 100% adaptable a celulares, tablets y computadoras',
+        'Redacción completa de textos gancho comerciales (Copywriting) enfocados en vender',
+        'Dominio propio configurado, candado SSL, blindaje Cloudflare y carga en menos de 1 segundo',
+        'Posicionamiento técnico en Google (SEO) y botones directos a tu WhatsApp o pasarela de cobro'
       ],
       services: [
         'Landing Pages Vendedoras para Anuncios y Redes Sociales',
@@ -91,37 +96,41 @@
     },
     cloud_db: {
       code: 'MOD-03 // EDGE-CLOUD-DB',
-      shortTitle: 'Nube, Bases de Datos & Hosting',
-      title: 'Bases de Datos Seguras, Usuarios & Alojamiento Veloz (Cloudflare, Supabase & Firebase)',
-      badge: 'Cloudflare · Supabase · Firebase · Seguridad Total',
-      sla: '99.99% Online · Soporta Miles de Visitas a la Vez',
-      modality: 'Infraestructura Lista para Escalar sin Caídas',
+      shortTitle: 'Nube, Bases de Datos & Ciberseguridad',
+      title: 'Bases de Datos Seguras, Usuarios, Ciberseguridad & Nube (Cloudflare, Supabase & Firebase)',
+      badge: 'Cloudflare Workers · Supabase PostgreSQL · Firebase · Blindaje WAF',
+      sla: 'SLA 99.99% · Cifrado TLS 1.3 · Soporta Tráfico Viral Masivo',
+      modality: 'Infraestructura Escalable y Blindada contra Caídas',
+      problem:
+        '¿Tenés miedo de que tu web se caiga justo cuando hacés publicidad o un video se vuelve viral en TikTok, o de sufrir hackeos y perder la información de tus clientes y ventas?',
+      solution:
+        'Armamos tu infraestructura sobre la red mundial de Cloudflare Workers, Supabase y Google Firebase con ciberseguridad activa (WAF, anti-DDoS, permisos por fila RLS y copias de seguridad automáticas).',
       summary:
-        'Si tu proyecto necesita cuentas de usuarios, guardar datos de clientes, almacenar archivos PDF o soportar miles de visitas desde TikTok o anuncios sin caerse, armamos toda tu base de datos y nube con la tecnología más segura del mercado.',
+        'Construimos los cimientos invisibles pero críticos de tu negocio digital: cuentas de usuarios, inicio de sesión con Google, bases de datos en tiempo real, guardado seguro de archivos PDF y protección total frente a picos de tráfico o ataques.',
       architecture:
-        'Protección y velocidad global con Cloudflare Workers, bases de datos seguras en Supabase (PostgreSQL) y sincronización en tiempo real con Google Firebase.',
+        'Distribución Serverless en Cloudflare Workers (+330 ciudades), clusters PostgreSQL con Row-Level Security (RLS) en Supabase y sincronización en vivo con Google Firebase bajo normativa Ley 25.326.',
       workflowSteps: [
-        'Armamos la base de datos donde se guardan tus clientes, ventas y archivos.',
-        'Configuramos el inicio de sesión seguro (con Google, correo o contraseña).',
-        'Blindamos tu sitio con Cloudflare para evitar caídas, ataques o lentitud.',
-        'Dejamos copias de seguridad automáticas para que tu información esté siempre protegida.'
+        'Diseñamos la base de datos blindada para tus usuarios, clientes, pagos y documentos.',
+        'Configuramos inicio de sesión seguro (con cuenta de Google, email, código o 2FA).',
+        'Activamos el escudo de ciberseguridad de Cloudflare (Firewall WAF, TLS 1.3 y anti-bots).',
+        'Programamos respaldos automáticos diarios para que tu información esté siempre a salvo.'
       ],
       caseStudy:
-        'Preparado para Tráfico Viral: Cuando CvStudio33 superó las +15.000 visitas web impulsadas por +200k seguidores en TikTok, nuestra arquitectura en Cloudflare y Supabase respondió al instante sin caídas.',
-      stack: ['Cloudflare & Workers', 'Supabase PostgreSQL', 'Google Firebase', 'Login con Google', 'Bóveda de Archivos Cloud', 'Seguridad Anti-Caídas'],
+        'Tráfico Viral sin Caídas: Cuando los videos de @CvStudio33 (+200k seguidores en TikTok) enviaron miles de usuarios simultáneos a la web, nuestra arquitectura en Cloudflare y Supabase respondió en milisegundos con 0% de caídas.',
+      stack: ['Cloudflare Edge & WAF', 'Cloudflare Workers', 'Supabase PostgreSQL', 'Google Firebase', 'OAuth 2.0 / Login Google', 'Ciberseguridad OWASP', 'Backups Automáticos'],
       timeline: '1 a 3 semanas',
       deliverables: [
-        'Base de datos rápida y segura en Supabase o Firebase lista para usar',
-        'Sistema de registro e inicio de sesión para tus clientes o equipo',
-        'Configuración completa de Cloudflare para máxima velocidad y protección',
-        'Almacenamiento en la nube para guardar comprobantes, PDFs e imágenes'
+        'Base de datos en producción en Supabase (PostgreSQL) o Google Firebase con seguridad RLS',
+        'Sistema completo de registro, inicio de sesión con Google y perfiles de usuario',
+        'Blindaje de ciberseguridad en Cloudflare (WAF, protección anti-DDoS y certificado TLS 1.3)',
+        'Bóveda segura en la nube para almacenar PDFs, comprobantes, fotos y documentos'
       ],
       services: [
         'Configuración de Hosting Ultrarrápido y Seguro con Cloudflare',
         'Bases de Datos de Clientes y Ventas en Supabase o Firebase',
         'Inicio de Sesión con Google, Correo y Perfiles de Usuario',
         'Guardado Seguro de Archivos, CVs, Facturas y Documentos en la Nube',
-        'Protección contra Caídas cuando tenés Mucho Tráfico o Publicidad',
+        'Protección y Ciberseguridad contra Hackeos, Bots y Tráfico Masivo',
         'Migración de Sitios Lentos a Servidores Modernos en la Nube',
         'Conexión de tu Web con Sistemas Externos y Bases de Datos',
         'Mantenimiento, Copias de Seguridad y Escalado en la Nube'
@@ -130,29 +139,33 @@
     systems: {
       code: 'MOD-04 // CUSTOM-ERP-CRM',
       shortTitle: 'Sistemas de Gestión, CRM & Turnos',
-      title: 'Sistemas a Medida para tu Negocio (Ventas, Stock, Clientes, Turnos y Comisiones)',
-      badge: '100% Tuyo · Sin Pagar Mensualidades por Empleado · Uso Fácil',
-      sla: 'Ahorrá Horas de Trabajo Diario · Accesible desde Celular y PC',
-      modality: 'Hecho Exactamente a la Medida de tu Negocio',
+      title: 'Sistemas a Medida para tu Negocio: Ventas, Stock, CRM, Turnos y Comisiones',
+      badge: '100% Tuyo sin Alquileres por Usuario · Uso Simple desde Celular y PC',
+      sla: 'Ahorrá +15 Horas por Semana · Reportes y PDFs en 1 Clic',
+      modality: 'Software Propio Hecho Exactamente a la Medida de tu Operación',
+      problem:
+        '¿Tenés todo anotado en cuadernos, decenas de planillas de Excel que se rompen o programas enlatados carísimos que te cobran por cada empleado y no se adaptan a tu forma de trabajar?',
+      solution:
+        'Creamos tu propio sistema web privado, simple y rápido para controlar ventas, stock, caja diaria, turnos, clientes y comisiones de vendedores desde tu celular o computadora, sin pagar licencias mensuales por empleado.',
       summary:
-        'Dejá atrás el desorden de miles de planillas sueltas o programas complicados. Te creamos un sistema simple, rápido y privado para controlar tus ventas, stock, clientes, turnos o comisiones desde el celular o la computadora.',
+        'Digitalizamos tu negocio con un sistema hecho a tu medida donde cada botón hace exactamente lo que necesitás: cargás una venta en segundos, descontás stock, emitís presupuestos en PDF con tu logo y ves cuánto ganaste en tiempo real.',
       architecture:
-        'Sistema web privado con niveles de permiso por empleado, reportes claros en tiempo real, avisos por WhatsApp y descarga de comprobantes o presupuestos en PDF con tu logo.',
+        'Aplicación web progresiva (PWA) multiusuario con roles de acceso (Administrador, Vendedor, Operador), base de datos en la nube, motor de PDF instantáneo y alertas automáticas por WhatsApp.',
       workflowSteps: [
-        'Nos contás cómo trabajás hoy y qué tareas te hacen perder tiempo.',
-        'Diseñamos una pantalla simple donde cualquier persona de tu equipo pueda cargar datos en segundos.',
-        'Sumamos reportes de ganancias, stock, clientes o cálculo automático de comisiones.',
-        'Te entregamos el sistema funcionando y te enseñamos a usarlo paso a paso.'
+        'Relevamos cómo trabajás hoy y qué tareas te hacen perder tiempo o dinero.',
+        'Diseñamos pantallas limpias e intuitivas para que vos y tu equipo las usen sin capacitación larga.',
+        'Automatizamos el cálculo de caja, stock, turnos o comisiones de vendedores y afiliados.',
+        'Te entregamos el sistema llave en mano y te acompañamos en la puesta en marcha.'
       ],
       caseStudy:
-        'Control Total sin Límites: Desde sistemas de turnos e inventario hasta paneles de vendedores con cálculo automático de comisiones (como el Sistema de la 5ta Venta al 80%).',
-      stack: ['Panel Web & Celular', 'Supabase Cloud', 'Python / React', 'Generador de PDF', 'Exportación a Excel', 'Alertas WhatsApp'],
+        'Panel de Partners y Sistema de la 5ta Venta: En CvStudio33 desarrollamos un panel propio de afiliados que calcula comisiones de hasta el 80% de forma automática, gestiona retiros y emite documentos en segundos.',
+      stack: ['Dashboard Web & Móvil', 'Supabase PostgreSQL', 'Python / TypeScript', 'Motor PDF Vault', 'Exportación Excel/CSV', 'Roles y Permisos', 'Alertas WhatsApp'],
       timeline: '2 a 5 semanas',
       deliverables: [
-        'Sistema propio para usar desde cualquier celular, tablet o computadora',
-        'Cuentas para vos y tus empleados con permisos personalizados',
-        'Descarga de presupuestos, recibos o reportes en PDF y Excel en 1 clic',
-        'Un sistema 100% tuyo sin límites de usuarios ni alquileres abusivos'
+        'Sistema de gestión 100% propio accesible desde cualquier celular, tablet o PC',
+        'Usuarios ilimitados con niveles de permiso (dueño, encargados, vendedores, sucursales)',
+        'Generador automático de presupuestos, recibos, órdenes de trabajo o reportes en PDF y Excel',
+        'Tablero de ganancias, alertas de stock bajo y recordatorios automáticos por WhatsApp'
       ],
       services: [
         'Sistema de Ventas, Caja Diaria y Control de Stock Fácil de Usar',
@@ -168,29 +181,33 @@
     ecommerce: {
       code: 'MOD-05 // ECOMMERCE-PAY',
       shortTitle: 'Tiendas Online & Cobros Automáticos',
-      title: 'Tiendas Online, Cobros con Mercado Pago & Venta de Servicios o Créditos',
-      badge: 'Mercado Pago · Transferencias · Sin Comisiones por Venta',
-      sla: 'Compra Rápida en 3 Pasos · Acreditación Automática',
-      modality: 'Tienda Propia Lista para Facturar 24/7',
+      title: 'Tiendas Online, Cobros con Mercado Pago & Venta de Servicios, Cursos o Tokens',
+      badge: 'Mercado Pago Oficial · Transferencias · 0% Comisiones por Venta a Terceros',
+      sla: 'Checkout Rápido en 3 Pasos · Acreditación y Entrega Automática 24/7',
+      modality: 'Tienda Propia Lista para Facturar Todos los Días',
+      problem:
+        '¿Las plataformas de alquiler te descuentan comisiones por cada venta, o tus clientes abandonan el carrito porque el proceso de compra es largo, confuso y lento en el celular?',
+      solution:
+        'Desarrollamos tu propia tienda online o plataforma de cobros con checkout ultrarrápido de 3 pasos, integrada directo a tu Mercado Pago, transferencia o Stripe para que el 100% de tu ganancia vaya a tu cuenta al instante.',
       summary:
-        'Vendé tus productos físicos, servicios digitales, cursos o paquetes de créditos todos los días de forma automática. Tus clientes eligen, pagan con Mercado Pago o transferencia y el sistema acredita la compra al instante.',
+        'Vendé productos físicos, servicios profesionales, cursos grabados, suscripciones o paquetes de créditos/tokens las 24 horas. El cliente elige, paga desde el celular y el sistema confirma el pedido o habilita el acceso sin que tengas que intervenir.',
       architecture:
-        'Catálogo moderno pensado para comprar fácil desde el celular, integrado de forma oficial con Mercado Pago, Stripe o transferencia y avisos directos al WhatsApp.',
+        'Motor de comercio electrónico optimizado para conversión móvil con Webhooks seguros en Cloudflare Workers conectados a la API oficial de Mercado Pago, Stripe y notificaciones instantáneas.',
       workflowSteps: [
-        'Armamos tu catálogo de productos, planes o servicios con fotos y precios claros.',
-        'Conectamos tu cuenta de Mercado Pago o medios de cobro para que recibas el dinero directo.',
-        'Automatizamos la entrega (confirmación de pedido, descarga digital o carga de créditos).',
-        'Te damos un panel muy simple para cambiar precios, cargar ofertas y ver tus ventas.'
+        'Armamos tu catálogo de productos, planes o paquetes con fotos, precios y ofertas claras.',
+        'Conectamos tu cuenta de Mercado Pago, bancos o cobros en USD para acreditación directa.',
+        'Configuramos la entrega automática (envío de pedido a WhatsApp, descarga o recarga de tokens).',
+        'Te entregamos un panel fácil para cambiar precios en masa, crear cupones y ver tus ventas.'
       ],
       caseStudy:
-        'Ventas Reales Comprobadas: En CvStudio33.com.ar implementamos cobros automatizados y economía de tokens, superando los +1.000 USD generados en compras directas dentro de la web.',
-      stack: ['Mercado Pago Oficial', 'Tienda Móvil Rápida', 'Cobros Automáticos', 'Carrito a WhatsApp', 'Suscripciones & Tokens', 'Stripe / USD'],
+        'Más de +1.000 USD Facturados en Compras Web: En CvStudio33.com.ar implementamos pasarelas serverless en Cloudflare Workers para la venta de plantillas, planes mensuales y recarga de Tokens NYX/AXON en vivo.',
+      stack: ['Mercado Pago API Oficial', 'Cloudflare Workers Pay', 'Checkout Móvil 3 Pasos', 'Economía de Tokens/Créditos', 'Carrito Directo a WhatsApp', 'Stripe / PayPal USD'],
       timeline: '2 a 4 semanas',
       deliverables: [
-        'Tienda online propia sin pagar comisiones por cada venta a otras plataformas',
-        'Cobros automáticos con Mercado Pago, tarjetas, transferencia o dólares',
-        'Panel autoadministrable para actualizar precios, stock y promociones en segundos',
-        'Avisos instantáneos de cada nueva compra en tu WhatsApp y correo'
+        'Tienda online o plataforma de cobros propia sin pagar comisiones por venta a intermediarios',
+        'Integración oficial con Mercado Pago (tarjetas, dinero en cuenta), transferencia y USD',
+        'Panel autoadministrable para actualizar productos, precios, stock y cupones en segundos',
+        'Confirmación automática de pago y alerta inmediata en tu WhatsApp con el detalle del pedido'
       ],
       services: [
         'Tienda Online Completa sin Pagar Comisiones por Venta',
@@ -206,29 +223,33 @@
     mobile: {
       code: 'MOD-06 // MOBILE-APPS',
       shortTitle: 'Apps para Celulares Android / iOS',
-      title: 'Aplicaciones Móviles para Celulares (Android, iOS & Web Apps Instalables)',
-      badge: 'Android · iOS · Instalable en el Celular · Fluidez Total',
-      sla: 'Navegación Táctil Cómoda · Conectada en Tiempo Real',
-      modality: 'App Móvil + Panel de Control Web',
+      title: 'Aplicaciones Móviles Nativas (Android / iOS) & Web Apps Instalables en 1 Clic',
+      badge: 'Android · iPhone (iOS) · Instalable sin Fricción · Fluidez Nativa 60fps',
+      sla: 'Diseño Ergonómico para el Pulgar · Sincronización en Tiempo Real',
+      modality: 'App Móvil Completa + Panel de Administración Web',
+      problem:
+        '¿Tus clientes usan todo desde el teléfono pero tu negocio no tiene una app cómoda, o pedirles que descarguen una aplicación pesada hace que la mitad abandone antes de registrarse?',
+      solution:
+        'Creamos tanto aplicaciones nativas para Android e iOS como Web Apps Progresivas (PWA) que se instalan en 1 segundo directo desde un link de WhatsApp o TikTok, con menú inferior táctil y máxima velocidad.',
       summary:
-        'Llevá tu negocio al bolsillo de tus clientes con una aplicación móvil rápida, moderna y fácil de usar. Desarrollamos tanto apps para Android y iPhone como Web Apps instalables en 1 clic sin obligar al usuario a perder tiempo.',
+        'Llevá tu marca a la pantalla principal del celular de tus clientes con una aplicación moderna, rápida y estable: ideal para pedidos, reservas de turnos, programas de puntos, lectura de códigos QR, comunidades o equipos de trabajo.',
       architecture:
-        'Diseño 100% adaptado a pantallas táctiles con menú inferior cómodo, notificaciones, uso de cámara/QR, ubicación en mapa y sincronización instantánea.',
+        'Desarrollo multiplataforma en Flutter / React Native y estándares PWA de última generación con Service Workers, caché inteligente, cámara/QR, geolocalización y backend en Firebase/Supabase.',
       workflowSteps: [
-        'Diseñamos las pantallas de tu app para que cualquier usuario la entienda sin esfuerzo.',
-        'Programamos las funciones clave (perfiles, pedidos, reservas, QR, chat o notificaciones).',
-        'La conectamos a un panel central para que manejes todo desde tu celular o PC.',
-        'Dejamos tu app lista para instalar y usar en teléfonos Android e iOS.'
+        'Diseñamos cada pantalla pensando en el uso real con una sola mano desde el celular.',
+        'Programamos las funciones clave (perfiles, pedidos, turnos, escáner QR, mapa o notificaciones).',
+        'Conectamos la app a tu panel central para que controles usuarios y ventas en vivo.',
+        'La dejamos lista para instalar en teléfonos Android e iPhone y publicarla en tiendas.'
       ],
       caseStudy:
-        'Diseñadas para el Pulgar: Cada pantalla respeta los tamaños reales de celulares modernos sin correrse hacia los costados ni ocultar botones importantes.',
-      stack: ['Apps Android & iOS', 'Web App Instalable (PWA)', 'Flutter / React Native', 'Notificaciones Push', 'Escáner QR & Cámara', 'Firebase & Supabase'],
+        'Experiencia Táctil Perfecta: Cero pantallas que se mueven hacia los costados y cero botones cortados. Diseñamos con bloqueo estricto de viewport y navegación inferior ergonómica.',
+      stack: ['Flutter Android & iOS', 'React Native', 'PWA Instalable en 1 Clic', 'Notificaciones Push', 'Escáner QR & Cámara', 'Firebase & Supabase Realtime'],
       timeline: '2 a 6 semanas',
       deliverables: [
-        'Aplicación móvil moderna y veloz funcionando en celulares Android e iPhone',
-        'Panel de administración web para controlar usuarios, contenidos y ventas',
-        'Funciones móviles integradas: notificaciones, cámara, códigos QR o mapas',
-        'Acompañamiento completo en el lanzamiento y actualizaciones'
+        'Aplicación móvil funcionando con fluidez total en celulares Android e iPhone (iOS)',
+        'Panel de control web para administrar usuarios, pedidos, contenidos y notificaciones',
+        'Integración de funciones móviles: cámara, lector QR, ubicación GPS y alertas push',
+        'Acompañamiento completo en el despliegue, publicación y actualizaciones'
       ],
       services: [
         'Aplicaciones Móviles para Android e iPhone (iOS)',
@@ -244,29 +265,33 @@
     python_auto: {
       code: 'MOD-07 // PYTHON-AUTOMATION',
       shortTitle: 'Automatización, Bots & Portales',
-      title: 'Automatización de Tareas con Python, Bots, APIs & Portales Inteligentes',
-      badge: 'Ahorrá Tiempo · Conecta tus Sistemas · Funciona Solo 24/7',
-      sla: 'Reduce el Trabajo Manual un 85% · Cero Errores Humanos',
-      modality: 'Robots de Software & Conexiones Automáticas',
+      title: 'Automatización con Python, Bots Inteligentes, APIs & Portales de Datos en Vivo',
+      badge: 'Python 3.12 · Conectores Oficiales API · Funciona Solo las 24 Horas',
+      sla: 'Ahorra el 85% del Trabajo Manual · Cero Errores de Carga',
+      modality: 'Robots de Software, Integraciones & Portales Automatizados',
+      problem:
+        '¿Tu equipo pierde horas todos los días copiando datos entre planillas, revisando precios a mano, enviando avisos uno por uno o actualizando publicaciones en distintos portales?',
+      solution:
+        'Programamos robots de software en Python y conectores automáticos en la nube que hacen todo ese trabajo repetitivo en segundos, las 24 horas, conectando tus sistemas y enviándote el resultado listo a tu celular.',
       summary:
-        '¿Perdés horas copiando datos, armando reportes, actualizando precios o publicando avisos? Creamos programas automáticos en Python y conectores oficiales que hacen ese trabajo pesado por vos todos los días sin descanso.',
+        'Desde portales de empleo o inmobiliarios conectados en vivo a grandes redes internacionales hasta bots que cruzan datos de Excel, generan PDFs, monitorean precios de la competencia y envían reportes diarios por WhatsApp o Telegram.',
       architecture:
-        'Motores en Python y Cloudflare Workers que conectan portales globales (como Jooble, Adzuna, Mercado Libre, Google Sheets, WhatsApp y bases de datos) de forma 100% automática.',
+        'Microservicios en Python (FastAPI / AsyncIO) y tareas programadas (Cron Triggers) en Cloudflare Workers integradas con APIs REST globales (Jooble, Adzuna, Mercado Pago, Telegram, WhatsApp y Google Workspace).',
       workflowSteps: [
-        'Vemos qué tarea repetitiva te quita tiempo hoy o qué plataformas querés unir.',
-        'Creamos el robot o conector en Python para que lo haga en segundos sin equivocarse.',
-        'Lo dejamos corriendo en la nube las 24 horas y te enviamos avisos o reportes listos.',
-        'Disfrutás de más tiempo libre mientras tu operación funciona en piloto automático.'
+        'Identificamos qué tarea manual te consume horas o qué plataformas querés conectar en vivo.',
+        'Desarrollamos el script o motor en Python con reglas claras y validación anti-errores.',
+        'Lo desplegamos en la nube para que corra solo cada minuto, hora o noche sin depender de tu PC.',
+        'Recibís alertas instantáneas, reportes limpios o tu portal actualizado en piloto automático.'
       ],
       caseStudy:
-        'Alianzas Oficiales Jooble & Adzuna en CvStudio33: Conectamos motores automatizados para crear un Portal de Empleo propio y único en el mercado con miles de búsquedas activas en vivo, logrando +200 contrataciones estimadas por nuestra IA en el primer mes.',
-      stack: ['Python 3.12', 'APIs Oficiales (Jooble / Adzuna)', 'Bots WhatsApp & Telegram', 'Google Sheets Auto', 'Web Scraping Inteligente', 'Cloudflare Cron'],
+        'Portal de Empleo Propio en Alianza con Jooble y Adzuna (CvStudio33): Automatizamos la conexión y filtrado algorítmico de vacantes reales por radio en KM y salario, logrando +200 contrataciones estimadas en su primer mes.',
+      stack: ['Python 3.12 Async', 'APIs Jooble & Adzuna', 'Cloudflare Cron Workers', 'Bots WhatsApp & Telegram', 'Google Sheets / Excel API', 'Scraping & Data Pipelines'],
       timeline: '1 a 3 semanas',
       deliverables: [
-        'Sistema automático funcionando 24/7 en la nube sin que tengas que estar frente a la PC',
-        'Conexión directa entre tus herramientas (Web, WhatsApp, Excel/Sheets, Mercado Pago)',
-        'Panel o avisos en tu celular cada vez que el robot completa su trabajo',
-        'Soporte y ajustes incluidos para que siempre funcione al 100%'
+        'Robot de software o integración API funcionando 24/7 en la nube de forma autónoma',
+        'Conexión automática entre tu sitio web, hojas de cálculo, base de datos y medios de pago',
+        'Alertas y resúmenes automáticos enviados directo a tu WhatsApp, Telegram o correo',
+        'Monitoreo, registro de actividad y soporte incluido ante cualquier cambio externo'
       ],
       services: [
         'Portales de Empleo o Buscadores Conectados a APIs (Como Jooble y Adzuna)',
@@ -281,30 +306,34 @@
     },
     uiux_seo: {
       code: 'MOD-08 // UIUX-SVG-SEO-AR',
-      shortTitle: 'Posicionamiento SEO & Rediseño',
-      title: 'Posicionamiento en Google (SEO), Textos Gancho & Diseño Web que Vende',
-      badge: 'Aparecé en Google · Textos que Atrapan · Más Consultas y Ventas',
-      sla: 'Velocidad Máxima · Optimizado para Clientes en Argentina y Global',
-      modality: 'SEO + Psicología de Conversión (CRO) + Diseño Premium',
+      shortTitle: 'Posicionamiento SEO & Rediseño CRO',
+      title: 'Posicionamiento en Google (SEO), Textos Gancho (CRO) & Rediseño Web Profesional',
+      badge: 'Aparecé Primero en Google · Textos que Convencen en 5 Segundos',
+      sla: 'Velocidad 100/100 · Más Consultas y Ventas con el Mismo Tráfico',
+      modality: 'Auditoría + SEO Técnico + Copywriting Vendedor + Diseño UI/UX',
+      problem:
+        '¿Tenés una página web que parece hecha con una plantilla genérica, no aparece cuando buscan tu rubro en Google o recibe visitas pero casi nadie toca el botón de contacto?',
+      solution:
+        'Rediseñamos la experiencia visual de tu sitio con identidad propia, corregimos cada fallo en celulares, escribimos textos gancho persuasivos y aplicamos SEO técnico para que Google te posicione y los visitantes te compren.',
       summary:
-        'De nada sirve una web si nadie la encuentra o si la gente entra y se va sin comprar. Optimizamos tu sitio para aparecer en Google, redactamos textos gancho claros que atrapan al cliente y diseñamos una experiencia visual impecable.',
+        'Combinamos diseño de interfaz moderno (sin clichés de IA), psicología de ventas (CRO) para superar la regla de los 5 segundos y posicionamiento orgánico en Google para transformar una web estancada en tu mejor canal de ventas.',
       architecture:
-        'Estructura SEO técnica para Google, textos persuasivos enfocados en beneficios claros, carga instantánea y botones estratégicos que guían al usuario a comprarte.',
+        'Optimización Core Web Vitals, datos estructurados Schema.org JSON-LD para Google Argentina y global, iconografía vectorial SVG a medida y arquitectura de conversión probada.',
       workflowSteps: [
-        'Analizamos cómo buscan tus clientes en Google y por qué tu web actual pierde ventas.',
-        'Reescribimos tus títulos y textos con frases gancho claras y fáciles de entender.',
-        'Mejoramos el diseño, los iconos, las animaciones y la adaptación al celular.',
-        'Dejamos tu sitio listo para escalar posiciones en Google y convertir más visitas en dinero.'
+        'Auditamos tu web actual: velocidad, vista en celulares, textos y palabras clave en Google.',
+        'Reescribimos tus titulares y secciones con ganchos claros de Problema → Solución → Prueba Social.',
+        'Renovamos el diseño, los iconos SVG, las animaciones y el flujo de contacto sin fricción.',
+        'Indexamos las mejoras en Google y medimos el aumento real en consultas y ventas.'
       ],
       caseStudy:
-        'Si querés ser otro caso de éxito, nosotros te ayudamos: aplicamos las mismas estrategias de retención visual, métricas claras y llamados a la acción que hicieron despegar a CvStudio33.',
-      stack: ['SEO Google Argentina', 'Copywriting Vendedor', 'Psicología de Ventas (CRO)', 'Diseño Móvil Perfecto', 'Iconos SVG Propios', 'Velocidad 100/100'],
+        'De Visita a Comprador en Segundos: La combinación de métricas en vivo, prueba social verificada y formularios de 1 toque multiplicó la tasa de contacto y ventas en nuestros proyectos propios y de clientes.',
+      stack: ['SEO Técnico Google AR', 'Copywriting de Respuesta Directa', 'Optimización CRO (Regla 5s)', 'Diseño UI/UX a Medida', 'Iconos & Logos SVG Propios', 'Schema.org JSON-LD'],
       timeline: '1 a 2 semanas',
       deliverables: [
-        'Configuración completa de SEO para que tu negocio aparezca mejor en Google',
-        'Textos comerciales persuasivos y claros en toda tu página web',
-        'Corrección total de errores en celulares (sin pantallas corridas ni botones ocultos)',
-        'Diseño moderno con animaciones suaves y formularios fáciles de completar'
+        'Optimización SEO completa (títulos, metadatos, Schema.org, sitemap y velocidad) para Google',
+        'Reescritura profesional de textos con ganchos comerciales que atrapan al cliente',
+        'Corrección definitiva de desbordes, pantallas corridas o botones cortados en celulares',
+        'Rediseño visual moderno con iconos vectoriales propios y llamadas a la acción claras'
       ],
       services: [
         'Posicionamiento en Google (SEO) para Atraer Clientes Todos los Meses',
@@ -335,7 +364,7 @@
   }
 
   /**
-   * 2. FILTRADO EN VIVO DE SERVICIOS
+   * 2. FILTRADO EN VIVO DE SERVICIOS (servicios.html)
    */
   function initServicesExplorer() {
     const searchInput = document.getElementById('service-search-input');
@@ -415,8 +444,6 @@
 
   /**
    * 2B. CONSOLA INTERACTIVA COMPACTA DE SERVICIOS EN INDEX.HTML
-   * Evita el scroll infinito en móvil metiendo las 8 divisiones y sus 64
-   * servicios dentro de un único cuadro de mando interactivo y moderno.
    */
   function initCompactServicesConsole() {
     const consoleRoot = document.getElementById('orion-services-console');
@@ -448,7 +475,7 @@
       if (codeEl) codeEl.textContent = data.code;
       if (titleEl) titleEl.textContent = data.title;
       if (badgeEl) badgeEl.textContent = data.badge;
-      if (summaryEl) summaryEl.textContent = data.summary;
+      if (summaryEl) summaryEl.textContent = `${data.problem} ${data.solution}`;
       if (archEl) archEl.textContent = data.architecture;
       if (slaEl) slaEl.textContent = `${data.sla} · ${data.modality}`;
       if (timelineEl) timelineEl.textContent = `Entrega estimada: ${data.timeline}`;
@@ -494,20 +521,67 @@
   }
 
   /**
-   * 3. MODAL / BOTTOM-SHEET DE FICHA TÉCNICA DE INGENIERÍA EXHAUSTIVA
+   * 2C. PANEL INTERACTIVO orion-engine://stack-produccion CON CAJÓN Y BOTÓN DE CERRAR
    */
-  function openServiceModal(categoryKey, specificServiceName) {
+  function initShowcaseStackPanel() {
+    const drawer = document.getElementById('showcase-inline-drawer');
+    if (!drawer) return;
+
+    const titleEl = document.getElementById('showcase-drawer-title');
+    const problemEl = document.getElementById('showcase-drawer-problem');
+    const solutionEl = document.getElementById('showcase-drawer-solution');
+    const fullSpecBtn = document.getElementById('showcase-drawer-open-modal');
+    const closeDrawerBtn = document.getElementById('showcase-drawer-close');
+    const rows = document.querySelectorAll('.showcase-row[data-stack-preview]');
+
+    rows.forEach((row) => {
+      row.addEventListener('click', (e) => {
+        if (e.target.closest('[data-open-service]')) return;
+        const cat = row.getAttribute('data-stack-preview') || 'orion_ai';
+        const data = ORION_SERVICES_DB[cat];
+        if (!data) return;
+
+        rows.forEach((r) => r.classList.remove('is-selected'));
+        row.classList.add('is-selected');
+
+        if (titleEl) titleEl.textContent = data.shortTitle;
+        if (problemEl) problemEl.textContent = data.problem;
+        if (solutionEl) solutionEl.textContent = data.solution;
+        if (fullSpecBtn) fullSpecBtn.setAttribute('data-open-service', cat);
+
+        drawer.classList.add('is-open');
+      });
+    });
+
+    if (closeDrawerBtn) {
+      closeDrawerBtn.addEventListener('click', () => {
+        drawer.classList.remove('is-open');
+        rows.forEach((r) => r.classList.remove('is-selected'));
+      });
+    }
+  }
+
+  /**
+   * 3. MODAL / BOTTOM-SHEET DE FICHA TÉCNICA v2 (CON BOTÓN CERRAR FIJO ARRIBA Y ABAJO)
+   */
+  let lastFocusedTrigger = null;
+
+  function openServiceModal(categoryKey, specificServiceName, triggerEl) {
     const modal = document.getElementById('service-detail-modal');
     if (!modal) return;
 
     const data = ORION_SERVICES_DB[categoryKey];
     if (!data) return;
 
+    if (triggerEl) lastFocusedTrigger = triggerEl;
+
     const codeEl = modal.querySelector('#modal-service-code');
     const titleEl = modal.querySelector('#modal-service-title');
     const badgeEl = modal.querySelector('#modal-service-badge');
     const slaEl = modal.querySelector('#modal-service-sla');
     const modalityEl = modal.querySelector('#modal-service-modality');
+    const problemEl = modal.querySelector('#modal-service-problem');
+    const solutionEl = modal.querySelector('#modal-service-solution');
     const summaryEl = modal.querySelector('#modal-service-summary');
     const archEl = modal.querySelector('#modal-service-arch');
     const workflowEl = modal.querySelector('#modal-service-workflow');
@@ -518,18 +592,19 @@
     const subservicesEl = modal.querySelector('#modal-service-all');
     const quoteBtn = modal.querySelector('#modal-quote-btn');
 
-    const activeHeadline = specificServiceName
-      ? `${specificServiceName}`
-      : data.title;
+    const activeHeadline = specificServiceName ? `${specificServiceName}` : data.title;
 
     if (codeEl) codeEl.textContent = data.code || 'ORION-SPEC // 0x33';
     if (titleEl) titleEl.textContent = activeHeadline;
     if (badgeEl) badgeEl.textContent = data.badge;
     if (slaEl) slaEl.textContent = data.sla || 'SLA 99.99% Edge';
     if (modalityEl) modalityEl.textContent = data.modality || 'Código 100% Propio';
+    if (problemEl) problemEl.textContent = data.problem || '';
+    if (solutionEl) solutionEl.textContent = data.solution || '';
+
     if (summaryEl) {
       summaryEl.textContent = specificServiceName
-        ? `Especificación técnica oficial para "${specificServiceName}": ${data.summary}`
+        ? `Solución específica "${specificServiceName}": ${data.summary}`
         : data.summary;
     }
     if (archEl) archEl.textContent = data.architecture;
@@ -577,8 +652,16 @@
       quoteBtn.setAttribute('href', `contacto.html?servicio=${encoded}#cotizador`);
     }
 
+    const bodyScroll = modal.querySelector('.bottom-sheet-body') || modal.querySelector('.bottom-sheet');
+    if (bodyScroll) bodyScroll.scrollTop = 0;
+
     modal.classList.add('is-open');
     document.body.style.overflow = 'hidden';
+
+    const closeBtn = modal.querySelector('[data-close-modal]');
+    if (closeBtn) {
+      setTimeout(() => closeBtn.focus({ preventScroll: true }), 60);
+    }
   }
 
   function closeServiceModal() {
@@ -586,33 +669,173 @@
     if (!modal) return;
     modal.classList.remove('is-open');
     document.body.style.overflow = '';
+    if (lastFocusedTrigger && typeof lastFocusedTrigger.focus === 'function') {
+      lastFocusedTrigger.focus({ preventScroll: true });
+    }
   }
 
   function initServiceModals() {
     document.addEventListener('click', (e) => {
+      const closeBtn = e.target.closest('[data-close-modal]');
+      if (closeBtn || e.target.classList.contains('modal-backdrop')) {
+        closeServiceModal();
+        return;
+      }
+
       const trigger = e.target.closest('[data-open-service]');
       if (trigger) {
         const cat = trigger.getAttribute('data-open-service');
         const specific = trigger.getAttribute('data-service-name') || '';
-        openServiceModal(cat, specific);
-        return;
-      }
-
-      if (e.target.matches('[data-close-modal]') || e.target.classList.contains('modal-backdrop')) {
-        closeServiceModal();
+        openServiceModal(cat, specific, trigger);
       }
     });
 
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeServiceModal();
+      if (e.key === 'Escape') {
+        closeServiceModal();
+      }
+    });
+
+    // Soporte táctil para deslizar hacia abajo desde la cabecera de la ficha en celulares
+    const sheetHead = document.querySelector('.bottom-sheet-sticky-head');
+    const sheet = document.querySelector('.bottom-sheet');
+    if (sheetHead && sheet) {
+      let startY = 0;
+      let currentY = 0;
+      let dragging = false;
+
+      sheetHead.addEventListener(
+        'touchstart',
+        (e) => {
+          if (e.touches.length !== 1) return;
+          startY = e.touches[0].clientY;
+          currentY = startY;
+          dragging = true;
+        },
+        { passive: true }
+      );
+
+      sheetHead.addEventListener(
+        'touchmove',
+        (e) => {
+          if (!dragging) return;
+          currentY = e.touches[0].clientY;
+          const delta = Math.max(0, currentY - startY);
+          if (delta > 0) {
+            sheet.style.transform = `translateY(${Math.min(delta, 220)}px)`;
+          }
+        },
+        { passive: true }
+      );
+
+      sheetHead.addEventListener('touchend', () => {
+        if (!dragging) return;
+        dragging = false;
+        const delta = currentY - startY;
+        sheet.style.transform = '';
+        if (delta > 75) {
+          closeServiceModal();
+        }
+      });
+    }
+  }
+
+  /**
+   * 3B. MENÚ EMERGENTE DEL BOTÓN "ORION" EN EL DOCK INFERIOR (2 OPCIONES)
+   * 1. Ver Documentación ORION (portafolio.html#orion-ia)
+   * 2. Hablar con ORION (Orión.html)
+   */
+  function initOrionDockPopover() {
+    const orionDockBtn = document.querySelector('.dock-item-orion');
+    if (!orionDockBtn) return;
+
+    let popover = document.getElementById('orion-dock-popover');
+    if (!popover) {
+      popover = document.createElement('div');
+      popover.id = 'orion-dock-popover';
+      popover.className = 'orion-dock-popover';
+      popover.setAttribute('role', 'dialog');
+      popover.setAttribute('aria-label', 'Centro de Comando ORION IA');
+      popover.innerHTML = `
+        <div class="orion-popover-head">
+          <span class="orion-popover-badge">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span>NÚCLEO NEURAL ORION IA · QWEN 3.8 + QLORA</span>
+          </span>
+          <button type="button" class="orion-popover-close" data-close-orion-popover aria-label="Cerrar menú ORION">✕</button>
+        </div>
+        <div class="orion-popover-grid">
+          <a href="portafolio.html#orion-ia" class="orion-popover-option">
+            <div class="orion-popover-option-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+              </svg>
+            </div>
+            <div class="orion-popover-option-text">
+              <strong>Ver Documentación ORION</strong>
+              <span>Arquitectura Qwen 3.8, servidores NVIDIA 40GB, QLoRA y visión a 5 años</span>
+            </div>
+          </a>
+          <a href="Orión.html" class="orion-popover-option">
+            <div class="orion-popover-option-icon" style="background:linear-gradient(135deg,#059669 0%,#2563EB 100%);" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                <circle cx="9" cy="10" r="1" fill="currentColor"/>
+                <circle cx="15" cy="10" r="1" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="orion-popover-option-text">
+              <strong>Hablar con ORION</strong>
+              <span>Abrir el Chatbot Inteligente de ORION IA en vivo (Orión.html)</span>
+            </div>
+          </a>
+        </div>
+      `;
+      document.body.appendChild(popover);
+    }
+
+    function togglePopover(forceState) {
+      const isOpen =
+        typeof forceState === 'boolean'
+          ? forceState
+          : !popover.classList.contains('is-open');
+      popover.classList.toggle('is-open', isOpen);
+      orionDockBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }
+
+    orionDockBtn.setAttribute('aria-haspopup', 'dialog');
+    orionDockBtn.setAttribute('aria-expanded', 'false');
+
+    orionDockBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      togglePopover();
+    });
+
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('[data-close-orion-popover]')) {
+        togglePopover(false);
+        return;
+      }
+      if (
+        popover.classList.contains('is-open') &&
+        !popover.contains(e.target) &&
+        !orionDockBtn.contains(e.target)
+      ) {
+        togglePopover(false);
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && popover.classList.contains('is-open')) {
+        togglePopover(false);
+      }
     });
   }
 
   /**
    * 4. SISTEMA CRO DE COMPRA RÁPIDA Y CONTACTO SIN FRICCIÓN (contacto.html)
-   * - Selección en 1 toque mediante tarjetas visuales (.cro-goal-card)
-   * - Actualización en vivo del link directo a WhatsApp para quienes quieren
-   *   comprar o cotizar en 10 segundos sin llenar formularios largos.
    */
   function initQuoteCalculator() {
     const form = document.getElementById('orion-quote-form');
@@ -664,7 +887,8 @@
       const chosen = Array.from(selectedGoals);
       if (summaryOutput) {
         if (chosen.length === 0) {
-          summaryOutput.textContent = 'Tocá arriba qué querés crear (podés elegir 1 o varios) y hablá directo con nosotros.';
+          summaryOutput.textContent =
+            'Tocá arriba qué querés crear (podés elegir 1 o varios) y hablá directo con nosotros.';
         } else {
           summaryOutput.textContent = `Seleccionado (${chosen.length}): ${chosen.join(' + ')}`;
         }
@@ -734,7 +958,9 @@
     initHeaderScroll();
     initServicesExplorer();
     initCompactServicesConsole();
+    initShowcaseStackPanel();
     initServiceModals();
+    initOrionDockPopover();
     initQuoteCalculator();
   });
 })();

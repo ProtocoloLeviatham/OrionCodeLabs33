@@ -361,11 +361,60 @@
     }, 3200);
   }
 
+  /**
+   * 5. MOTOR ESPACIAL DE LA CONSTELACIÓN DE ORIÓN AL DESLIZAR (portafolio.html#orion-ia)
+   */
+  function initOrionConstellationScroll() {
+    const stage = document.querySelector('.orion-constellation-stage');
+    if (!stage) return;
+
+    const svg = stage.querySelector('.constellation-svg-viewport');
+    const telemetryBadge = stage.querySelector('#orion-live-epoch-status');
+    const epochs = [
+      'QWEN 3.8 BASE // QLORA 4-BIT NF4 · VRAM 21.8 / 40.0 GB NVIDIA',
+      'AUTO-APRENDIZAJE NOCTURNO ACTIVO // EPOCH #334 · LOSS 0.041',
+      'CINTURÓN DE ORIÓN SINCRONIZADO // ALNITAK · ALNILAM · MINTAKA',
+      'HUGGING FACE WEIGHTS // ADAPTADORES LORA R=64 · BF16 PRECISION'
+    ];
+
+    if (telemetryBadge) {
+      let epIdx = 0;
+      window.setInterval(() => {
+        epIdx = (epIdx + 1) % epochs.length;
+        telemetryBadge.textContent = epochs[epIdx];
+      }, 3100);
+    }
+
+    if (svg) {
+      window.addEventListener(
+        'scroll',
+        () => {
+          const rect = stage.getBoundingClientRect();
+          const vh = window.innerHeight || 800;
+          if (rect.top < vh && rect.bottom > 0) {
+            const ratio = Math.max(-1, Math.min(1, (vh / 2 - (rect.top + rect.height / 2)) / (vh / 2)));
+            const ringGroup = svg.querySelector('#orion-space-ring');
+            const starsGroup = svg.querySelector('#orion-space-stars');
+            if (ringGroup) {
+              ringGroup.style.transform = `rotate(${ratio * 12}deg)`;
+              ringGroup.style.transformOrigin = '210px 135px';
+            }
+            if (starsGroup) {
+              starsGroup.style.transform = `translateY(${ratio * -8}px)`;
+            }
+          }
+        },
+        { passive: true }
+      );
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     initOrionMottoAnimation();
     initScrollReveal();
     initInteractiveAndVideo();
     initLiveMetricsCounter();
     initProcess3DScrollEngine();
+    initOrionConstellationScroll();
   });
 })();

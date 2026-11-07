@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 220" width="260" height="220" role="img" aria-label="Emblema Oficial OrionCodeLabs33">
+  <defs>
+    <linearGradient id="orionRingGrad" x1="10%" y1="90%" x2="90%" y2="10%">
+      <stop offset="0%" stop-color="#0B132B"/>
+      <stop offset="35%" stop-color="#2563EB"/>
+      <stop offset="70%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#9333EA"/>
+    </linearGradient>
+    <linearGradient id="orionCircuitGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="50%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#C084FC"/>
+    </linearGradient>
+    <linearGradient id="orionStarGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="50%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Anillo Orbital Trasero (Arco superior izquierdo) -->
+  <g transform="rotate(-36 130 110)" fill="none">
+    <ellipse cx="130" cy="110" rx="112" ry="34" stroke="url(#orionRingGrad)" stroke-width="10" stroke-linecap="round"/>
+    <ellipse cx="130" cy="110" rx="98" ry="25" stroke="#0B132B" stroke-width="3.2" stroke-dasharray="32 10 18 8"/>
+    <ellipse cx="130" cy="110" rx="122" ry="41" stroke="url(#orionCircuitGrad)" stroke-width="2.4" stroke-dasharray="48 16 22 14" opacity="0.85"/>
+  </g>
+
+  <!-- Corchetes de Código < > y Núcleo Central O -->
+  <g fill="none" stroke="#0B132B" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Corchete Izquierdo < -->
+    <path d="M74 64 L22 110 L74 156" stroke-width="19"/>
+    <!-- Corchete Derecho > -->
+    <path d="M186 64 L238 110 L186 156" stroke-width="19"/>
+    <!-- Letra Central O tipo Cápsula -->
+    <rect x="94" y="48" width="72" height="124" rx="36" stroke-width="20" fill="rgba(255,255,255,0.92)"/>
+  </g>
+
+  <!-- Cinturón de Orión: 3 Estrellas de 4 Puntas + Línea Astral -->
+  <g>
+    <line x1="106" y1="134" x2="154" y2="86" stroke="url(#orionStarGrad)" stroke-width="2.8" stroke-linecap="round"/>
+    <!-- Estrella 1: Alnitak (Azul Cobalto) -->
+    <polygon points="106,120 109.2,130.8 120,134 109.2,137.2 106,148 102.8,137.2 92,134 102.8,130.8" fill="#2563EB"/>
+    <!-- Estrella 2: Alnilam (Centro Principal Índigo) -->
+    <polygon points="130,90 134.5,105.5 150,110 134.5,114.5 130,130 125.5,114.5 110,110 125.5,105.5" fill="#4F46E5"/>
+    <!-- Estrella 3: Mintaka (Violeta Orión) -->
+    <polygon points="154,72 157.2,82.8 168,86 157.2,89.2 154,100 150.8,89.2 140,86 150.8,82.8" fill="#9333EA"/>
+  </g>
+
+  <!-- Arco Frontal del Anillo Orbital con Trazas de Circuito (Cruza por delante de la O) -->
+  <g transform="rotate(-36 130 110)" fill="none">
+    <path d="M 18 110 A 112 34 0 0 0 242 110" stroke="url(#orionRingGrad)" stroke-width="12" stroke-linecap="round"/>
+    <path d="M 32 110 A 98 25 0 0 0 228 110" stroke="url(#orionCircuitGrad)" stroke-width="2.6" stroke-dasharray="26 8 12 8"/>
+    <!-- Nodos de Circuito Oficiales -->
+    <circle cx="65" cy="136" r="3.4" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+    <circle cx="130" cy="144" r="3.8" fill="#FFFFFF" stroke="#4F46E5" stroke-width="2"/>
+    <circle cx="195" cy="136" r="3.4" fill="#FFFFFF" stroke="#9333EA" stroke-width="2"/>
+  </g>
+</svg>

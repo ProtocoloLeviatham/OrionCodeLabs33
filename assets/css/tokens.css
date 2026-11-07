@@ -1,16 +1,16 @@
 /* ==========================================================================
-   OrionCodeLabs33 — Architectural White & Cobalt-Violet Design System
+   OrionCodeLabs33 v3 — Architectural White, Cosmic Night & Orion Belt System
    Archivo 1: assets/css/tokens.css
-   Diseñado para Web App Moderna de Alta Ingeniería (Blanco Puro + Azul Noche
-   #0B132B + Cobalto Eléctrico #2563EB + Violeta Orión #7C3AED)
+   Diseñado para Web App Moderna de Alta Conversión (Blanco Puro + Azul Noche
+   #070B1F / #0B132B + Cobalto Eléctrico #2563EB + Violeta Orión #7C3AED)
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Familias Tipográficas */
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-display: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+  /* Familias Tipográficas Distintivas (Anti-Plantilla Genérica) */
+  --font-sans: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Bricolage Grotesque', 'Instrument Sans', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
 
   /* Escala Tipográfica Fluida y Equilibrada */
@@ -21,17 +21,18 @@
   --text-xl: clamp(1.3rem, 1.18rem + 0.55vw, 1.55rem);
   --text-2xl: clamp(1.6rem, 1.38rem + 1vw, 2.15rem);
   --text-3xl: clamp(1.95rem, 1.62rem + 1.65vw, 2.85rem);
-  --text-hero: clamp(2.2rem, 1.7rem + 2.5vw, 3.75rem);
+  --text-hero: clamp(2.15rem, 1.68rem + 2.4vw, 3.65rem);
 
-  /* Paleta Principal: Blanco Arquitectónico & Tinta Orión (#0B132B) */
+  /* Paleta Principal: Blanco Arquitectónico & Tinta Orión (#0B132B / #070B1F) */
   --bg-primary: #FFFFFF;
   --bg-secondary: #F6F8FC;
   --bg-tertiary: #EEF2F9;
   --bg-surface: #FFFFFF;
   --bg-surface-hover: #F8FAFF;
-  --bg-glass: rgba(255, 255, 255, 0.86);
-  --bg-dock: rgba(11, 19, 43, 0.92);
-  --bg-code: #0B132B;
+  --bg-glass: rgba(255, 255, 255, 0.88);
+  --bg-dock: rgba(255, 255, 255, 0.92);
+  --bg-code: #070B1F;
+  --bg-cosmos: #070B1F;
 
   /* Textos de Alto Contraste y Lectura Limpia */
   --text-primary: #0B132B;
@@ -39,8 +40,9 @@
   --text-muted: #64748B;
   --text-on-brand: #FFFFFF;
 
-  /* Colores de Marca Extraídos del Logo OrionCodeLabs33 */
+  /* Colores de Marca Extraídos del Logo Oficial OrionCodeLabs33 */
   --brand-navy: #0B132B;
+  --brand-cosmos: #070B1F;
   --brand-blue: #2563EB;
   --brand-blue-bright: #1D4ED8;
   --brand-indigo: #4F46E5;
@@ -51,9 +53,10 @@
   --brand-amber: #D97706;
 
   /* Gradientes de Ingeniería */
-  --gradient-orion: linear-gradient(135deg, #2563EB 0%, #4F46E5 50%, #8B5CF6 100%);
-  --gradient-orion-dark: linear-gradient(135deg, #0B132B 0%, #1E293B 45%, #1E1B4B 100%);
-  --gradient-orion-subtle: linear-gradient(135deg, rgba(37, 99, 235, 0.07) 0%, rgba(124, 58, 237, 0.08) 100%);
+  --gradient-orion: linear-gradient(135deg, #2563EB 0%, #4F46E5 50%, #9333EA 100%);
+  --gradient-brand: var(--gradient-orion);
+  --gradient-orion-dark: linear-gradient(135deg, #070B1F 0%, #0F172A 45%, #1E1B4B 100%);
+  --gradient-orion-subtle: linear-gradient(135deg, rgba(37, 99, 235, 0.06) 0%, rgba(124, 58, 237, 0.08) 100%);
   --gradient-surface-sheen: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
 
   /* Bordes y Sombras Multicapa (Estética Limpia de Web App) */
@@ -67,7 +70,7 @@
   --shadow-md: 0 14px 34px -8px rgba(11, 19, 43, 0.09), 0 4px 10px -3px rgba(11, 19, 43, 0.04);
   --shadow-lg: 0 24px 56px -12px rgba(11, 19, 43, 0.14), 0 8px 20px -6px rgba(37, 99, 235, 0.08);
   --shadow-glow: 0 10px 30px -6px rgba(37, 99, 235, 0.35);
-  --shadow-dock: 0 20px 50px -10px rgba(11, 19, 43, 0.32), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  --shadow-dock: 0 20px 50px -10px rgba(11, 19, 43, 0.18), 0 4px 16px rgba(37, 99, 235, 0.1), inset 0 0 0 1px rgba(37, 99, 235, 0.14);
 
   /* Radios y Dimensiones */
   --radius-xs: 8px;
@@ -76,13 +79,20 @@
   --radius-lg: 22px;
   --radius-xl: 30px;
   --radius-pill: 9999px;
+  --radius-full: 9999px;
 
   --header-height: 68px;
-  --dock-height: 72px;
+  --dock-height: 74px;
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 
   --container-max: 1260px;
   --container-pad: clamp(1rem, 4vw, 2.5rem);
+
+  /* Escala Z-Index Estricta */
+  --z-header: 90;
+  --z-dock: 150;
+  --z-dock-popover: 165;
+  --z-modal-backdrop: 240;
 
   /* Curvas Físicas de Animación */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -90,7 +100,7 @@
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Reset y Base */
+/* Reset y Bloqueo Estricto de Viewport Móvil (Web App Nativa) */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -123,7 +133,7 @@ body {
   overscroll-behavior-x: none;
   position: relative;
   /* Espacio reservado abajo para el Dock de Navegación en celular y PC */
-  padding-bottom: calc(var(--dock-height) + var(--safe-bottom) + 28px);
+  padding-bottom: calc(var(--dock-height) + var(--safe-bottom) + 32px);
 }
 
 main, section, header, footer {
